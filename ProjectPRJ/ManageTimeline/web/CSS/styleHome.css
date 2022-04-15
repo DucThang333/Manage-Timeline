@@ -6,91 +6,169 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Created on : Apr 15, 2022, 7:14:04 PM
     Author     : Thang
 */
-.header{
+/* header */
+.header {
     background-color: var(--black-color);
     height: 70px;
     display: flex;
     justify-content: space-between;
 }
-.header__brand{
+
+.header__brand {
     display: flex;
     align-items: center;
 }
-.header__brand--img{
+
+.header__brand--img {
     margin-left: 16px;
     width: 40px;
     height: 40px;
 }
-.header__brand--text{
+
+.header__brand--text {
     color: white;
 }
-.header__feature{
+
+.header__feature {
     width: 50%;
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
-.header__transfer{
+
+.header__transfer {
     width: 190px;
     display: flex;
     justify-content: space-between;
 }
-.header__transfer--link{
+
+.header__transfer--link {
     width: 44%;
     height: 40px;
     text-align: center;
     line-height: 40px;
 }
-.header__transfer--link:hover{
+
+.header__transfer--link:hover {
     border: 1px solid var(--green-color);
     background-color: #292e33;
     line-height: 38px;
 }
 
-.header__feature--link{
+.header__feature--link {
     color: var(--green-color);
     font-size: 20px;
 }
-.header__search--input{
+
+.header__search--input {
     width: 220px;
     height: 35px;
     border-radius: 2px;
     padding: 0.5rem;
 }
-.header__search--btn{
+
+.header__search--btn {
     width: 63px;
     height: 35px;
     border-radius: 3px;
     color: var(--green-color);
-    background-color: var(--while-color);
+    background-color: #ff000000;
     border: 1px solid;
 }
-.header__search--btn:hover{
+
+.header__search--btn:hover {
     color: var(--while-color);
     background-color: var(--green-color);
     border-color: var(--green-color);
 }
-.header__log{
+
+.header__log {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 118px;
 }
-.header__out--link{
+
+.header__out--link {
     transition: 0.3s;
 }
-.header__out--link:hover{
+
+.header__out--link:hover {
     font-size: 1.3rem;
     text-shadow: 2px 2px 10px rgb(120, 117, 117);
 }
-.header__Account--img{
+
+.header__Account--img {
     border-radius: 50%;
     width: 30px;
     cursor: pointer;
 }
-.header__Account--img:hover{
+
+.header__Account--img:hover {
     width: 32px;
     box-shadow: 0px 0px 10px 0px #ccc;
 }
 
+/* container */
+.container {
+    display: flex;
+    padding-top: 18px;
+}
 
+.container__content {
+    margin-left: 18px;
+    width: 1175px;
+    height: 760px;
+    background-color: var(--dark-green-color);
+    overflow-y: scroll;
+    overflow-x: scroll;
+    border-top: 1px black solid;
+    border-left: 2px black solid;
+    display: flex;
+}
+
+.container__feature {
+    width: 296px;
+    height: 30px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 20px;
+    left: 100%;
+}
+
+.container__feature--create {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 2px;
+    border: 1px #8fb49691 solid;
+    border-radius: 2px;
+    background-color: var(--dark-green-color);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding-left: 10px;
+}
+.container__timeline{
+    height: 1300px;
+}
+.container__content--box{
+    margin-left: 20px;
+    width: 100px;
+    height: 300px;
+    background-image: url("/img/testbox.jpg");
+    background-size: cover;
+    background-color: rgb(214, 236, 214);
+}
+.box--new{
+    height: 250px;
+    background-image: url("/img/testbox2.jpg");
+}
+
+.container__timeline--line{
+    margin-top: 50px;
+    font-size: 5px;
+    align-items: center;
+    width: 60%;
+    height: 1px;
+    background-color: #0000005c;
+}
