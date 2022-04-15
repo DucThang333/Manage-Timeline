@@ -6,15 +6,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Created on : Apr 15, 2022, 2:54:31 PM
     Author     : Thang
 */
-
 :root{
     --text-color:#333;
     --brown-color:#3e1932;
+    --black-color:#212529;
+    --while-color:#fff;
+    --green-color:#198754;
 }
 *{
     margin: 0;
     padding: 0;
     box-sizing: inherit;
+    border: none;
 }
 html{
     box-sizing: border-box;
@@ -27,6 +30,14 @@ a{
     text-decoration: none;
 }
 .btn{
-    border: none;
+    cursor: pointer;
+}
+input:focus-visible{
+    outline: none;
+}
+input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    content: url(../IMG/Delete.jpg);
+    width: 14px;
     cursor: pointer;
 }

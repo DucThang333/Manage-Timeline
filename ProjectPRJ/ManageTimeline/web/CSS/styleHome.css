@@ -1,0 +1,96 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Apr 15, 2022, 7:14:04 PM
+    Author     : Thang
+*/
+.header{
+    background-color: var(--black-color);
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+}
+.header__brand{
+    display: flex;
+    align-items: center;
+}
+.header__brand--img{
+    margin-left: 16px;
+    width: 40px;
+    height: 40px;
+}
+.header__brand--text{
+    color: white;
+}
+.header__feature{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.header__transfer{
+    width: 190px;
+    display: flex;
+    justify-content: space-between;
+}
+.header__transfer--link{
+    width: 44%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+}
+.header__transfer--link:hover{
+    border: 1px solid var(--green-color);
+    background-color: #292e33;
+    line-height: 38px;
+}
+
+.header__feature--link{
+    color: var(--green-color);
+    font-size: 20px;
+}
+.header__search--input{
+    width: 220px;
+    height: 35px;
+    border-radius: 2px;
+    padding: 0.5rem;
+}
+.header__search--btn{
+    width: 63px;
+    height: 35px;
+    border-radius: 3px;
+    color: var(--green-color);
+    background-color: var(--while-color);
+    border: 1px solid;
+}
+.header__search--btn:hover{
+    color: var(--while-color);
+    background-color: var(--green-color);
+    border-color: var(--green-color);
+}
+.header__log{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 118px;
+}
+.header__out--link{
+    transition: 0.3s;
+}
+.header__out--link:hover{
+    font-size: 1.3rem;
+    text-shadow: 2px 2px 10px rgb(120, 117, 117);
+}
+.header__Account--img{
+    border-radius: 50%;
+    width: 30px;
+    cursor: pointer;
+}
+.header__Account--img:hover{
+    width: 32px;
+    box-shadow: 0px 0px 10px 0px #ccc;
+}
+
+
