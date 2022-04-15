@@ -1,0 +1,73 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Apr 15, 2022, 2:54:54 PM
+    Author     : Thang
+*/
+
+body {
+    background-image: url('../IMG/Background-Login.jpg');
+    background-size: cover;
+}
+.login {
+    width: 100%;
+    height: 80vh;
+}
+.login__container {
+    margin-top: 148px;
+    margin-left: 684px;
+    width: 50%;
+    height: 66%;
+    background-color: #f0cccc9f;
+    border-radius: 15px;
+}
+.login__form--login {
+    padding: 8px;
+}
+.login__form--login p:first-child{
+    margin-top: 15px;
+}
+.text--login{
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: var(--brown-color);
+}
+.login__form--link{
+    color: var(--brown-color);
+}
+.login__form--forget{
+    margin-top: 10px;
+}
+.login__form--change{
+    margin-top: 10px;
+}
+.login__form--input{
+    font-size: 32px;
+    border-radius: 5px;
+    border: 1px solid #3e1932;
+}
+.login__form--btn{
+    margin-top: 20px;
+    font-size: 1.6rem;
+    padding: 10px 30px 10px 30px;
+    margin-left: 136px;
+    background-color: #683d42;
+    color: #cd8b7c;
+    border-radius: 5px;
+}
+.login__create{
+    margin-top: 1%;
+    margin-left: 6%;
+    width: 340px;
+    height: 42px;
+    background-color: #683d42;
+    border: none;
+    text-align: center;
+    font-size: 32px;
+    border-radius: 5px;
+}
+.login__create--link{
+    color: #c38577;
+}

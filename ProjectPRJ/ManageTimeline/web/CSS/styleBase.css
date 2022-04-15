@@ -1,0 +1,32 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Apr 15, 2022, 2:54:31 PM
+    Author     : Thang
+*/
+
+:root{
+    --text-color:#333;
+    --brown-color:#3e1932;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+html{
+    box-sizing: border-box;
+}
+
+img {
+    width: 100%;
+}
+a{
+    text-decoration: none;
+}
+.btn{
+    border: none;
+    cursor: pointer;
+}
