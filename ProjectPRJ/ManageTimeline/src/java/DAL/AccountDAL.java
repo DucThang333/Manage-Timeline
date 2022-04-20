@@ -27,7 +27,9 @@ public class AccountDAL extends BaseDAL<Account>{
             ResultSet rs = stmt.executeQuery("select * from Account");
             // get data
             while (rs.next()) {
-                listAccount.add(new Account(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getString(6)));
+                listAccount.add(new Account(rs.getString(1),rs.getString(2),
+                        rs.getString(3),rs.getString(4),rs.getInt(5),
+                        rs.getString(6),rs.getDate(7)));
             }
 //            // close
 //            connection.close();
@@ -47,7 +49,8 @@ public class AccountDAL extends BaseDAL<Account>{
             // get data
             if(rs.next()){
                 return new Account(rs.getString(1),rs.getString(2)
-                        ,rs.getString(3),rs.getString(4),rs.getInt(5),rs.getString(6));
+                        ,rs.getString(3),rs.getString(4),rs.getInt(5)
+                        ,rs.getString(6),rs.getDate(7));
             }
 //            // close
 //            conn.close();
@@ -56,10 +59,21 @@ public class AccountDAL extends BaseDAL<Account>{
         }
         return null;
     }
+    public boolean existAccount(String username , String password){
+        Account acc = getAccountByUsername(username);
+        try {
+            if(acc.getUserName().equals(username) && acc.getPassword().equals(password)){
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return false;
+    }
     public  Account getAccountByUsername(String name){
                 try {
             // PreparedStatement prepare execute
-            PreparedStatement PreStmt = connection.prepareStatement("select * from Account where NameAccount = ?");
+            PreparedStatement PreStmt = connection.prepareStatement("select * from Account where usernameAccount = ?");
             // PreparedStatement set place(?)
             PreStmt.setString(1,name);
             // Resuilt to contain result execute
@@ -67,7 +81,8 @@ public class AccountDAL extends BaseDAL<Account>{
             // get data
             if(rs.next()){
                 return new Account(rs.getString(1),rs.getString(2)
-                        ,rs.getString(3),rs.getString(4),rs.getInt(5),rs.getString(6));
+                        ,rs.getString(3),rs.getString(4),rs.getInt(5),
+                        rs.getString(6),rs.getDate(7));
             }
 //            // close
 //            conn.close();
@@ -87,16 +102,16 @@ public class AccountDAL extends BaseDAL<Account>{
     
     
 // -----------test process------------  
-//    public static void main(String[] args) {
-//        AccountDAL d = new AccountDAL();
-////         test getAll
-//        for (Account acc : d.getAll()) {
-//            System.out.println(acc);
-//        }
-//        System.out.println("---------------");
-////      test getAccountByID
-//        System.out.println(d.getAccountByID("0234"));
-//    // test getAccountByUsername
-//        System.out.println(d.getAccountByUsername("ABC"));
-//    }
+    public static void main(String[] args) {
+        AccountDAL d = new AccountDAL();
+//         test getAll
+        for (Account acc : d.getAll()) {
+            System.out.println(acc);
+        }
+        System.out.println("---------------");
+//      test getAccountByID
+        System.out.println(d.getAccountByID("0234"));
+    // test getAccountByUsername
+        System.out.println(d.getAccountByUsername("ABC"));
+    }
 }

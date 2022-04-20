@@ -4,6 +4,8 @@
  */
 package Model;
 
+import java.sql.Date;
+
 /**
  *
  * @author Thang
@@ -15,17 +17,19 @@ public class Account {
     private String password;
     private int phone;
     private String imageURL;
+    private Date dateJoin;
 
     public Account() {
     }
 
-    public Account(String iD, String name, String userName, String password, int phone, String imageURL) {
+    public Account(String iD, String name, String userName, String password, int phone, String imageURL ,Date dateJoin) {
         this.iD = iD;
         this.name = name;
         this.userName = userName;
         this.password = password;
         this.phone = phone;
         this.imageURL = imageURL;
+        this.dateJoin = dateJoin;
     }
 
     public String getID() {
@@ -75,10 +79,20 @@ public class Account {
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
     }
+
+    public Date getDateJoin() {
+        return dateJoin;
+    }
+
+    public void setDateJoin(Date dateJoin) {
+        this.dateJoin = dateJoin;
+    }
+    
     
     @Override
     public String toString() {
-        return iD+ " | " + userName + " | " + password + " | " + phone + " | " + imageURL ;
+        return  iD+ " | "+ name + " | " + userName + " | " + password + " | " 
+                + phone + " | " + imageURL + "|" + dateJoin;
     }
     
 }

@@ -4,8 +4,9 @@
  */
 package Controller;
 
+import DAL.AccountDAL;
+import Model.Account;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,7 +29,15 @@ public class loginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        String username = request.getParameter("username").trim();
+        String password = request.getParameter("password").trim();
+        AccountDAL accDAL = new AccountDAL();
+        if(accDAL.existAccount(username, password)){
+            response.sendRedirect("home.jsp");
+        }else{
+            request.setAttribute("errorLogin", "Wrong username or password please re-login");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

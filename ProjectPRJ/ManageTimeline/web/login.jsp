@@ -18,15 +18,16 @@
             <div class="login__container">
                 <form action="login" class="login__form--login">
                     <p class="text text--login">Username</p>
-                    <input type="text" class="input login__form--input">
+                    <input type="text" class="input login__form--input" name="username">
                     <p class="text text--login">Password</p>
-                    <input type="password" class="input login__form--input">
+                    <input type="password" class="input login__form--input" name="password">
                     <div class="login__form--forget">
                         <a href="" class="login__form--link">Forgot password</a>
                     </div>
                     <div class="login__form--change">
                         <a href="" class="login__form--link">Change Password</a>
                     </div>
+                    <p class="login__error">${errorLogin}</p>
                     <button class="btn login__form--btn">Login</button>
                 </form>
                 <div class="login__create">
