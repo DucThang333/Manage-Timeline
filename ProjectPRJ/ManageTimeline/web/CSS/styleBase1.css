@@ -48,3 +48,7 @@ li{
 .line{
     border-bottom: 1px solid rgb(54, 52, 52);
 }
+hr{
+    background-color: var(--black-color);
+    height: 1px;
+}

@@ -15,7 +15,6 @@ public class ItemsInfor {
     private String title;
     private Date dateStart;
     private Date dateEnd;
-    private Date dateJoin;
     private String detail;
 
     public ItemsInfor() {

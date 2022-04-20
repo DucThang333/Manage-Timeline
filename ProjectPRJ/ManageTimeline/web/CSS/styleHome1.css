@@ -196,16 +196,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 
 .container__timeline--line{
-    margin-top: 50px;
     font-size: 5px;
     align-items: center;
-    width: 60%;
-    height: 1px;
-    background-color: #0000005c;
+    width: auto;
 }
 .timeline--begin{
     margin-top: 0;
-    height: 0px;
 }
 .timeline--big{
     width: 100%;

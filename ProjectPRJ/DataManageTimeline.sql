@@ -11,6 +11,12 @@ go
 -- drop table ItemsInfor
 go
 
+-- delete data
+go
+	-- delete from ItemsInfor where IDItems = '2228' 
+go
+
+
 -- check data
 go
 	-- command table Account
@@ -65,8 +71,4 @@ go
 	values('2228','022','JDBC','2024-10-2','2025-12-3','JDBC')
 go
 
--- delete data
-go
-	-- delete from ItemsInfor where IDItems = '2228' 
-go
 

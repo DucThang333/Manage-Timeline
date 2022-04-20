@@ -6,48 +6,42 @@ package View;
 
 import DAL.ItemsInforDAL;
 import View.ModelView.Timeline;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-
-
 
 /**
  *
  * @author Thang
  */
 public class FormatTimeline {
-    // get convert day to px
-    private int styleTimeline(String iDAccount ,Date dateJoin){
+
+    // get timesline
+    public Timeline getTimesline(String iDAccount, Date dateJoin) {
         ItemsInforDAL item = new ItemsInforDAL();
         Date dateMax = item.getMaxdate(iDAccount);
-        if(dateMax == null)return 12;
+        if (dateMax == null) {
+            return new Timeline(12, 60, 1, dateJoin, 1);
+        }
         long diff = dateMax.getTime() - dateJoin.getTime();
-        long dayBetween = diff/(1000 * 60 * 60 * 24);
-        if(dayBetween <= 189){
-            //small per day with 12px
-            return 12;
-        }else if(dayBetween >= 189 && dayBetween <=378){
-            // medium per day with 3px
-            return 6;
-        }else{
-            // big per day with 2px
-            return 3;
+        int dayBetween = (int) (diff / (1000 * 60 * 60 * 24));
+        if (dayBetween < 60) {
+            return new Timeline(12, 60, 1, dateJoin, 1);
+        } else if (dayBetween >= 60 && dayBetween <= 189) {
+            return new Timeline(12, dayBetween, 1, dateJoin, 1);
+        } else if (dayBetween >= 189 && dayBetween <= 378) {
+            return new Timeline(6, dayBetween / 2, 2, dateJoin, 2);
+        } else {
+            return new Timeline(2, dayBetween / 6, 6, dateJoin, 3);
         }
     }
-    // get convert day to px
-    
-    public Timeline getTimesLoop(String iDAccount ,Date dateJoin , Date dateMax){
-        int times = styleTimeline(iDAccount, dateJoin);
-        if(times == 12 && dateMax)
-        return new Timeline(times, times);
-        
-    }
-    
-    // test running
-    public static void main(String[] args) {
-        FormatTimeline t = new FormatTimeline();
-        Date dNow = new Date();
-        System.out.println(dNow.getTime());
-        t.styleTimeline("022",dNow);
 
-    }
+    // test running
+//    public static void main(String[] args) throws ParseException {
+//        String dt1 = "2008-01-01";  // Start date
+//        String dt2 = "2008-01-01";  // Start date
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        Timeline tim = new Timeline(12,6,2,sdf.parse(dt2),2);
+//        System.out.println(tim.getNextDate(100));
+//    }
 }
