@@ -16,7 +16,7 @@
     <body>
         <div class="login">
             <div class="login__container">
-                <form action="" class="login__form--login">
+                <form action="login" class="login__form--login">
                     <p class="text text--login">Username</p>
                     <input type="text" class="input login__form--input">
                     <p class="text text--login">Password</p>
