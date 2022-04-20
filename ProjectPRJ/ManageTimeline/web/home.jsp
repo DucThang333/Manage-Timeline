@@ -16,7 +16,7 @@
     <body>
         <nav class="header">
             <div class="header__brand">
-                <img class="header__brand--img" src="/img/Logo.png" alt="Logo">
+                <img class="header__brand--img" src="IMG/Logo.png" alt="Logo">
                 <H1 class="header__brand--text">TimeLine</H1>
             </div>
             <div class="header__feature">
@@ -37,10 +37,10 @@
                         <i class="fa-regular fa-bell" style="color: white;font-size: 1.6rem;"></i>
                     </div>
                     <div class="header__account">
-                        <img class="header__account--img"  id="account-img" src="/img/Logo.png" alt="">
+                        <img class="header__account--img"  id="account-img" src="IMG/Logo.png" alt="">
                         <ul class="header__account--setting " id="account-setting">
                             <li class="header__setting--header line">
-                                <img class="header__setting--img" src="file:///C:/Downloads/Logonew.png" alt="">
+                                <img class="header__setting--img" src="IMG/Logo.png" alt="">
                                 <div class="header__setting--info">
                                     <h4>Luu Duc Thang</h4>
                                     <h5>Thoi gian hoat dong : 90 ngay</h5>
@@ -106,10 +106,12 @@
                         <p class="container__timeline--time">1/2023</p>
                     </div>
                 </div>
-                <div class="container__content--box">
-                </div>
-                <div class="container__content--box box--new">
-                </div>
+                <%for(int i = 0 ; i  <5 ; i++){%>
+                    <div class="container__content--box"
+                         style="">
+                    </div>
+                <%}%>
+                
             </div>
             <div class="container__feature">
                 <div class="container__feature--create">Create New</div>
@@ -122,7 +124,7 @@
             </div>
         </div>
         <script src="https://kit.fontawesome.com/98a6f068d5.js" crossorigin="anonymous"></script>
-        <script src="toolBase.js"></script>
-        <script src="scriptHome.js"></script>
+<!--        <script src="toolBase.js"></script>-->
+<script src="JS/scriptHome.js"></script>
     </body>
 </html>

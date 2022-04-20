@@ -11,6 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -32,9 +33,16 @@ public class loginServlet extends HttpServlet {
         String username = request.getParameter("username").trim();
         String password = request.getParameter("password").trim();
         AccountDAL accDAL = new AccountDAL();
-        if(accDAL.existAccount(username, password)){
+        Account acc = accDAL.existAccount(username, password);
+        if (acc != null) {
+            // get session iDAccount
+            HttpSession session = request.getSession();
+            session.setAttribute("iDAccount", acc.getID());
+            session.setAttribute("dateJoin", acc.getDateJoin());
+            session.setAttribute("nameAccount", acc.getName());
             response.sendRedirect("home.jsp");
-        }else{
+//            request.getRequestDispatcher("home.jsp").forward(request, response);
+        } else {
             request.setAttribute("errorLogin", "Wrong username or password please re-login");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }

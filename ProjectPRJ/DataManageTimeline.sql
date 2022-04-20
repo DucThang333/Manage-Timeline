@@ -7,7 +7,8 @@ go
 go
 
 go
-	drop table Account
+--	drop table Account
+-- drop table ItemsInfor
 go
 
 -- check data
@@ -18,7 +19,8 @@ go
 	select * from Account where nameAccount = 'ABC'
 
 	-- command table ItemsInfor
-	select * from ItemsInfor
+	select * from ItemsInfor where IDAccount = '022';
+	select max(DateEnd)from ItemsInfor where IDAccount = '022'
 go 
 
 --create table account
@@ -59,5 +61,12 @@ go
 	values('2226','022','video','2000-10-2','2001-12-3','video')
 	insert into ItemsInfor
 	values('2227','022','SQL','2000-10-2','2001-12-3','SQL')
+	insert into ItemsInfor
+	values('2228','022','JDBC','2024-10-2','2025-12-3','JDBC')
+go
+
+-- delete data
+go
+	-- delete from ItemsInfor where IDItems = '2228' 
 go
 

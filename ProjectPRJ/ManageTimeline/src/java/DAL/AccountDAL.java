@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class AccountDAL extends BaseDAL<Account>{
     //---- get all -----
-    @Override
+  
     public ArrayList<Account> getAll() {
         ArrayList<Account> listAccount = new ArrayList<>();
         // connect
@@ -59,16 +59,16 @@ public class AccountDAL extends BaseDAL<Account>{
         }
         return null;
     }
-    public boolean existAccount(String username , String password){
+    public Account existAccount(String username , String password){
         Account acc = getAccountByUsername(username);
         try {
             if(acc.getUserName().equals(username) && acc.getPassword().equals(password)){
-                return true;
+                return acc;
             }
         } catch (Exception e) {
-            return false;
+            return null;
         }
-        return false;
+        return null;
     }
     public  Account getAccountByUsername(String name){
                 try {
@@ -102,16 +102,16 @@ public class AccountDAL extends BaseDAL<Account>{
     
     
 // -----------test process------------  
-    public static void main(String[] args) {
-        AccountDAL d = new AccountDAL();
-//         test getAll
-        for (Account acc : d.getAll()) {
-            System.out.println(acc);
-        }
-        System.out.println("---------------");
-//      test getAccountByID
-        System.out.println(d.getAccountByID("0234"));
-    // test getAccountByUsername
-        System.out.println(d.getAccountByUsername("ABC"));
-    }
+//    public static void main(String[] args) {
+//        AccountDAL d = new AccountDAL();
+////         test getAll
+//        for (Account acc : d.getAll()) {
+//            System.out.println(acc);
+//        }
+//        System.out.println("---------------");
+////      test getAccountByID
+//        System.out.println(d.getAccountByID("0234"));
+//    // test getAccountByUsername
+//        System.out.println(d.getAccountByUsername("hai123"));
+//    }
 }
