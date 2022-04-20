@@ -10,6 +10,7 @@ package Model;
  */
 public class Account {
     private String iD;
+    private String name;
     private String userName;
     private String password;
     private int phone;
@@ -18,20 +19,29 @@ public class Account {
     public Account() {
     }
 
-    public Account(String iD, String userName, String password, int phone, String imageURL) {
+    public Account(String iD, String name, String userName, String password, int phone, String imageURL) {
         this.iD = iD;
+        this.name = name;
         this.userName = userName;
         this.password = password;
         this.phone = phone;
         this.imageURL = imageURL;
     }
 
-    public String getiD() {
+    public String getID() {
         return iD;
     }
 
-    public void setiD(String iD) {
+    public void setID(String iD) {
         this.iD = iD;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUserName() {
@@ -58,14 +68,14 @@ public class Account {
         this.phone = phone;
     }
 
-    public String getImage() {
+    public String getImageURL() {
         return imageURL;
     }
 
-    public void setImage(String imageURL) {
+    public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
     }
-
+    
     @Override
     public String toString() {
         return iD+ " | " + userName + " | " + password + " | " + phone + " | " + imageURL ;

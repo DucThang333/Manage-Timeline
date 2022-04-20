@@ -14,7 +14,7 @@ go
 --create table account
 go 
 	create table Account (IDAccount varchar(50) primary key ,
-	NameAccount varchar(50) not null,PasswordAccount varchar(50) not null ,
+	NameAccount varchar(50) not null unique,PasswordAccount varchar(50) not null ,
 	PhoneAccount int not null, IMGAccount varchar(100) not null)
 go
 
