@@ -4,7 +4,9 @@
  */
 package Controller;
 
+import View.FormatItemsLocate;
 import View.FormatTimeline;
+import View.ModelView.ItemsLocate;
 import View.ModelView.Timeline;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -12,8 +14,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -42,13 +43,15 @@ public class homeServlet extends HttpServlet {
         FormatTimeline fTimeline = new FormatTimeline();
         Timeline timeline = fTimeline.getTimesline(iDAccount, dateJoin);
         timeline.setMonth();
+        
+        // set data items ----
+        FormatItemsLocate fItemsLocate = new FormatItemsLocate();
+        ArrayList<ItemsLocate> listItemsLocate = 
+                fItemsLocate.getArrayItemsLocate(iDAccount, dateJoin,timeline.getType());
+        
+        // set attribute
         request.setAttribute("timeline", timeline);
-        // set data ----
-        
-        
-        
-        
-        
+        request.setAttribute("listItemsLocate",listItemsLocate);
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }
 

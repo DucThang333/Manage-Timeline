@@ -38,7 +38,7 @@ public class FormatTimeline {
         }
     }
 
-    public int getDayBetween(Date dateMax, Date dateJoin) {
+    private int getDayBetween(Date dateMax, Date dateJoin) {
         return (int) ((dateMax.getTime() - dateJoin.getTime()) / (1000 * 3600 * 24));
     }
 

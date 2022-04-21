@@ -5,18 +5,19 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="Model.ItemsInfor"%>
+<%@page import="View.ModelView.ItemsLocate"%>
 <%@page import="View.ModelView.Timeline"%>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
-    <head>
+    <head>  
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="CSS/styleBase1.css">
-        <link rel="stylesheet" href="CSS/styleHome1.css">
+        <link rel="stylesheet"  href="CSS/styleHome1.css">
         <%
-            //ArrayList<ItemsInfor> listItemsInfor = (ArrayList) request.getAttribute("listItemsInfor"); 
+            // get list Items
+            ArrayList<ItemsLocate> listItemsInfor = (ArrayList) request.getAttribute("listItemsLocate"); 
             // get timeline
             Timeline timeline = (Timeline) request.getAttribute("timeline");
         %> 
@@ -72,23 +73,25 @@
             <div class="container__content">
                 <div class="container__timeline">
                     <%for(int i = 0;i < timeline.getSegmentNumber(); i++){%>
-                    
-                        <%String date = (String)timeline.getNextDate(i);%>
-                        <div <%if(i!=0){%>style="margin-top:12px"<%}%>>
-                            <hr width="30%" <%if(i==0){%> style="height:0px"<%}%> 
-                                class="<%=timeline.getLine()?"timeline--big":""%>">
-                            <p class="container__timeline--time ">
-                                <%=date%>
-                            </p>
-                        </div>
+
+                    <%String date = (String)timeline.getNextDate(i);%>
+                    <div class="container__timeline--distance">
+                        <hr width="30%" <%if(i==0){%> style="height:0px"<%}%> 
+                            class="<%=timeline.getLine()?"timeline--big":""%>">
+                        <p class="container__timeline--time ">
+                            <%=date%>
+                        </p>
+                    </div>
                     <%}%>
                 </div>
-                <%for(int i = 0 ; i  <5 ; i++){%>
-                <div class="container__content--box"
-                     style="">
-                </div>
-                <%}%>
-
+                <div style="display: flex;width: fit-content">
+                    <%for(ItemsLocate item : listItemsInfor){%>
+                    <div class="container__content--box"
+                         style="margin-top: <%=item.getDistance()%>px;height:
+                         <%=item.getHeigth()%>px">
+                    </div>
+                    <%}%>
+                </div> 
             </div>
             <div class="container__feature">
                 <div class="container__feature--create">Create New</div>

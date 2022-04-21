@@ -7,9 +7,9 @@ go
 go
 
 go
---	drop table Account
--- drop table ItemsInfor
--- drop table settting
+ --drop table Account
+ --drop table ItemsInfor
+ --drop table settting
 go
 
 -- delete data
@@ -22,13 +22,19 @@ go
 go
 	-- command table Account
 	select * from Account
-	select * from Account where idAccount = 022
+	select * from Account where idAccount = '022'
 	select * from Account where nameAccount = 'ABC'
 
 	-- command table ItemsInfor
 	select * from ItemsInfor where IDAccount = '022';
+	select * from ItemsInfor where IDAccount = '022' and IDItems = '2222'
 	select max(DateEnd)from ItemsInfor where IDAccount = '022'
+	select * from ItemsInfor where IDAccount = '022' order by DateStart,dateEnd;
 go 
+
+UPDATE Account
+SET DateJoin = '1950-12-17'
+WHERE IDAccount = '022';
 
 --create table account
 go 
@@ -77,6 +83,15 @@ go
 	values('2227','022','SQL','2000-10-2','2001-12-3','SQL')
 	insert into ItemsInfor
 	values('2228','022','JDBC','2024-10-2','2025-12-3','JDBC')
+	insert into ItemsInfor
+	values('2229','022','JDBC','2000-11-2','2025-12-3','JDBC')
+	insert into ItemsInfor
+	values('2230','022','JDBC','2000-10-2','2010-12-3','JDBC')
+	insert into ItemsInfor
+	values('2231','022','JDBC','2000-10-2','2005-12-3','JDBC')
+	insert into ItemsInfor
+	values('2232','022','JDBC','2001-10-2','2001-12-3','JDBC')
 go
+
 
 

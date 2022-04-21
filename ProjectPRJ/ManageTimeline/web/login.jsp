@@ -12,7 +12,7 @@
         <title>login</title>
         <link rel="stylesheet" href="CSS/styleBase1.css">
         <link rel="stylesheet" href="CSS/styleLogin1.css">
-    </head>
+    </head>   
     <body>
         <div class="login">
             <div class="login__container">
