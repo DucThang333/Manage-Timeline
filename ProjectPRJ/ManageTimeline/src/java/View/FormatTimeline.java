@@ -6,8 +6,6 @@ package View;
 
 import DAL.ItemsInforDAL;
 import View.ModelView.Timeline;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -18,22 +16,30 @@ public class FormatTimeline {
 
     // get timesline
     public Timeline getTimesline(String iDAccount, Date dateJoin) {
-        ItemsInforDAL item = new ItemsInforDAL();
-        Date dateMax = item.getMaxdate(iDAccount);
-        if (dateMax == null) {
-            return new Timeline(12, 60, 1, dateJoin, 1);
+        try {
+            ItemsInforDAL item = new ItemsInforDAL();
+            Date dateMax = item.getMaxdate(iDAccount);
+            if (dateMax == null) {
+                return new Timeline(30, dateJoin, 1);
+            }
+            int dayBetween = getDayBetween(dateMax, dateJoin);
+            System.out.println(dayBetween);
+            if (dayBetween < 60) {
+                return new Timeline(30, dateJoin, 1);
+            } else if (dayBetween >= 60 && dayBetween <= 189) {
+                return new Timeline(dayBetween + 10, dateJoin, 1);
+            } else if (dayBetween >= 189 && dayBetween <= 378) {
+                return new Timeline(dayBetween / 2 + 10, dateJoin, 2);
+            } else {
+                return new Timeline(dayBetween / 6 + 10, dateJoin, 6);
+            }
+        } catch (Exception e) {
+            return null;
         }
-        long diff = dateMax.getTime() - dateJoin.getTime();
-        int dayBetween = (int) (diff / (1000 * 60 * 60 * 24));
-        if (dayBetween < 60) {
-            return new Timeline(12, 60, 1, dateJoin, 1);
-        } else if (dayBetween >= 60 && dayBetween <= 189) {
-            return new Timeline(12, dayBetween, 1, dateJoin, 1);
-        } else if (dayBetween >= 189 && dayBetween <= 378) {
-            return new Timeline(6, dayBetween / 2, 2, dateJoin, 2);
-        } else {
-            return new Timeline(2, dayBetween / 6, 6, dateJoin, 3);
-        }
+    }
+
+    public int getDayBetween(Date dateMax, Date dateJoin) {
+        return (int) ((dateMax.getTime() - dateJoin.getTime()) / (1000 * 3600 * 24));
     }
 
     // test running
@@ -41,7 +47,19 @@ public class FormatTimeline {
 //        String dt1 = "2008-01-01";  // Start date
 //        String dt2 = "2008-01-01";  // Start date
 //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        Timeline tim = new Timeline(12,6,2,sdf.parse(dt2),2);
-//        System.out.println(tim.getNextDate(100));
+//        FormatTimeline f = new FormatTimeline();
+//        Timeline tim = f.getTimesline("022", f.getDate());
+//        System.out.println(tim.getType());
+//    }
+//
+//        public Date getDate() {
+//        Date newdate = new Date();
+//        try {
+//            String dt2 = "2024-05-15";  // Start date
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//            newdate = sdf.parse(dt2);
+//        } catch (ParseException e) {
+//        }
+//        return newdate;
 //    }
 }

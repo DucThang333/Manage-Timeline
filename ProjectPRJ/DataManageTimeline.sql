@@ -9,6 +9,7 @@ go
 go
 --	drop table Account
 -- drop table ItemsInfor
+-- drop table settting
 go
 
 -- delete data
@@ -41,6 +42,13 @@ go
 	create table ItemsInfor(IDItems varchar(50) primary key , 
 	IDAccount varchar(50) foreign key references Account(IDAccount),
 	Title varchar(50) not null ,DateStart date not null,DateEnd date not null,Detail varchar(50))
+go 
+
+go 
+	create table setting(IDSetting varchar(50) unique not null)
+	-----
+	alter table setting
+		add constraint FK_IDAccount_IDSetting foreign key(IDSetting) references Account(IDAccount)
 go 
 
 

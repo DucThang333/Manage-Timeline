@@ -4,20 +4,23 @@
  */
 package Controller;
 
-import DAL.AccountDAL;
-import Model.Account;
+import View.FormatTimeline;
+import View.ModelView.Timeline;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
  * @author Thang
  */
-public class loginServlet extends HttpServlet {
+public class homeServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,24 +33,37 @@ public class loginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username").trim();
-        String password = request.getParameter("password").trim();
-        AccountDAL accDAL = new AccountDAL();
-        Account acc = accDAL.existAccount(username, password);
-        if (acc != null) {
-            // get session iDAccount
-            HttpSession session = request.getSession();
-            session.setAttribute("iDAccount", acc.getID());
-            session.setAttribute("dateJoin", acc.getDateJoin());
-            session.setAttribute("nameAccount", acc.getName());
-//            response.sendRedirect("home");
-            request.getRequestDispatcher("home").forward(request, response);
-//            request.getRequestDispatcher("home.jsp").forward(request, response);
-        } else {
-            request.setAttribute("errorLogin", "Wrong username or password please re-login");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+        session.setAttribute("iDAccount","022");
+//        session.setAttribute("dateJoin",getDate());
+        Timeline timeline = null;
+        try {
+            String iDAccount = (String) session.getAttribute("iDAccount");
+//            Date dateJoin = (Date) session.getAttribute("dateJoin");
+            FormatTimeline fTimeline = new FormatTimeline();
+            timeline = fTimeline.getTimesline(iDAccount, getDate());
+//            if (null == timeline) {
+//                throw new Exception();
+//            }
+        } catch (Exception e) {
+            response.sendRedirect("login.jsp");
+            return;
         }
+        request.setAttribute("timeline", timeline);
+        request.getRequestDispatcher("home.jsp").forward(request, response);
     }
+    public Date getDate() {
+        Date newdate = new Date();
+        try {
+            String dt2 = "2025-05-15";  // Start date
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            newdate = sdf.parse(dt2);
+        } catch (ParseException e) {
+        }
+        return newdate;
+    }
+//    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

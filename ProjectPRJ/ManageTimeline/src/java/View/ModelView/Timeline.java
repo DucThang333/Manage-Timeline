@@ -15,12 +15,8 @@ import java.util.Date;
  */
 public class Timeline {
 
-    // unit px
-    private int pixel;
     // unit times
     private int segmentNumber;
-    // unit 1 month
-    private int tick;
     // type (1,2,3..)
     private int type;
     // date join
@@ -33,13 +29,12 @@ public class Timeline {
     public Timeline() {
     }
 
-    public Timeline(int pixel, int segmentNumber, int tick, Date dateJoin, int type) {
-        this.pixel = pixel;
+    public Timeline(int segmentNumber, Date dateJoin, int type) {
         this.segmentNumber = segmentNumber;
-        this.tick = tick;
         this.dateJoin = dateJoin;
         this.type = type;
         this.line = false;
+        setMonth();
     }
 
     public void setDateJoin(Date dateJoin) {
@@ -58,28 +53,12 @@ public class Timeline {
         this.type = type;
     }
 
-    public int getPixel() {
-        return pixel;
-    }
-
-    public void setPixel(int pixel) {
-        this.pixel = pixel;
-    }
-
     public int getSegmentNumber() {
         return segmentNumber;
     }
 
     public void setSegmentNumber(int segmentNumber) {
         this.segmentNumber = segmentNumber;
-    }
-
-    public int getTick() {
-        return tick;
-    }
-
-    public void setTick(int tick) {
-        this.tick = tick;
     }
 
     public void setLine(boolean line) {
@@ -109,26 +88,25 @@ public class Timeline {
     
 
     public String getNextDate(int datePlus) {
-        if(type == 2){
-            datePlus*=2;
-        }else if(type == 2){
-            datePlus*=6;
-        }
+        datePlus = datePlus*type;
         setLine(false);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateJoin);
         calendar.add(Calendar.DATE, datePlus);
-        if(monthAfter != calendar.get(Calendar.MONTH)){
-            setMonthAfter(monthAfter + 1);
+        if((monthAfter%12) != calendar.get(Calendar.MONTH)){
+            monthAfter = monthAfter + 1;
         }
-        if((type == 1 && monthAfter == (monthIndex + 1)) || 
-            (type == 2 && monthAfter == (monthIndex + 2)) ||
-                (type == 3 && monthAfter == (monthIndex + 6))){
+        if(monthAfter == (monthIndex + type)){
             setMonthIndex(monthAfter);
             setLine(true);
         }
         return sdf.format(calendar.getTime());
     }
-
+    
+    private void setMonth(){
+         Calendar calendar = Calendar.getInstance();
+        calendar.setTime(dateJoin);
+        monthAfter = monthIndex = calendar.get(Calendar.MONTH);
+    }
 }

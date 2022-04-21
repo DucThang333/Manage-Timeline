@@ -22,6 +22,7 @@
         %> 
     </head>
     <body>
+        <%=timeline.getType%>
         <nav class="header">
             <div class="header__brand">
                 <img class="header__brand--img" src="IMG/Logo.png" alt="Logo">
@@ -72,9 +73,10 @@
             <div class="container__content">
                 <div class="container__timeline">
                     <%for(int i = 0;i < timeline.getSegmentNumber(); i++){%>
+                    
                         <%String date = (String)timeline.getNextDate(i);%>
-                        <div <%if(i!=0){%>style="margin-top:<%=timeline.getPixel()%>px;" <%}%> >
-                            <hr width="30%" 
+                        <div <%if(i!=0){%>style="margin-top:12px"<%}%>>
+                            <hr width="30%" <%if(i==0){%> style="height:0px"<%}%> 
                                 class="<%=timeline.getLine()?"timeline--big":""%>">
                             <p class="container__timeline--time ">
                                 <%=date%>
