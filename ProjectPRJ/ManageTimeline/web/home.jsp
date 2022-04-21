@@ -22,7 +22,6 @@
         %> 
     </head>
     <body>
-        <%=timeline.getType%>
         <nav class="header">
             <div class="header__brand">
                 <img class="header__brand--img" src="IMG/Logo.png" alt="Logo">

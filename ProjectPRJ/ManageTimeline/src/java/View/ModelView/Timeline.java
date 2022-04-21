@@ -34,7 +34,6 @@ public class Timeline {
         this.dateJoin = dateJoin;
         this.type = type;
         this.line = false;
-        setMonth();
     }
 
     public void setDateJoin(Date dateJoin) {
@@ -104,7 +103,7 @@ public class Timeline {
         return sdf.format(calendar.getTime());
     }
     
-    private void setMonth(){
+    public void setMonth(){
          Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateJoin);
         monthAfter = monthIndex = calendar.get(Calendar.MONTH);

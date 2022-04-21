@@ -34,36 +34,35 @@ public class homeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        // get session
         HttpSession session = request.getSession();
-        session.setAttribute("iDAccount","022");
-//        session.setAttribute("dateJoin",getDate());
-        Timeline timeline = null;
-        try {
-            String iDAccount = (String) session.getAttribute("iDAccount");
-//            Date dateJoin = (Date) session.getAttribute("dateJoin");
-            FormatTimeline fTimeline = new FormatTimeline();
-            timeline = fTimeline.getTimesline(iDAccount, getDate());
-//            if (null == timeline) {
-//                throw new Exception();
-//            }
-        } catch (Exception e) {
-            response.sendRedirect("login.jsp");
-            return;
-        }
+        String iDAccount = (String) session.getAttribute("iDAccount");
+        Date dateJoin = (Date) session.getAttribute("dateJoin");
+        // set timeline ---
+        FormatTimeline fTimeline = new FormatTimeline();
+        Timeline timeline = fTimeline.getTimesline(iDAccount, dateJoin);
+        timeline.setMonth();
         request.setAttribute("timeline", timeline);
+        // set data ----
+        
+        
+        
+        
+        
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }
-    public Date getDate() {
-        Date newdate = new Date();
-        try {
-            String dt2 = "2025-05-15";  // Start date
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            newdate = sdf.parse(dt2);
-        } catch (ParseException e) {
-        }
-        return newdate;
-    }
-//    
+
+//    public Date getDate() {
+//        Date newdate = new Date();
+//        try {
+//            String dt2 = "2025-05-15";  // Start date
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//            newdate = sdf.parse(dt2);
+//        } catch (ParseException e) {
+//        }
+//        return newdate;
+//    }
+ 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

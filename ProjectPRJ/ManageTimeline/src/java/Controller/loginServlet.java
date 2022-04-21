@@ -5,6 +5,7 @@
 package Controller;
 
 import DAL.AccountDAL;
+import DAL.ItemsInforDAL;
 import Model.Account;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -40,9 +41,7 @@ public class loginServlet extends HttpServlet {
             session.setAttribute("iDAccount", acc.getID());
             session.setAttribute("dateJoin", acc.getDateJoin());
             session.setAttribute("nameAccount", acc.getName());
-//            response.sendRedirect("home");
-            request.getRequestDispatcher("home").forward(request, response);
-//            request.getRequestDispatcher("home.jsp").forward(request, response);
+            response.sendRedirect("home");
         } else {
             request.setAttribute("errorLogin", "Wrong username or password please re-login");
             request.getRequestDispatcher("login.jsp").forward(request, response);
