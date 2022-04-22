@@ -13,7 +13,7 @@
     <head>  
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="CSS/styleBase1.css">
+        <link rel="stylesheet" href="CSS/styleBase2.css">
         <link rel="stylesheet"  href="CSS/styleHome2.css">
         <%
             // get list Items
@@ -46,24 +46,24 @@
                         <i class="fa-regular fa-bell" style="color: white;font-size: 1.6rem;"></i>
                     </div>
                     <div class="header__account">
-                        <img class="header__account--img"  id="account-img" src="IMG/Logo.png" alt="">
-                        <ul class="header__account--setting " id="account-setting">
+                        <img class="header__account--img" onclick="getDisplay(this,'account-setting')" src="IMG/Logo.png" alt="">
+                        <ul class="header__account--setting" id="account-setting">
                             <li class="header__setting--header line">
-                                <img class="header__setting--img" src="IMG/Logo.png" alt="">
-                                <div class="header__setting--info">
+                                <img onclick='event.stopPropagation();' class="header__setting--img" src="IMG/Logo.png" alt="">
+                                <div onclick='event.stopPropagation();' class="header__setting--info">
                                     <h4>Luu Duc Thang</h4>
                                     <h5>Thoi gian hoat dong : 90 ngay</h5>
                                 </div>
                             </li>
-                            <li class="header__account--propoties ">Sign out <i class="fal fa-bell-exclamation"></i></li>
-                            <li class="header__account--propoties line">Switch account</li>
-                            <li class="header__account--propoties ">Language</li>
-                            <li class="header__account--propoties ">Appearance</li>
-                            <li class="header__account--propoties ">Setting</li>
-                            <li class="header__account--propoties line">Reset Data</li>
-                            <li class="header__account--propoties ">Contact</li>
-                            <li class="header__account--propoties ">Help</li>
-                            <li class="header__account--propoties ">Send feedback</li>
+                            <li onclick='event.stopPropagation();' class="header__account--propoties ">Sign out <i class="fal fa-bell-exclamation"></i></li>
+                            <li onclick='event.stopPropagation();' class="header__account--propoties line">Switch account</li>
+                            <li onclick='event.stopPropagation();'  class="header__account--propoties ">Language</li>
+                            <li onclick='event.stopPropagation();' class="header__account--propoties ">Appearance</li>
+                            <li onclick='event.stopPropagation();' class="header__account--propoties ">Setting</li>
+                            <li onclick='event.stopPropagation();' class="header__account--propoties line">Reset Data</li>
+                            <li onclick='event.stopPropagation();' class="header__account--propoties ">Contact</li>
+                            <li onclick='event.stopPropagation();' class="header__account--propoties ">Help</li>
+                            <li onclick='event.stopPropagation();' class="header__account--propoties ">Send feedback</li>
                         </ul>
                     </div>
                 </div>
@@ -93,18 +93,41 @@
                     <%}%>
                 </div> 
             </div>
-            <div class="container__feature">
-                <div class="container__feature--create">Create New</div>
-                <div class="container__feature--create">Create New</div>
-                <div class="container__feature--create">Create New</div>
-                <div class="container__feature--create">Create New</div>
-                <div class="container__feature--create">Create New</div>
-                <div class="container__feature--create">Create New</div>
-                <div class="container__feature--create">Create New</div>
-            </div>
+        <ul class="container__feature">
+            <li class="container__feature--item" onclick="getDisplay(this,'form-create')">
+                Create New Item
+                <div class="container__feature--create" id="form-create">
+                    <p onclick='event.stopPropagation();'>information</p>
+                    <form onclick='event.stopPropagation();' action="">
+                        <table>
+                            <tr>
+                                <td><label for="">title</title></label></td>
+                                <td><input type="text"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="">date start</label></td>
+                                <td><input type="date" value="2022-04-22" min="2022-04-22"><br></td>
+                            </tr>
+                            <tr>
+                                <td><label for="">date end</label></td>
+                                <td><input type="date"  value="2022-04-22" min="2022-04-22"><br></td>
+                            </tr>
+                            <tr>
+                                <td><label for="">description</label></td>
+                                <td><textarea ></textarea><br></td>
+                            </tr>
+                        </table>
+                        <button class="btn">create</button>
+                        <button class="btn" style="margin-left: 10px;">cancel</button>
+                    </form>
+                </div>
+            </li>
+            <li class="container__feature--item">Delete Item</li>
+            <li class="container__feature--item">Update</li>
+        </ul>
         </div>
         <script src="https://kit.fontawesome.com/98a6f068d5.js" crossorigin="anonymous"></script>
         <!--        <script src="toolBase.js"></script>-->
-        <script src="JS/scriptHome.js"></script>
+        <script src="JS/scriptHome1.js"></script>
     </body>
 </html>

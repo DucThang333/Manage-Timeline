@@ -119,35 +119,49 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
         }
         return false; 
     }
-//    public boolean deleteItemsInfor(String iDItemsInfor , String iDAccount){
-//        
-//    
-//    
-//    }
+    public  void deleteItemsInfor(String iDItemsInfor , String iDAccount){
+                // connect
+        try {
+            // PreparedStatement prepare execute
+            PreparedStatement PreStmt = connection.prepareStatement(
+                "delete from ItemsInfor where IDAccount = ? and IDItems = ?");
+            // PreparedStatement set place(?)
+            PreStmt.setString(1, iDAccount);
+            PreStmt.setString(2, iDItemsInfor);
+            // Resuilt to execute
+            PreStmt.execute();
+            // get data
+        } catch (SQLException ex) {
+        }
+    }
 
     // test running
-    public static void main(String[] args) {
-        ItemsInforDAL i = new ItemsInforDAL();
-        Date dt1 = new Date(i.getDate("2005-2-2").getTime());
-        Date dt2 = new Date(i.getDate("2007-2-2").getTime());
-        System.out.println( i.createItemsInfor(new ItemsInfor("100015","newItem"
-                ,dt1,dt2, "s"),"022"));
-        
-        for (ItemsInfor itemsInfor : i.getAll("022")) {
-            System.out.println(itemsInfor);
-        }
-        System.out.println(i.getMaxdate("022"));
-        System.out.println(i.getItemsInforByID("022","2222"));
-    }
-        public java.util.Date getDate(String dt2) {
-        java.util.Date newdate = new java.util.Date();
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            newdate = sdf.parse(dt2);
-        } catch (ParseException e) {
-        }
-        return newdate;
-    }
+//    public static void main(String[] args) {
+//        ItemsInforDAL i = new ItemsInforDAL();
+////        Date dt1 = new Date(i.getDate("2005-2-2").getTime());
+////        Date dt2 = new Date(i.getDate("2007-2-2").getTime());
+////        System.out.println( i.createItemsInfor(new ItemsInfor("100015","newItem"
+////                ,dt1,dt2, "s"),"022"));
+//        
+//        for (ItemsInfor itemsInfor : i.getAll("022")) {
+//            System.out.println(itemsInfor);
+//        }
+//        i.deleteItemsInfor("100015","022");
+//        for (ItemsInfor itemsInfor : i.getAll("022")) {
+//            System.out.println(itemsInfor);
+//        }
+//        System.out.println(i.getMaxdate("022"));
+//        System.out.println(i.getItemsInforByID("022","2222"));
+//    }
+//        public java.util.Date getDate(String dt2) {
+//        java.util.Date newdate = new java.util.Date();
+//        try {
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//            newdate = sdf.parse(dt2);
+//        } catch (ParseException e) {
+//        }
+//        return newdate;
+//    }
     
 //    
 }

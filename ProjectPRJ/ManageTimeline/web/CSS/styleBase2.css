@@ -13,6 +13,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     --while-color:#fff;
     --green-color:#198754;
     --dark-green-color:#90a49329;
+    --earth-brown--color : #584242f0;
 }
 *{
     margin: 0;
@@ -47,8 +48,4 @@ li{
 }
 .line{
     border-bottom: 1px solid rgb(54, 52, 52);
-}
-hr{
-    background-color: var(--black-color);
-    height: 1px;
 }

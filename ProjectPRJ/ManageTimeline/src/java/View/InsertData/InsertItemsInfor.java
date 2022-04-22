@@ -10,7 +10,7 @@ import java.sql.Date;
 
 /**
  *
- * @author Thang
+ * @author Thangs
  */
 public class InsertItemsInfor {
 
@@ -19,7 +19,7 @@ public class InsertItemsInfor {
         ItemsInforDAL intemDAL = new ItemsInforDAL();
         System.out.println(dateNow);
         System.out.println(itemsInfor.getDateEnd() + " " + itemsInfor.getDateStart());
-        setIDItemsInfor(itemsInfor, iDAccount, dateNow);
+        setIDItemsInfor(itemsInfor, iDAccount, dateNow.getTime());
         if (!checkDate(dateNow, itemsInfor.getDateStart(), itemsInfor.getDateEnd())) {
             return false;
         } else if (!intemDAL.createItemsInfor(itemsInfor, iDAccount)) {
@@ -28,7 +28,7 @@ public class InsertItemsInfor {
         return true;
     }
 
-    private void setIDItemsInfor(ItemsInfor itemsInfor, String iDAccount, Date time) {
+    private void setIDItemsInfor(ItemsInfor itemsInfor, String iDAccount, long time) {
         itemsInfor.setID(iDAccount + "." + String.valueOf(time));
     }
 

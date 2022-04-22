@@ -1,4 +1,4 @@
---create data base
+s--create data base
 create database ManageTimeline
 	
 --use database
@@ -30,6 +30,7 @@ go
 	select * from ItemsInfor where IDAccount = '022' and IDItems = '2222'
 	select max(DateEnd)from ItemsInfor where IDAccount = '022'
 	select * from ItemsInfor where IDAccount = '022' order by DateStart,dateEnd;
+	delete from ItemsInfor where IDAccount = '022' and IDItems = '100011'
 go 
 
 UPDATE Account
