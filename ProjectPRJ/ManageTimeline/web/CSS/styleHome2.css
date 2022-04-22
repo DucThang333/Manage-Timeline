@@ -183,7 +183,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     height: auto;
 }
 .container__timeline--distance{
-    height: 40px;
+    height: 48px;
+    width: 53px;
 }
 .container__content--box{
     margin-left: 20px;

@@ -9,6 +9,7 @@ package View.ModelView;
  * @author Thang
  */
 public class ItemsLocate {
+
     private String iD;
     // unit day
     private int heigth;
@@ -20,10 +21,10 @@ public class ItemsLocate {
     public ItemsLocate() {
     }
 
-    public ItemsLocate(String iD, int heigth, int distance, int type, int degree) {
+    public ItemsLocate(String iD, int dayBetween, int dayDistance, int type, int degree) {
         this.iD = iD;
-        this.heigth = heigth;
-        this.distance = distance;
+        setHeigth(dayBetween);
+        setDistance(dayDistance);
         this.type = type;
         this.degree = degree;
     }
@@ -32,16 +33,16 @@ public class ItemsLocate {
         return iD;
     }
 
-    public void setiD(String iD) {      
-        this.iD = iD;        
+    public void setiD(String iD) {
+        this.iD = iD;
     }
 
     public int getDistance() {
-        return distance;  
+        return distance;
     }
 
-    public void setDistance(int distance) {
-        this.distance = distance;
+    private void setDistance(int dayDistance) {
+        this.distance = changeDatetoPx(dayDistance);
     }
 
     public int getDegree() {
@@ -56,8 +57,8 @@ public class ItemsLocate {
         return heigth;
     }
 
-    public void setHeigth(int heigth) {
-        this.heigth = heigth;
+    private void setHeigth(int dayBetween) {
+        this.heigth = changeDatetoPx(dayBetween);
     }
 
     public int getType() {
@@ -68,8 +69,19 @@ public class ItemsLocate {
         this.type = type;
     }
 
+    private int changeDatetoPx(int day) {
+        switch (type) {
+            case 1:
+                return day * 48 + 1;
+            case 2:
+                return day * 24 + 1;
+            default:
+                return day * 8 + 1;
+        }
+    }
+
     @Override
     public String toString() {
         return "ItemsLocate{" + "iD=" + iD + ", heigth=" + heigth + ", distance=" + distance + ", type=" + type + ", degree=" + degree + '}';
-    }    
+    }
 }

@@ -14,7 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="CSS/styleBase1.css">
-        <link rel="stylesheet"  href="CSS/styleHome1.css">
+        <link rel="stylesheet"  href="CSS/styleHome2.css">
         <%
             // get list Items
             ArrayList<ItemsLocate> listItemsInfor = (ArrayList) request.getAttribute("listItemsLocate"); 

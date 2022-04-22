@@ -28,6 +28,13 @@ public class ItemsInfor {
         this.detail = detail;
     }
 
+    public ItemsInfor(String title, Date dateStart, Date dateEnd, String detail) {
+        this.title = title;
+        this.dateStart = dateStart;
+        this.dateEnd = dateEnd;
+        this.detail = detail;
+    }
+
     public String getID() {
         return iD;
     }

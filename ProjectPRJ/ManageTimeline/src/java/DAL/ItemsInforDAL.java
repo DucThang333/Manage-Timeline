@@ -9,6 +9,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -97,7 +99,7 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
         return null;
     }
 
-    public boolean createTtemsInfor(ItemsInfor itemsInfor , String iDAccount) {
+    public boolean createItemsInfor(ItemsInfor itemsInfor , String iDAccount) {
         // connect
         try {
             // PreparedStatement prepare execute
@@ -117,20 +119,35 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
         }
         return false; 
     }
+//    public boolean deleteItemsInfor(String iDItemsInfor , String iDAccount){
+//        
+//    
+//    
+//    }
 
     // test running
-//    public static void main(String[] args) {
-//        ItemsInforDAL i = new ItemsInforDAL();
-//        Date newdate = new Date(2000-05-15);
-//         Date newdate1 = new Date(2000-05-15);
-//        i.createTtemsInfor(new ItemsInfor("100011","newItem"
-//                , newdate,newdate1, "s"),"022");
-//        
-//        for (ItemsInfor itemsInfor : i.getAll("022")) {
-//            System.out.println(itemsInfor);
-//        }
-//        System.out.println(i.getMaxdate("022"));
-//        System.out.println(i.getItemsInforByID("022","2222"));
-//    }
+    public static void main(String[] args) {
+        ItemsInforDAL i = new ItemsInforDAL();
+        Date dt1 = new Date(i.getDate("2005-2-2").getTime());
+        Date dt2 = new Date(i.getDate("2007-2-2").getTime());
+        System.out.println( i.createItemsInfor(new ItemsInfor("100015","newItem"
+                ,dt1,dt2, "s"),"022"));
+        
+        for (ItemsInfor itemsInfor : i.getAll("022")) {
+            System.out.println(itemsInfor);
+        }
+        System.out.println(i.getMaxdate("022"));
+        System.out.println(i.getItemsInforByID("022","2222"));
+    }
+        public java.util.Date getDate(String dt2) {
+        java.util.Date newdate = new java.util.Date();
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            newdate = sdf.parse(dt2);
+        } catch (ParseException e) {
+        }
+        return newdate;
+    }
+    
 //    
 }

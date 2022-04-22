@@ -37,7 +37,7 @@ public class loginServlet extends HttpServlet {
         if (acc != null) {
             // get session iDAccount
             HttpSession session = request.getSession();
-            session.setAttribute("iDAccount", acc.getID());
+            request.getSession().setAttribute("iDAccount", acc.getID());
             session.setAttribute("dateJoin", acc.getDateJoin());
             session.setAttribute("nameAccount", acc.getName());
             response.sendRedirect("home");

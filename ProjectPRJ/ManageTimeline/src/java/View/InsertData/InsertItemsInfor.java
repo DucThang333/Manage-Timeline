@@ -14,23 +14,48 @@ import java.sql.Date;
  */
 public class InsertItemsInfor {
 
-    public boolean checkInvalid(ItemsInfor itemsInfor, Date dateNow , String iDAccount) {
+    public boolean checkInvalid(ItemsInfor itemsInfor, String iDAccount) {
+        Date dateNow = new Date(System.currentTimeMillis());
         ItemsInforDAL intemDAL = new ItemsInforDAL();
-        if(!checkDate(dateNow, itemsInfor.getDateStart(), itemsInfor.getDateEnd())){
+        System.out.println(dateNow);
+        System.out.println(itemsInfor.getDateEnd() + " " + itemsInfor.getDateStart());
+        setIDItemsInfor(itemsInfor, iDAccount, dateNow);
+        if (!checkDate(dateNow, itemsInfor.getDateStart(), itemsInfor.getDateEnd())) {
             return false;
-        }else if(intemDAL.createTtemsInfor(itemsInfor, iDAccount)){
+        } else if (!intemDAL.createItemsInfor(itemsInfor, iDAccount)) {
             return false;
         }
-        
         return true;
+    }
+
+    private void setIDItemsInfor(ItemsInfor itemsInfor, String iDAccount, Date time) {
+        itemsInfor.setID(iDAccount + "." + String.valueOf(time));
     }
 
     private boolean checkDate(Date dateNow, Date dateStart, Date dateEnd) {
         if (dateStart.getTime() < dateNow.getTime()) {
-            return false; 
-        }else if(dateEnd.getTime() < dateStart.getTime()){
+            return false;
+        } else if (dateEnd.getTime() < dateStart.getTime()) {
             return false;
         }
         return true;
     }
+
+//    public static void main(String[] args) {
+//        InsertItemsInfor i = new InsertItemsInfor();
+//        Date dt1 = new java.sql.Date(i.getDate("2022-10-10").getTime());
+//        Date dt2 = new java.sql.Date(i.getDate("2022-11-10").getTime());
+//        System.out.println(i.checkInvalid(new ItemsInfor("newTime", dt1, dt2,
+//                "01234566"), "022"));
+//    }
+
+//    public java.util.Date getDate(String dt2) {
+//        java.util.Date newdate = new java.util.Date();
+//        try {
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//            newdate = sdf.parse(dt2);
+//        } catch (ParseException e) {
+//        }
+//        return newdate;
+//    }
 }

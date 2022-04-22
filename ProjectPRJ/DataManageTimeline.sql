@@ -8,7 +8,7 @@ go
 
 go
  --drop table Account
- --drop table ItemsInfor
+ drop table ItemsInfor
  --drop table settting
 go
 
@@ -33,7 +33,7 @@ go
 go 
 
 UPDATE Account
-SET DateJoin = '1950-12-17'
+SET DateJoin = '1999-09-22'
 WHERE IDAccount = '022';
 
 --create table account
