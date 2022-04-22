@@ -15,14 +15,18 @@
         <title>JSP Page</title>
         <link rel="stylesheet" href="CSS/styleBase2.css">
         <link rel="stylesheet"  href="CSS/styleHome2.css">
+        <link rel="stylesheet" href="Accessory/CSS/toastCSS.css"/>
+            <script src="Accessory/JS/toastScript.js"></script>
         <%
             // get list Items
             ArrayList<ItemsLocate> listItemsInfor = (ArrayList) request.getAttribute("listItemsLocate"); 
             // get timeline
             Timeline timeline = (Timeline) request.getAttribute("timeline");
+            boolean create = (boolean)request.getAttribute("create");
         %> 
     </head>
     <body>
+        <div id="toast"></div>
         <nav class="header">
             <div class="header__brand">
                 <img class="header__brand--img" src="IMG/Logo.png" alt="Logo">
@@ -46,7 +50,7 @@
                         <i class="fa-regular fa-bell" style="color: white;font-size: 1.6rem;"></i>
                     </div>
                     <div class="header__account">
-                        <img class="header__account--img" onclick="getDisplay(this,'account-setting')" src="IMG/Logo.png" alt="">
+                        <img class="header__account--img" onclick="getDisplay(this, 'account-setting')" src="IMG/Logo.png" alt="">
                         <ul class="header__account--setting" id="account-setting">
                             <li class="header__setting--header line">
                                 <img onclick='event.stopPropagation();' class="header__setting--img" src="IMG/Logo.png" alt="">
@@ -93,38 +97,44 @@
                     <%}%>
                 </div> 
             </div>
-        <ul class="container__feature">
-            <li class="container__feature--item" onclick="getDisplay(this,'form-create')">
-                Create New Item
-                <div class="container__feature--create" id="form-create">
-                    <p onclick='event.stopPropagation();'>information</p>
-                    <form onclick='event.stopPropagation();' action="">
-                        <table>
-                            <tr>
-                                <td><label for="">title</title></label></td>
-                                <td><input type="text"></td>
-                            </tr>
-                            <tr>
-                                <td><label for="">date start</label></td>
-                                <td><input type="date" value="2022-04-22" min="2022-04-22"><br></td>
-                            </tr>
-                            <tr>
-                                <td><label for="">date end</label></td>
-                                <td><input type="date"  value="2022-04-22" min="2022-04-22"><br></td>
-                            </tr>
-                            <tr>
-                                <td><label for="">description</label></td>
-                                <td><textarea ></textarea><br></td>
-                            </tr>
-                        </table>
-                        <button class="btn">create</button>
-                        <button class="btn" style="margin-left: 10px;">cancel</button>
-                    </form>
-                </div>
-            </li>
-            <li class="container__feature--item">Delete Item</li>
-            <li class="container__feature--item">Update</li>
-        </ul>
+            <ul class="container__feature">
+                <li class="container__feature--item" onclick="getDisplay(this, 'form-create')">
+                    Create New Item
+                    <div class="container__feature--create" id="form-create">
+                        <p onclick='event.stopPropagation();'>information</p>
+                        <form onclick='event.stopPropagation();' action="createItemsInfor">
+                            <table>
+                                <tr>
+                                    <td><label for="">title</title></label></td>
+                                    <td><input name="createTitle"type="text"></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="">date start</label></td>
+                                    <td><input name="createDateStart"type="date" value="2022-04-22" min="2022-04-22"><br></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="">date end</label></td>
+                                    <td><input name="createDateEnd"type="date"  value="2022-04-22" min="2022-04-22"><br></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="">description</label></td>
+                                    <td><textarea name="createDescription" ></textarea><br></td>
+                                </tr>
+                            </table>
+                            <button class="btn">create</button>
+                        </form>
+                        <button class="btn">cancel</button>
+                        <%if(create){%>
+                        <script>
+                            showSuccessToast();
+                        </script>
+                        <%}%>
+                    </div>
+                </li>
+                <li class="container__feature--item">Delete Item</li>
+                <li class="container__feature--item">Update</li>
+
+            </ul>
         </div>
         <script src="https://kit.fontawesome.com/98a6f068d5.js" crossorigin="anonymous"></script>
         <!--        <script src="toolBase.js"></script>-->

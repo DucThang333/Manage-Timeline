@@ -4,24 +4,23 @@
  */
 package Controller;
 
-import View.FormatItemsLocate;
-import View.FormatTimeline;
-import View.ModelView.ItemsLocate;
-import View.ModelView.Timeline;
+import Model.ItemsInfor;
+import View.InsertData.InsertItemsInfor;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  *
  * @author Thang
  */
-public class homeServlet extends HttpServlet {
+public class createItemsInforServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,43 +34,25 @@ public class homeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        // get session
-        HttpSession session = request.getSession();
-        String iDAccount = (String) session.getAttribute("iDAccount");
-        Date dateJoin = (Date) session.getAttribute("dateJoin");
-        // set timeline ---
-        FormatTimeline fTimeline = new FormatTimeline();
-        Timeline timeline = fTimeline.getTimesline(iDAccount, dateJoin);
-        timeline.setMonth();
-        
-        // set data items ----
-        FormatItemsLocate fItemsLocate = new FormatItemsLocate();
-        boolean check;
-        try {
-            check = (boolean)request.getAttribute("createH");
-        } catch (Exception e) {
-            check = false;
-        }
-        ArrayList<ItemsLocate> listItemsLocate = 
-                fItemsLocate.getArrayItemsLocate(iDAccount, dateJoin,timeline.getType());
-        request.setAttribute("create",check);
-        // set attribute
-        request.setAttribute("timeline", timeline);
-        request.setAttribute("listItemsLocate",listItemsLocate);
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+        String iDAccount = (String) request.getSession().getAttribute("iDAccount");
+        String title = request.getParameter("createTitle");
+        Date dateStart = new Date(getDate(request.getParameter("createDateStart")).getTime());
+        Date dateEnd =new Date(getDate(request.getParameter("createDateEnd")).getTime());
+        String description = request.getParameter("createDescription");
+        InsertItemsInfor insert = new InsertItemsInfor();  
+        request.setAttribute("createH",insert.checkInvalid(new ItemsInfor(title, dateStart, dateEnd, description), iDAccount));
+        request.getRequestDispatcher("home").forward(request, response);
     }
-
-//    public Date getDate() {
-//        Date newdate = new Date();
-//        try {
-//            String dt2 = "2025-05-15";  // Start date
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//            newdate = sdf.parse(dt2);
-//        } catch (ParseException e) {
-//        }
-//        return newdate;
-//    }
- 
+    
+    private java.util.Date getDate(String dt2) {
+        java.util.Date newdate = new java.util.Date();
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            newdate = sdf.parse(dt2);
+        } catch (ParseException e) {
+        }
+        return newdate;
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -110,6 +91,6 @@ public class homeServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }// </editor-fold> 
 
 }
