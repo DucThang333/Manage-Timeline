@@ -6,18 +6,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Created on : Apr 22, 2022, 8:53:21 PM
     Author     : Thang
 */
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-body {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    font-family: "Helvetica Neue";
-}
 
 
 /* ======= Toast message ======== */

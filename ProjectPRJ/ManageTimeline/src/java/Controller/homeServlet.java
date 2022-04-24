@@ -4,18 +4,19 @@
  */
 package Controller;
 
+import DAL.AccountDAL;
+import Model.Account;
 import View.FormatItemsLocate;
 import View.FormatTimeline;
 import View.ModelView.ItemsLocate;
 import View.ModelView.Timeline;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *
@@ -36,12 +37,13 @@ public class homeServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         // get session
-        HttpSession session = request.getSession();
-        String iDAccount = (String) session.getAttribute("iDAccount");
-        Date dateJoin = (Date) session.getAttribute("dateJoin");
+        Cookie[] cookies = request.getCookies();
+        Cookie C_iDAccount = loginServlet.getCookie(cookies,"IDAccount");
+        AccountDAL accDAL = new AccountDAL();
+        Account acc = accDAL.getAccountByID(C_iDAccount.getValue());
         // set timeline ---
         FormatTimeline fTimeline = new FormatTimeline();
-        Timeline timeline = fTimeline.getTimesline(iDAccount, dateJoin);
+        Timeline timeline = fTimeline.getTimesline(acc.getID(),acc.getDateJoin());
         timeline.setMonth();
         
         // set data items ----
@@ -53,13 +55,14 @@ public class homeServlet extends HttpServlet {
             check = false;
         }
         ArrayList<ItemsLocate> listItemsLocate = 
-                fItemsLocate.getArrayItemsLocate(iDAccount, dateJoin,timeline.getType());
+                fItemsLocate.getArrayItemsLocate(acc.getID(),acc.getDateJoin(),timeline.getType());
         request.setAttribute("create",check);
         // set attribute
-        request.setAttribute("timeline", timeline);
-        request.setAttribute("listItemsLocate",listItemsLocate);
+        request.getSession().setAttribute("timeline", timeline);
+        request.getSession().setAttribute("listItemsLocate",listItemsLocate);
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }
+    
 
 //    public Date getDate() {
 //        Date newdate = new Date();

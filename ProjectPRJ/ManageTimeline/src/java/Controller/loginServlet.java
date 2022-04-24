@@ -8,10 +8,11 @@ import DAL.AccountDAL;
 import Model.Account;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import java.io.PrintWriter;
 
 /**
  *
@@ -30,21 +31,20 @@ public class loginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username").trim();
-        String password = request.getParameter("password").trim();
-        AccountDAL accDAL = new AccountDAL();
-        Account acc = accDAL.existAccount(username, password);
-        if (acc != null) {
-            // get session iDAccount
-            HttpSession session = request.getSession();
-            request.getSession().setAttribute("iDAccount", acc.getID());
-            session.setAttribute("dateJoin", acc.getDateJoin());
-            session.setAttribute("nameAccount", acc.getName());
-            response.sendRedirect("home");
+    }
+
+    public static Cookie getCookie(Cookie[] cookie, String nameCookie) {
+        if (cookie == null) {
+            return null;
         } else {
-            request.setAttribute("errorLogin", "Wrong username or password please re-login");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            for (Cookie coo : cookie) {
+                if (coo.getName().equals(nameCookie)) {
+                    return coo;
+
+                }
+            }
         }
+        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -59,7 +59,13 @@ public class loginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        Cookie[] cookies = request.getCookies();
+        request.setAttribute("name",getCookie(cookies,"username").getValue());
+        for (Cookie coo : cookies) {
+            coo.setMaxAge(0);
+            response.addCookie(coo);
+        }
+        request.getRequestDispatcher("login.jsp").include(request, response);
     }
 
     /**
@@ -73,7 +79,26 @@ public class loginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String username = request.getParameter("username").trim();
+        String password = request.getParameter("password").trim();
+        AccountDAL accDAL = new AccountDAL();
+        Account acc = accDAL.existAccount(username, password);
+        if (acc != null) {
+            String remember = request.getParameter("remember");
+            if (remember != null) {
+                Cookie C_Username = new Cookie("username", username);
+                Cookie C_IDAccount = new Cookie("IDAccount", acc.getID());
+                C_Username.setMaxAge(3600);
+                C_IDAccount.setMaxAge(3600);
+                response.addCookie(C_Username);
+                response.addCookie(C_IDAccount);
+            }
+            // get session iDAccount
+            response.sendRedirect("home");
+        } else {
+            request.setAttribute("errorLogin", "Wrong username or password please re-login");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        } 
     }
 
     /**

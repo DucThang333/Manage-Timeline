@@ -8,6 +8,7 @@
 <%@page import="View.ModelView.ItemsLocate"%>
 <%@page import="View.ModelView.Timeline"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="Controller.homeServlet" %>
 <!DOCTYPE html>
 <html>
     <head>  
@@ -15,14 +16,14 @@
         <title>JSP Page</title>
         <link rel="stylesheet" href="CSS/styleBase2.css">
         <link rel="stylesheet"  href="CSS/styleHome2.css">
-        <link rel="stylesheet" href="Accessory/CSS/toastCSS.css"/>
-            <script src="Accessory/JS/toastScript.js"></script>
+        <link rel="stylesheet" href="CSS/toastCSS.css"/>
+        <script src="JS/toastScript.js"></script>
         <%
             // get list Items
-            ArrayList<ItemsLocate> listItemsInfor = (ArrayList) request.getAttribute("listItemsLocate"); 
+            ArrayList<ItemsLocate> listItemsInfor = (ArrayList) session.getAttribute("listItemsLocate"); 
             // get timeline
-            Timeline timeline = (Timeline) request.getAttribute("timeline");
-            boolean create = (boolean)request.getAttribute("create");
+            Timeline timeline = (Timeline) session.getAttribute("timeline");
+            boolean create = (boolean) request.getAttribute("create");
         %> 
     </head>
     <body>
@@ -59,7 +60,9 @@
                                     <h5>Thoi gian hoat dong : 90 ngay</h5>
                                 </div>
                             </li>
-                            <li onclick='event.stopPropagation();' class="header__account--propoties ">Sign out <i class="fal fa-bell-exclamation"></i></li>
+                            <li onclick='event.stopPropagation();' class="header__account--propoties ">
+                                <a href="login">Sign out</a>
+                            </li>
                             <li onclick='event.stopPropagation();' class="header__account--propoties line">Switch account</li>
                             <li onclick='event.stopPropagation();'  class="header__account--propoties ">Language</li>
                             <li onclick='event.stopPropagation();' class="header__account--propoties ">Appearance</li>

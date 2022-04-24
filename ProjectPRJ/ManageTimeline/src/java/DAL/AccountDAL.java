@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import Model.Account;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -54,8 +55,7 @@ public class AccountDAL extends BaseDAL<Account>{
             }
 //            // close
 //            conn.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (SQLException ex) {
         }
         return null;
     }
@@ -86,8 +86,7 @@ public class AccountDAL extends BaseDAL<Account>{
             }
 //            // close
 //            conn.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (SQLException ex) {
         }
         return null;
     }
