@@ -17,16 +17,18 @@ public class ItemsLocate {
     private int distance;
     private int type;
     private int degree;
+    private String background;
 
     public ItemsLocate() {
     }
 
-    public ItemsLocate(String iD, int dayBetween, int dayDistance, int type, int degree) {
+    public ItemsLocate(String iD, int dayBetween, int dayDistance, int type, int degree , String background) {
         this.iD = iD;
         setHeigth(dayBetween);
         setDistance(dayDistance);
         this.type = type;
         this.degree = degree;
+        this.background = background;
     }
 
     public String getiD() {
@@ -78,6 +80,14 @@ public class ItemsLocate {
             default:
                 return day * 8 + 1;
         }
+    }
+
+    public String getBackground() {
+        return background;
+    }
+
+    public void setBackground(String background) {
+        this.background = background;
     }
 
     @Override

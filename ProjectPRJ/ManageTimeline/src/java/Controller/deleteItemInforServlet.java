@@ -4,26 +4,18 @@
  */
 package Controller;
 
-import DAL.AccountDAL;
-import DAL.ItemsInforDAL;
-import Model.Account;
-import View.FormatItemsLocate;
-import View.FormatTimeline;
-import View.ModelView.ItemsLocate;
-import View.ModelView.Timeline;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 
 /**
  *
  * @author Thang
  */
-public class homeServlet extends HttpServlet {
+public class deleteItemInforServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,47 +28,20 @@ public class homeServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // get session
-        Cookie[] cookies = request.getCookies();
-        Cookie C_iDAccount = loginServlet.getCookie(cookies,"IDAccount");
-        AccountDAL accDAL = new AccountDAL();
-        ItemsInforDAL itemsDAL = new ItemsInforDAL();
-        Account acc = accDAL.getAccountByID(C_iDAccount.getValue());
-        // set timeline ---
-        FormatTimeline fTimeline = new FormatTimeline();
-        Timeline timeline = fTimeline.getTimesline(acc.getID(),acc.getDateJoin());
-        timeline.setMonth();
-        
-        // set data items ----
-        FormatItemsLocate fItemsLocate = new FormatItemsLocate();
-        boolean check;
-        try {
-            check = (boolean)request.getAttribute("createH");
-        } catch (Exception e) {
-            check = false;
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet deleteItemInforServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet deleteItemInforServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        ArrayList<ItemsLocate> listItemsLocate = 
-                fItemsLocate.getArrayItemsLocate(acc.getID(),acc.getDateJoin(),timeline.getType());
-        request.setAttribute("create",check);
-        // set attribute
-        request.getSession().setAttribute("ItemsIdentity",itemsDAL.getAllIdentify(C_iDAccount.getValue()));
-        request.getSession().setAttribute("timeline", timeline);
-        request.getSession().setAttribute("listItemsLocate",listItemsLocate);
-        request.getRequestDispatcher("home.jsp").forward(request, response);
     }
-    
-
-//    public Date getDate() {
-//        Date newdate = new Date();
-//        try {
-//            String dt2 = "2025-05-15";  // Start date
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//            newdate = sdf.parse(dt2);
-//        } catch (ParseException e) {
-//        }
-//        return newdate;
-//    }
- 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

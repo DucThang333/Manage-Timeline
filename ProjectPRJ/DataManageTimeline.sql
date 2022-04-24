@@ -48,7 +48,8 @@ go
 go
 	create table ItemsInfor(IDItems varchar(50) primary key , 
 	IDAccount varchar(50) foreign key references Account(IDAccount),
-	Title varchar(50) not null ,DateStart date not null,DateEnd date not null,Detail varchar(50))
+	Title varchar(50) not null ,DateStart date not null,DateEnd date not null,Detail varchar(50),
+	Background varchar(200) not null)
 go 
 
 go 
@@ -71,28 +72,17 @@ go
 
 	-- insert table ItemsInfor
 	insert into ItemsInfor
-	values('2222','022','game','2000-10-2','2001-12-3','Stream game 8h')
+	values('2222','022','game','2000-10-2','2001-12-3','Stream game 8h','#d6ecd6')
 	insert into ItemsInfor
-	values('2223','022','learning','2005-6-18','2007-10-3','learning 4h perday')
+	values('2223','022','learning','2005-6-18','2007-10-3','learning 4h perday','#d6ecd6')
 	insert into ItemsInfor
-	values('2224','0234','cooking','2007-9-12','2008-11-13','cooking from teacher(david)')
+	values('2224','0234','cooking','2007-9-12','2008-11-13','cooking from teacher(david)' , '#d6ecd6')
 	insert into ItemsInfor
-	values('2225','02322','travel','2000-11-2','2009-12-3','travel to china , korea')
+	values('2225','02322','travel','2000-11-2','2009-12-3','travel to china , korea' , '#d6ecd6')
 	insert into ItemsInfor
-	values('2226','022','video','2000-10-2','2001-12-3','video')
+	values('2226','022','video','2000-10-2','2001-12-3','video', '#d6ecd6')
 	insert into ItemsInfor
-	values('2227','022','SQL','2000-10-2','2001-12-3','SQL')
-	insert into ItemsInfor
-	values('2228','022','JDBC','2024-10-2','2025-12-3','JDBC')
-	insert into ItemsInfor
-	values('2229','022','JDBC','2000-11-2','2025-12-3','JDBC')
-	insert into ItemsInfor
-	values('2230','022','JDBC','2000-10-2','2010-12-3','JDBC')
-	insert into ItemsInfor
-	values('2231','022','JDBC','2000-10-2','2005-12-3','JDBC')
-	insert into ItemsInfor
-	values('2232','022','JDBC','2001-10-2','2001-12-3','JDBC')
-go
+	values('2227','022','SQL','2000-10-2','2001-12-3','SQL', '#d6ecd6')
 
 
 

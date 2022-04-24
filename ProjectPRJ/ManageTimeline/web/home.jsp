@@ -15,9 +15,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="CSS/styleBase2.css">
-        <link rel="stylesheet"  href="CSS/styleHome2.css">
-        <link rel="stylesheet" href="CSS/toastCSS.css"/>
-        <script src="JS/toastScript.js"></script>
+        <link rel="stylesheet"  href="CSS/styleHome5.css">
+        <link rel="stylesheet" href="CSS/styletoast.css"/>
+        <link rel="stylesheet" href="CSS/styleSearch.css"/>
+        <script src="JS/scriptToast.js"></script>
         <%
             // get list Items
             ArrayList<ItemsLocate> listItemsInfor = (ArrayList) session.getAttribute("listItemsLocate"); 
@@ -25,6 +26,9 @@
             Timeline timeline = (Timeline) session.getAttribute("timeline");
             boolean create = (boolean) request.getAttribute("create");
         %> 
+        <script>
+            let suggestions = ${sessionScope.ItemsIdentity};
+        </script>
     </head>
     <body>
         <div id="toast"></div>
@@ -103,7 +107,7 @@
             <ul class="container__feature">
                 <li class="container__feature--item" onclick="getDisplay(this, 'form-create')">
                     Create New Item
-                    <div class="container__feature--create" id="form-create">
+                    <div class="container__feature--form" id="form-create">
                         <p onclick='event.stopPropagation();'>information</p>
                         <form onclick='event.stopPropagation();' action="createItemsInfor">
                             <table>
@@ -123,6 +127,14 @@
                                     <td><label for="">description</label></td>
                                     <td><textarea name="createDescription" ></textarea><br></td>
                                 </tr>
+                                <tr>
+                                    <td>background</td>
+                                    <td>
+                                        <input name="bgColor" class="background--color" type="color"
+                                               value="#d6ecd6"><br>
+                                        <input name="bgfile"type="file" value="null"style="padding: 0px;">
+                                    </td>
+                                </tr>
                             </table>
                             <button class="btn">create</button>
                         </form>
@@ -134,7 +146,19 @@
                         <%}%>
                     </div>
                 </li>
-                <li class="container__feature--item">Delete Item</li>
+                <li class="container__feature--item">
+                    Delete Item
+                    <div  class="container__feature--form" id="form-delete" style="width: 400px; display: block;">
+                        <p >search to delete</p>
+                        <form class="feature-search" action="">
+                            <input  type="text" placeholder="Type to search..">
+                            <button class="btn">create</button>
+                            <div class="autocom-box">
+                                <!-- here list are inserted from javascript -->
+                            </div>
+                        </form>
+                    </div>  
+                </li>
                 <li class="container__feature--item">Update</li>
 
             </ul>
@@ -142,5 +166,6 @@
         <script src="https://kit.fontawesome.com/98a6f068d5.js" crossorigin="anonymous"></script>
         <!--        <script src="toolBase.js"></script>-->
         <script src="JS/scriptHome1.js"></script>
+        <script src="JS/scriptSearch.js"></script>
     </body>
 </html>

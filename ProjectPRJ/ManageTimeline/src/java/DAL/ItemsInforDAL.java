@@ -32,7 +32,7 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
             // get data
             while (rs.next()) {
                 listItemsInfor.add(new ItemsInfor(rs.getString(1), rs.getString(3),
-                        rs.getDate(4), rs.getDate(5), rs.getString(6)));
+                        rs.getDate(4), rs.getDate(5), rs.getString(6),rs.getString(7)));
             }
         } catch (SQLException ex) {
         }
@@ -52,7 +52,28 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
             // get data
             while (rs.next()) {
                 listItemsInfor.add(new ItemsInfor(rs.getString(1), rs.getString(3),
-                        rs.getDate(4), rs.getDate(5), rs.getString(6)));
+                        rs.getDate(4), rs.getDate(5), rs.getString(6),rs.getString(7)));
+            }
+        } catch (SQLException ex) {
+        }
+        return listItemsInfor;
+    }
+        public ArrayList<ItemsInfor> getAllIdentify(String iDAccount) {
+        ArrayList<ItemsInfor> listItemsInfor = new ArrayList<>();
+        // connect
+        try {
+            // PreparedStatement prepare execute
+            PreparedStatement PreStmt = connection.prepareStatement(
+                    "	select title , dateStart,idItems from ItemsInfor where IDAccount = ? order by title ,dateStart;");
+            
+            // PreparedStatement set place(?)
+            PreStmt.setString(1, iDAccount);
+            // Resuilt to contain result execute
+            ResultSet rs = PreStmt.executeQuery();
+            // get data
+            while (rs.next()) {
+                listItemsInfor.add(new ItemsInfor(rs.getString(1), rs.getString(3),
+                        rs.getDate(4)));
             }
         } catch (SQLException ex) {
         }
@@ -92,7 +113,7 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
             // get data
             while (rs.next()) {
                 return new ItemsInfor(rs.getString(1), rs.getString(3),
-                        rs.getDate(4), rs.getDate(5), rs.getString(6));
+                        rs.getDate(4), rs.getDate(5), rs.getString(6),rs.getString(7));
             }
         } catch (SQLException ex) {
         }
@@ -104,7 +125,7 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
         try {
             // PreparedStatement prepare execute
             PreparedStatement PreStmt = connection.prepareStatement(
-                    "insert into ItemsInfor values(?,?,?,?,?,?)");
+                    "insert into ItemsInfor values(?,?,?,?,?,?,?)");
             // PreparedStatement set place(?)
             PreStmt.setString(1, itemsInfor.getID());
             PreStmt.setString(2, iDAccount);
@@ -112,6 +133,7 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
             PreStmt.setDate(4, itemsInfor.getDateStart());
             PreStmt.setDate(5, itemsInfor.getDateEnd());
             PreStmt.setString(6, itemsInfor.getDetail());
+            PreStmt.setString(7, itemsInfor.getBackground());
             // Resuilt to contain result execute
             PreStmt.execute();
             return true;

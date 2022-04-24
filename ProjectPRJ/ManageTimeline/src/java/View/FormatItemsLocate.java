@@ -31,7 +31,7 @@ public class FormatItemsLocate {
     private ItemsLocate getItemsLocate(ItemsInfor itemsInfor,Date dateJoin, int type) {
         int dayDistance = getDayBetween(itemsInfor.getDateStart(), dateJoin);
         int dayBetween = getDayBetween(itemsInfor.getDateEnd(),itemsInfor.getDateStart());
-        return new ItemsLocate(itemsInfor.getID(),dayBetween,dayDistance, type, 1);
+        return new ItemsLocate(itemsInfor.getID(),dayBetween,dayDistance, type, 1,itemsInfor.getBackground());
     }
 
     private int getDayBetween(Date dateMax, Date dateJoin) {

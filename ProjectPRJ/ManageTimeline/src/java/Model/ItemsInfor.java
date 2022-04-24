@@ -11,28 +11,38 @@ import java.sql.Date;
  * @author Thang
  */
 public class ItemsInfor {
+
     private String iD;
     private String title;
     private Date dateStart;
     private Date dateEnd;
     private String detail;
+    private String background;
 
     public ItemsInfor() {
     }
 
-    public ItemsInfor(String iD, String title, Date dateStart, Date dateEnd, String detail) {
+    public ItemsInfor(String iD, String title, Date dateStart, Date dateEnd, String detail, String bacground) {
         this.iD = iD;
         this.title = title;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.detail = detail;
+        this.background = bacground;
     }
 
-    public ItemsInfor(String title, Date dateStart, Date dateEnd, String detail) {
+    public ItemsInfor(String title, Date dateStart, Date dateEnd, String detail, String background) {
         this.title = title;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.detail = detail;
+        this.background = background; 
+    }
+
+    public ItemsInfor(String iD, String title, Date dateStart) {
+        this.iD = iD;
+        this.title = title;
+        this.dateStart = dateStart;
     }
 
     public String getID() {
@@ -74,12 +84,18 @@ public class ItemsInfor {
     public void setDetail(String detail) {
         this.detail = detail;
     }
-    
 
+    public String getBackground() {
+        return background;
+    }
+
+    public void setBackground(String background) {
+        this.background = background;
+    }
 
     @Override
     public String toString() {
-        return iD + " | " + title + " | " + dateStart +" | " + dateEnd + " | " + detail; 
+        return "ItemsInfor{" + "iD=" + iD + ", title=" + title + ", dateStart=" + dateStart + ", dateEnd=" + dateEnd + ", detail=" + detail + ", background=" + background + '}';
     }
-    
+
 }

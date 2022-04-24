@@ -9,6 +9,7 @@ import View.InsertData.InsertItemsInfor;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -34,13 +35,18 @@ public class createItemsInforServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String iDAccount = (String) request.getSession().getAttribute("iDAccount");
+        Cookie[] cookie = request.getCookies();
+        String iDAccount = loginServlet.getCookie(cookie, "IDAccount").getValue();
         String title = request.getParameter("createTitle");
         Date dateStart = new Date(getDate(request.getParameter("createDateStart")).getTime());
         Date dateEnd =new Date(getDate(request.getParameter("createDateEnd")).getTime());
         String description = request.getParameter("createDescription");
+        String backround = request.getParameter("bgfile");
+        if("null".equals(backround)){
+            backround = request.getParameter("bgColor");
+        }
         InsertItemsInfor insert = new InsertItemsInfor();  
-        request.setAttribute("createH",insert.checkInvalid(new ItemsInfor(title, dateStart, dateEnd, description), iDAccount));
+        request.setAttribute("createH",insert.checkInvalid(new ItemsInfor(title, dateStart, dateEnd, description ,backround), iDAccount));
         request.getRequestDispatcher("home").forward(request, response);
     }
     
