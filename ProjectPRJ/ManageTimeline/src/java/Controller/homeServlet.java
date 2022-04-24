@@ -59,7 +59,7 @@ public class homeServlet extends HttpServlet {
                 fItemsLocate.getArrayItemsLocate(acc.getID(),acc.getDateJoin(),timeline.getType());
         request.setAttribute("create",check);
         // set attribute
-        request.getSession().setAttribute("ItemsIdentity",itemsDAL.getAllIdentify(C_iDAccount.getValue()));
+        request.getSession().setAttribute("itemsIdentity",itemsDAL.getAllIdentify(C_iDAccount.getValue()));
         request.getSession().setAttribute("timeline", timeline);
         request.getSession().setAttribute("listItemsLocate",listItemsLocate);
         request.getRequestDispatcher("home.jsp").forward(request, response);

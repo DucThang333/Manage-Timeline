@@ -31,6 +31,8 @@ go
 	select max(DateEnd)from ItemsInfor where IDAccount = '022'
 	select * from ItemsInfor where IDAccount = '022' order by DateStart,dateEnd;
 	delete from ItemsInfor where IDAccount = '022' and IDItems = '100011'
+	select title , dateStart,idItems from ItemsInfor where IDAccount = '022' order by title ,dateStart;
+	select * from ItemsInfor where title = 'learning' and dateStart = '2005-06-18'
 go 
 
 UPDATE Account
@@ -83,6 +85,9 @@ go
 	values('2226','022','video','2000-10-2','2001-12-3','video', '#d6ecd6')
 	insert into ItemsInfor
 	values('2227','022','SQL','2000-10-2','2001-12-3','SQL', '#d6ecd6')
+		insert into ItemsInfor
+	values('2229','022','123','2000-10-2','2001-12-3','SQL', '#d6ecd6')
+
 
 
 

@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="View.ModelView.ItemsLocate"%>
 <%@page import="View.ModelView.Timeline"%>
+<%@page import="Model.ItemsInfor" %>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Controller.homeServlet" %>
 <!DOCTYPE html>
@@ -17,17 +18,18 @@
         <link rel="stylesheet" href="CSS/styleBase2.css">
         <link rel="stylesheet"  href="CSS/styleHome5.css">
         <link rel="stylesheet" href="CSS/styletoast.css"/>
-        <link rel="stylesheet" href="CSS/styleSearch.css"/>
+        <link rel="stylesheet" href="CSS/styleSearch1.css"/>
         <script src="JS/scriptToast.js"></script>
         <%
             // get list Items
             ArrayList<ItemsLocate> listItemsInfor = (ArrayList) session.getAttribute("listItemsLocate"); 
+            ArrayList<ItemsInfor> itemsIdentity = (ArrayList) session.getAttribute("itemsIdentity"); 
             // get timeline
             Timeline timeline = (Timeline) session.getAttribute("timeline");
             boolean create = (boolean) request.getAttribute("create");
         %> 
         <script>
-            let suggestions = ${sessionScope.ItemsIdentity};
+            let suggestions = ${sessionScope.itemsIdentity};
         </script>
     </head>
     <body>
@@ -146,26 +148,44 @@
                         <%}%>
                     </div>
                 </li>
-                <li class="container__feature--item">
+                <li class="container__feature--item" onclick="getDisplay(this, 'form-delete')" >
                     Delete Item
-                    <div  class="container__feature--form" id="form-delete" style="width: 400px; display: block;">
-                        <p >search to delete</p>
-                        <form class="feature-search" action="">
-                            <input  type="text" placeholder="Type to search..">
-                            <button class="btn">create</button>
+                    <div onclick='event.stopPropagation();'  class="container__feature--form" id="form-delete" style="width: 400px;">
+                        <p>search</p>
+                        <form class="feature-search" action="deleteItemInfor" method="post">
+                            <input name="search-delete" type="text" placeholder="search : title + date start">
+                            <button class="btn">search</button>
                             <div class="autocom-box">
                                 <!-- here list are inserted from javascript -->
                             </div>
                         </form>
-                    </div>  
+                    </div>
+                    <div style="width: 300px ;" >
+                        
+                        
+                    </div>
                 </li>
-                <li class="container__feature--item">Update</li>
+                <li class="container__feature--item" onclick="getDisplay(this, 'form-update')">
+                    Update
+                    <div onclick='event.stopPropagation();'  class="container__feature--form" id="form-update" style="width: 400px;">
+                        <p >search</p>
+                        <form class="feature-search-update"action="">
+                            <input  type="text" placeholder="search : title + date start">
+                            <button class="btn">search</button>
+                            <div id="1"class="autocom-box" >
+                                <!-- here list are inserted from javascript -->
+                            </div>
+                        </form>
+                    </div>   
+                </li>
 
             </ul>
         </div>
         <script src="https://kit.fontawesome.com/98a6f068d5.js" crossorigin="anonymous"></script>
         <!--        <script src="toolBase.js"></script>-->
         <script src="JS/scriptHome1.js"></script>
+        <script src="JS/clickCreateClass.js"></script> 
         <script src="JS/scriptSearch.js"></script>
+
     </body>
 </html>

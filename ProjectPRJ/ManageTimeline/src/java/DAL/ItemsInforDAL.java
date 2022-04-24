@@ -32,7 +32,7 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
             // get data
             while (rs.next()) {
                 listItemsInfor.add(new ItemsInfor(rs.getString(1), rs.getString(3),
-                        rs.getDate(4), rs.getDate(5), rs.getString(6),rs.getString(7)));
+                        rs.getDate(4), rs.getDate(5), rs.getString(6), rs.getString(7)));
             }
         } catch (SQLException ex) {
         }
@@ -52,32 +52,62 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
             // get data
             while (rs.next()) {
                 listItemsInfor.add(new ItemsInfor(rs.getString(1), rs.getString(3),
-                        rs.getDate(4), rs.getDate(5), rs.getString(6),rs.getString(7)));
+                        rs.getDate(4), rs.getDate(5), rs.getString(6), rs.getString(7)));
             }
         } catch (SQLException ex) {
         }
         return listItemsInfor;
     }
-        public ArrayList<ItemsInfor> getAllIdentify(String iDAccount) {
+
+    public ArrayList<ItemsInfor> getAlByTitleDate(String iDAccount , String title , String date) {
         ArrayList<ItemsInfor> listItemsInfor = new ArrayList<>();
         // connect
         try {
             // PreparedStatement prepare execute
+            PreparedStatement PreStmt = connection.prepareStatement("select * from ItemsInfor where IDAccount = ?  order by DateStart,dateEnd");
+            // PreparedStatement set place(?)
+            PreStmt.setString(1, iDAccount);
+            PreStmt.setString(2, title);
+            PreStmt.setString(1, date);
+            // Resuilt to contain result execute
+            ResultSet rs = PreStmt.executeQuery();
+            // get data
+            while (rs.next()) {
+                listItemsInfor.add(new ItemsInfor(rs.getString(1), rs.getString(3),
+                        rs.getDate(4), rs.getDate(5), rs.getString(6), rs.getString(7)));
+            }
+        } catch (SQLException ex) {
+            return null;
+        }
+        return listItemsInfor;
+    } 
+
+    public ArrayList<String> getAllIdentify(String iDAccount) {
+        ArrayList<String> listIdentify = new ArrayList<>();
+        // connect
+        try {
+            // PreparedStatement prepare execute
             PreparedStatement PreStmt = connection.prepareStatement(
-                    "	select title , dateStart,idItems from ItemsInfor where IDAccount = ? order by title ,dateStart;");
-            
+                    "	select title , dateStart from ItemsInfor where IDAccount = ? order by title ,dateStart;");
+
             // PreparedStatement set place(?)
             PreStmt.setString(1, iDAccount);
             // Resuilt to contain result execute
             ResultSet rs = PreStmt.executeQuery();
             // get data
             while (rs.next()) {
-                listItemsInfor.add(new ItemsInfor(rs.getString(1), rs.getString(3),
-                        rs.getDate(4)));
+                listIdentify.add(" ' " + rs.getString(1) + "   " + rs.getDate(2) + " ' ");
             }
         } catch (SQLException ex) {
         }
-        return listItemsInfor;
+        return listIdentify;
+    }
+
+    public static void main(String[] args) {
+        ItemsInforDAL i = new ItemsInforDAL();
+        for (String stri : i.getAllIdentify("022")) {
+            System.out.println(stri);
+        }
     }
 
     public Date getMaxdate(String iDAccount) {
@@ -113,14 +143,14 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
             // get data
             while (rs.next()) {
                 return new ItemsInfor(rs.getString(1), rs.getString(3),
-                        rs.getDate(4), rs.getDate(5), rs.getString(6),rs.getString(7));
+                        rs.getDate(4), rs.getDate(5), rs.getString(6), rs.getString(7));
             }
         } catch (SQLException ex) {
         }
         return null;
     }
 
-    public boolean createItemsInfor(ItemsInfor itemsInfor , String iDAccount) {
+    public boolean createItemsInfor(ItemsInfor itemsInfor, String iDAccount) {
         // connect
         try {
             // PreparedStatement prepare execute
@@ -139,14 +169,15 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
             return true;
         } catch (SQLException ex) {
         }
-        return false; 
+        return false;
     }
-    public  void deleteItemsInfor(String iDItemsInfor , String iDAccount){
-                // connect
+
+    public void deleteItemsInfor(String iDItemsInfor, String iDAccount) {
+        // connect
         try {
             // PreparedStatement prepare execute
             PreparedStatement PreStmt = connection.prepareStatement(
-                "delete from ItemsInfor where IDAccount = ? and IDItems = ?");
+                    "delete from ItemsInfor where IDAccount = ? and IDItems = ?");
             // PreparedStatement set place(?)
             PreStmt.setString(1, iDAccount);
             PreStmt.setString(2, iDItemsInfor);
@@ -184,6 +215,5 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
 //        }
 //        return newdate;
 //    }
-    
 //    
 }

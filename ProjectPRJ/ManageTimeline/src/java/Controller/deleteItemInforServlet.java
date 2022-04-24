@@ -4,12 +4,16 @@
  */
 package Controller;
 
+import DAL.ItemsInforDAL;
+import Model.ItemsInfor;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
 /**
  *
@@ -69,9 +73,21 @@ public class deleteItemInforServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String search = request.getParameter("search-delete");
+        String title = search.substring(0,search.length()-11).trim();
+        Cookie[] cookie = request.getCookies();
+        Cookie C_iDAccount = loginServlet.getCookie(cookie,"IDAccount");
+        String dateStart = search.substring(search.length()- 10,search.length()).trim();
+        ItemsInforDAL itemsDAL = new ItemsInforDAL();
+        ArrayList<ItemsInfor> items = itemsDAL.getAlByTitleDate(C_iDAccount.getValue(), title, dateStart);
+        if(items != null){
+            request.setAttribute("checkFindDelete",false);
+        }
+        request.getRequestDispatcher("home.jsp").forward(request, response);
     }
-
+    
+    
+    
     /**
      * Returns a short description of the servlet.
      *
