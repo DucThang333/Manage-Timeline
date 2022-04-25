@@ -278,4 +278,55 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     background-color: #5e7c6a5c;
     color: white;
 }
+.container__feature--delete{
+    background-color: var(--earth-brown--color);
+    color: #e4c3c3;
+    position: absolute;
+    top: 0;
+    right: 105%;
+}
+
+.container__feature--delete .form-delete {
+    padding: 10px 30px 20px 10px;
+    width: 400px;
+}
+.container__feature--delete button{
+    margin-top: 13px;
+    background-color: gray;
+    font-size: 20px;
+    padding: 5px 10px 5px 10px;
+}
+
+#cancel-delete{
+    margin: 0px 0px 10px 10px;
+}
+
+.container__feature--delete .btn{
+    width: 100px;
+    height: 30px;
+    background-color: rgb(134, 129, 129);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container__feature--delete  a{
+    margin-top: 10px;
+}
+.container__feature--delete .form-update {
+    padding: 10px 30px 20px 10px;
+    width: 400px;
+}
+.container__feature--delete .form-update form{
+    margin-top: 10px;
+    font-size: 19px;
+    display: none;
+}
+.container__feature--delete .form-update input{
+    font-size: 16px;
+    padding: 4px;
+}
+.container__feature--delete .form-update textarea{
+    width: 230px;
+    height: 67px; 
+}
 

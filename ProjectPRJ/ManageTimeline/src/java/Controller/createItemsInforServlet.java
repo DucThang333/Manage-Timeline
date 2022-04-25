@@ -45,8 +45,10 @@ public class createItemsInforServlet extends HttpServlet {
         if("null".equals(backround)){
             backround = request.getParameter("bgColor");
         }
-        InsertItemsInfor insert = new InsertItemsInfor();  
-        request.setAttribute("createH",insert.checkInvalid(new ItemsInfor(title, dateStart, dateEnd, description ,backround), iDAccount));
+        InsertItemsInfor insert = new InsertItemsInfor(); 
+        request.setAttribute("doCreate", true);
+        request.setAttribute("checkCreate",
+                insert.checkInvalid(new ItemsInfor(title, dateStart, dateEnd, description ,backround), iDAccount));
         request.getRequestDispatcher("home").forward(request, response);
     }
     

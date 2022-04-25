@@ -49,18 +49,13 @@ public class homeServlet extends HttpServlet {
         
         // set data items ----
         FormatItemsLocate fItemsLocate = new FormatItemsLocate();
-        boolean check;
-        try {
-            check = (boolean)request.getAttribute("createH");
-        } catch (Exception e) {
-            check = false;
-        }
         ArrayList<ItemsLocate> listItemsLocate = 
                 fItemsLocate.getArrayItemsLocate(acc.getID(),acc.getDateJoin(),timeline.getType());
-        request.setAttribute("create",check);
         // set attribute
         request.getSession().setAttribute("itemsIdentity",itemsDAL.getAllIdentify(C_iDAccount.getValue()));
         request.getSession().setAttribute("timeline", timeline);
+        request.setAttribute("doCreate",request.getAttribute("doCreate"));
+        request.setAttribute("doDelete",request.getAttribute("doDelete"));
         request.getSession().setAttribute("listItemsLocate",listItemsLocate);
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }

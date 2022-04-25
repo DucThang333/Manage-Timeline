@@ -32,12 +32,13 @@ go
 	select * from ItemsInfor where IDAccount = '022' order by DateStart,dateEnd;
 	delete from ItemsInfor where IDAccount = '022' and IDItems = '100011'
 	select title , dateStart,idItems from ItemsInfor where IDAccount = '022' order by title ,dateStart;
-	select * from ItemsInfor where title = 'learning' and dateStart = '2005-06-18'
+	select * from ItemsInfor where IDAccount = '022' and title = 'learning' and dateStart = '2005-06-18'
+	select * from ItemsInfor where IDAccount = '022' and title = 'game' and dateStart = '2000-10-02'
+	UPDATE ItemsInfor
+	SET		Title = 'abc' ,DateStart = '2000-12-03',DateEnd = '2001-01-01', Detail  = 'ab' ,Background = '111' 
+	WHERE IDItems = '022.1650860715418' and IDAccount = '022';
+ 
 go 
-
-UPDATE Account
-SET DateJoin = '1999-09-22'
-WHERE IDAccount = '022';
 
 --create table account
 go 

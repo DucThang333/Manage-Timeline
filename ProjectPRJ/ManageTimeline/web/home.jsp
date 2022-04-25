@@ -4,29 +4,30 @@
     Author     : Thang
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="View.ModelView.ItemsLocate"%>
 <%@page import="View.ModelView.Timeline"%>
 <%@page import="Model.ItemsInfor" %>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Controller.homeServlet" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <!DOCTYPE html>
 <html>
     <head>  
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="CSS/styleBase2.css">
-        <link rel="stylesheet"  href="CSS/styleHome5.css">
+        <link rel="stylesheet"  href="CSS/styleHome6.css">
         <link rel="stylesheet" href="CSS/styletoast.css"/>
         <link rel="stylesheet" href="CSS/styleSearch1.css"/>
-        <script src="JS/scriptToast.js"></script>
+        <script src="JS/scriptToast1.js"></script>
         <%
             // get list Items
             ArrayList<ItemsLocate> listItemsInfor = (ArrayList) session.getAttribute("listItemsLocate"); 
             ArrayList<ItemsInfor> itemsIdentity = (ArrayList) session.getAttribute("itemsIdentity"); 
             // get timeline
             Timeline timeline = (Timeline) session.getAttribute("timeline");
-            boolean create = (boolean) request.getAttribute("create");
         %> 
         <script>
             let suggestions = ${sessionScope.itemsIdentity};
@@ -86,7 +87,6 @@
             <div class="container__content">
                 <div class="container__timeline">
                     <%for(int i = 0;i < timeline.getSegmentNumber(); i++){%>
-
                     <%String date = (String)timeline.getNextDate(i);%>
                     <div class="container__timeline--distance">
                         <hr width="30%" <%if(i==0){%> style="height:0px"<%}%> 
@@ -141,12 +141,19 @@
                             <button class="btn">create</button>
                         </form>
                         <button class="btn">cancel</button>
-                        <%if(create){%>
-                        <script>
-                            showSuccessToast();
-                        </script>
-                        <%}%>
                     </div>
+                    <c:if test="${doCreate}">
+                        <c:if test="${checkCreate}">
+                            <script>
+                                showSuccessToastCreate();
+                            </script>
+                        </c:if>  
+                        <c:if test="${!checkCreate}">
+                            <script>
+                                showErrorToastCreate();
+                            </script>
+                        </c:if>   
+                    </c:if> 
                 </li>
                 <li class="container__feature--item" onclick="getDisplay(this, 'form-delete')" >
                     Delete Item
@@ -160,30 +167,99 @@
                             </div>
                         </form>
                     </div>
-                    <div style="width: 300px ;" >
-                        
-                        
-                    </div>
+                    <c:if test="${checkFindDelete}">
+                        <div class="container__feature--delete" id="display-delete"> 
+                            <div class="form-delete">
+                                <c:forEach items="${listItemsDelete}" var="item">
+                                    <div class="form" id="${item.getID()}">
+                                        <p>title : ${item.getTitle()}</p>
+                                        <p>date start : ${item.getDateStart()} </p>
+                                        <p>date end : ${item.getDateEnd()}</p>
+                                        <p>description ${item.getDetail()}</p>
+                                        <div class="btn" onclick="getHideDelete(this)">delete</div>
+                                    </div> 
+                                </c:forEach>
+                                <a class="btn" id="submit-delete" >done</a>
+                            </div>
+                            <button class="btn" id="cancel-delete" onclick="cancelHideDelete()">cancel</button>
+                        </div>
+                    </c:if>   
+                    <c:if test="${checkDelete}">
+                        <script>
+                            showSuccessToastDelete(${titleDe});
+                        </script>
+                    </c:if>    
                 </li>
                 <li class="container__feature--item" onclick="getDisplay(this, 'form-update')">
                     Update
                     <div onclick='event.stopPropagation();'  class="container__feature--form" id="form-update" style="width: 400px;">
                         <p >search</p>
-                        <form class="feature-search-update"action="">
-                            <input  type="text" placeholder="search : title + date start">
+                        <form class="feature-search-update"action="updateItemsInfor" method="post">
+                            <input name="search-update"  type="text" placeholder="search : title + date start">
                             <button class="btn">search</button>
                             <div id="1"class="autocom-box" >
                                 <!-- here list are inserted from javascript -->
                             </div>
                         </form>
-                    </div>   
+                    </div>  
+                    <c:if test="${checkFindUpdate}">
+                        <div class="container__feature--delete" id="display-delete">
+                            <div class="form-update">
+                                <c:forEach items="${listItemsUpdate}" var="item">
+                                    <div class="form line" id="${item.getID()}">
+                                        <p>title : ${item.getTitle()}</p>
+                                        <p>date start : ${item.getDateStart()} </p>
+                                        <p>date end : ${item.getDateEnd()}</p>
+                                        <p>description ${item.getDetail()}</p>
+                                        <div class="btn" onclick="getAllHideUpdate(this)">update</div>
+                                    </div> 
+                                </c:forEach> 
+                                <form id="form-update-input" onclick='event.stopPropagation();' action="updateItemsInfor">
+                                    <input name="IDItemUpdate" style="display: none;">
+                                    <table>
+                                        <tr>
+                                            <td><label for="">title</title></label></td>
+                                            <td><input name="titleUpdate" type="text"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="">date start</label></td>
+                                            <td><input name="dateStartUpdate" type="date"><br></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="">date end</label></td>
+                                            <td><input name="dateEndUpdate" type="date"><br></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="">description</label></td>
+                                             <td><textarea name="detailUpdate" ></textarea><br></td>
+                                        </tr>
+                                        <tr>
+                                            <td>background</td>
+                                            <td>
+                                                <input name="bgColorUpdate" class="background--color" type="color"
+                                                       value="#d6ecd6"><br>
+                                                <input name="bgfileUpdate"type="file" value="null"style="padding: 0px;">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <button class="btn">update</button>
+                                </form>  
+                            </div>
+                            <button class="btn" id="cancel-delete" onclick="cancelHideDelete()">cancel</button>
+                        </div> 
+                    </c:if>   
+                    <c:if test="${checkDelete}">
+                        <script>
+                            showSuccessToastDelete(${titleDe});
+                        </script>
+                    </c:if>     
                 </li>
 
             </ul>
         </div>
         <script src="https://kit.fontawesome.com/98a6f068d5.js" crossorigin="anonymous"></script>
         <!--        <script src="toolBase.js"></script>-->
-        <script src="JS/scriptHome1.js"></script>
+        <script src="JS/scriptHome2.js"></script>
         <script src="JS/clickCreateClass.js"></script> 
         <script src="JS/scriptSearch.js"></script>
 

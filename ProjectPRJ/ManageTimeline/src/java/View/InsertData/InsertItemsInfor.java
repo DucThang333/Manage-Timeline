@@ -17,8 +17,6 @@ public class InsertItemsInfor {
     public boolean checkInvalid(ItemsInfor itemsInfor, String iDAccount) {
         Date dateNow = new Date(System.currentTimeMillis());
         ItemsInforDAL intemDAL = new ItemsInforDAL();
-        System.out.println(dateNow);
-        System.out.println(itemsInfor.getDateEnd() + " " + itemsInfor.getDateStart());
         setIDItemsInfor(itemsInfor, iDAccount, dateNow.getTime());
         if (!checkDate(dateNow, itemsInfor.getDateStart(), itemsInfor.getDateEnd())) {
             return false;
@@ -32,7 +30,7 @@ public class InsertItemsInfor {
         itemsInfor.setID(iDAccount + "." + String.valueOf(time));
     }
 
-    private boolean checkDate(Date dateNow, Date dateStart, Date dateEnd) {
+    public boolean checkDate(Date dateNow, Date dateStart, Date dateEnd) {
         if (dateStart.getTime() < dateNow.getTime()) {
             return false;
         } else if (dateEnd.getTime() < dateStart.getTime()) {

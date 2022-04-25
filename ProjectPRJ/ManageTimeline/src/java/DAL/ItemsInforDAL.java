@@ -59,16 +59,17 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
         return listItemsInfor;
     }
 
-    public ArrayList<ItemsInfor> getAlByTitleDate(String iDAccount , String title , String date) {
+    public ArrayList<ItemsInfor> getAlByTitleDate(String iDAccount, String title, Date date) {
         ArrayList<ItemsInfor> listItemsInfor = new ArrayList<>();
         // connect
         try {
             // PreparedStatement prepare execute
-            PreparedStatement PreStmt = connection.prepareStatement("select * from ItemsInfor where IDAccount = ?  order by DateStart,dateEnd");
+            PreparedStatement PreStmt = connection.prepareStatement(""
+                    + "select * from ItemsInfor where IDAccount = ? and title = ? and dateStart = ?");
             // PreparedStatement set place(?)
             PreStmt.setString(1, iDAccount);
             PreStmt.setString(2, title);
-            PreStmt.setString(1, date);
+            PreStmt.setDate(3, date);
             // Resuilt to contain result execute
             ResultSet rs = PreStmt.executeQuery();
             // get data
@@ -80,7 +81,7 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
             return null;
         }
         return listItemsInfor;
-    } 
+    }
 
     public ArrayList<String> getAllIdentify(String iDAccount) {
         ArrayList<String> listIdentify = new ArrayList<>();
@@ -164,6 +165,30 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
             PreStmt.setDate(5, itemsInfor.getDateEnd());
             PreStmt.setString(6, itemsInfor.getDetail());
             PreStmt.setString(7, itemsInfor.getBackground());
+            // Resuilt to contain result execute
+            PreStmt.execute();
+            return true;
+        } catch (SQLException ex) {
+        }
+        return false;
+    }
+
+    public boolean updateItemsInfor(ItemsInfor itemsInfor, String iDAccount) {
+        // connect
+        try {
+            // PreparedStatement prepare execute
+            PreparedStatement PreStmt = connection.prepareStatement(
+                    "	UPDATE ItemsInfor\n"
+                    + "	SET Title = ? ,DateStart = ?,DateEnd = ?, Detail  = ? ,Background = ? \n"
+                    + "	WHERE IDItems = ? and IDAccount = ?;");
+            // PreparedStatement set place(?)
+            PreStmt.setString(1, itemsInfor.getTitle());
+            PreStmt.setDate(2, itemsInfor.getDateStart());
+            PreStmt.setDate(3, itemsInfor.getDateEnd());
+            PreStmt.setString(4, itemsInfor.getDetail());
+            PreStmt.setString(5, itemsInfor.getBackground());
+            PreStmt.setString(6, itemsInfor.getID());
+            PreStmt.setString(7, iDAccount);
             // Resuilt to contain result execute
             PreStmt.execute();
             return true;

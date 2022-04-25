@@ -6,6 +6,7 @@ package Controller;
 
 import DAL.ItemsInforDAL;
 import Model.ItemsInfor;
+import View.InsertData.InsertItemsInfor;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
  *
  * @author Thang
  */
-public class deleteItemInforServlet extends HttpServlet {
+public class updateItemsInforServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,19 +34,7 @@ public class deleteItemInforServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet deleteItemInforServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet deleteItemInforServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -60,18 +49,21 @@ public class deleteItemInforServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-        String itemsDelete = request.getParameter("itemsDelete");
-        String[] IDitemsDeletes = itemsDelete.split(",");
-        Cookie[] cookies = request.getCookies();
-        Cookie C_Account = loginServlet.getCookie(cookies, "IDAccount");
-        ItemsInforDAL itemsDAL = new ItemsInforDAL();
-        for (String i : IDitemsDeletes) {
-            itemsDAL.deleteItemsInfor(i.trim(), C_Account.getValue());
-            request.setAttribute("doDelete", true);
-            request.setAttribute("checkDelete", true);  
-        }
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+        PrintWriter out = response.getWriter();
+        String IDItem = request.getParameter("IDItemUpdate");
+        String title = request.getParameter("titleUpdate");
+        String dateStart = request.getParameter("dateStartUpdate");
+        String dateEnd = request.getParameter("dateEndUpdate");
+        String detail = request.getParameter("detailUpdate"); 
+        Date dateSt = Date.valueOf(dateStart);
+        Date dateEn = Date.valueOf(dateEnd);
+        InsertItemsInfor insertData = new InsertItemsInfor();
+        Date dateNow = new Date(System.currentTimeMillis());
+        if(insertData.checkDate(dateNow, dateSt, dateEn)){
+            out.print("update false");
+            return;
+        };
+        
     }
 
     /**
@@ -85,7 +77,7 @@ public class deleteItemInforServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String search = request.getParameter("search-delete").trim();
+        String search = request.getParameter("search-update").trim();
         if (search.length() < 11) {
             request.getRequestDispatcher("home.jsp").forward(request, response);
         }
@@ -97,9 +89,9 @@ public class deleteItemInforServlet extends HttpServlet {
         ItemsInforDAL itemsDAL = new ItemsInforDAL();
         ArrayList<ItemsInfor> items = itemsDAL.getAlByTitleDate(C_iDAccount.getValue(), title, date);
         if (items != null) {
-            request.setAttribute("checkFindDelete", true);
+            request.setAttribute("checkFindUpdate", true);
         }
-        request.setAttribute("listItemsDelete", items);
+        request.setAttribute("listItemsUpdate", items);
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }
 
