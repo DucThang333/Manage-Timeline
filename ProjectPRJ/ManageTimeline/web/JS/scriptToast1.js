@@ -75,4 +75,21 @@ function showSuccessToastDelete() {
         duration: 5000
     });
 }
+function showErrorToastUpdate() {
+    toast({
+        title: "error!",
+        message: "can not update shedule please enter again !",
+        type: "error",
+        duration: 5000
+    });
+}
+
+function showSuccessToastUpdate() {
+    toast({
+        title: "Successfull update",
+        message: "you are update schedule ",
+        type: "success",
+        duration: 5000
+    });
+}
 

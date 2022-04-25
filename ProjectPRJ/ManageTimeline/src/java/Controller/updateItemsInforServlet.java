@@ -54,16 +54,27 @@ public class updateItemsInforServlet extends HttpServlet {
         String title = request.getParameter("titleUpdate");
         String dateStart = request.getParameter("dateStartUpdate");
         String dateEnd = request.getParameter("dateEndUpdate");
-        String detail = request.getParameter("detailUpdate"); 
+        String detail = request.getParameter("detailUpdate");
+        String background = request.getParameter("bgfileUpdate");
+        Cookie[] cookie = request.getCookies();
+        Cookie C_iDAccount = loginServlet.getCookie(cookie, "IDAccount"); 
+        if (background.equals("")) {
+            background = request.getParameter("bgColorUpdate");
+        }
         Date dateSt = Date.valueOf(dateStart);
         Date dateEn = Date.valueOf(dateEnd);
         InsertItemsInfor insertData = new InsertItemsInfor();
         Date dateNow = new Date(System.currentTimeMillis());
-        if(insertData.checkDate(dateNow, dateSt, dateEn)){
+        if (!insertData.checkDate(dateNow, dateSt, dateEn)) {
             out.print("update false");
             return;
-        };
-        
+        }
+        ItemsInforDAL itemDAL = new ItemsInforDAL();
+        request.setAttribute("checkUpdate", itemDAL.updateItemsInfor(new ItemsInfor
+        (IDItem, title, dateSt, dateEn, detail, background),C_iDAccount.getValue()));
+        request.setAttribute("doUpdate", true);
+        request.setAttribute("checkFindUpdate", false);
+        request.getRequestDispatcher("home").forward(request, response);
     }
 
     /**
@@ -78,21 +89,20 @@ public class updateItemsInforServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String search = request.getParameter("search-update").trim();
-        if (search.length() < 11) {
-            request.getRequestDispatcher("home.jsp").forward(request, response);
-        }
-        String title = search.substring(0, search.length() - 11).trim();
         Cookie[] cookie = request.getCookies();
         Cookie C_iDAccount = loginServlet.getCookie(cookie, "IDAccount");
-        String dateStart = search.substring(search.length() - 10, search.length()).trim();
-        Date date = Date.valueOf(dateStart);
         ItemsInforDAL itemsDAL = new ItemsInforDAL();
-        ArrayList<ItemsInfor> items = itemsDAL.getAlByTitleDate(C_iDAccount.getValue(), title, date);
-        if (items != null) {
+        ArrayList<ItemsInfor> iemsUpdate = new ArrayList<>();
+        for (ItemsInfor item : itemsDAL.getAll(C_iDAccount.getValue())) {
+            if ((item.getTitle() + " " + item.getDateStart()).contains(search)) {
+                iemsUpdate.add(item);
+            }
+        }
+        if (!iemsUpdate.isEmpty()) {
             request.setAttribute("checkFindUpdate", true);
         }
-        request.setAttribute("listItemsUpdate", items);
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+        request.setAttribute("listItemsUpdate", iemsUpdate);
+        request.getRequestDispatcher("home").forward(request, response);
     }
 
     /**

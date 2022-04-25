@@ -56,6 +56,7 @@ public class homeServlet extends HttpServlet {
         request.getSession().setAttribute("timeline", timeline);
         request.setAttribute("doCreate",request.getAttribute("doCreate"));
         request.setAttribute("doDelete",request.getAttribute("doDelete"));
+        request.setAttribute("doUpdate",request.getAttribute("doUpdate"));
         request.getSession().setAttribute("listItemsLocate",listItemsLocate);
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }

@@ -42,7 +42,7 @@ public class createItemsInforServlet extends HttpServlet {
         Date dateEnd =new Date(getDate(request.getParameter("createDateEnd")).getTime());
         String description = request.getParameter("createDescription");
         String backround = request.getParameter("bgfile");
-        if("null".equals(backround)){
+        if("".equals(backround)){
             backround = request.getParameter("bgColor");
         }
         InsertItemsInfor insert = new InsertItemsInfor(); 

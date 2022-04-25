@@ -69,8 +69,9 @@ public class deleteItemInforServlet extends HttpServlet {
         for (String i : IDitemsDeletes) {
             itemsDAL.deleteItemsInfor(i.trim(), C_Account.getValue());
             request.setAttribute("doDelete", true);
-            request.setAttribute("checkDelete", true);  
+            request.setAttribute("checkDelete", true);
         }
+        request.setAttribute("checkFindDelete", false);
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }
 
@@ -86,20 +87,19 @@ public class deleteItemInforServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String search = request.getParameter("search-delete").trim();
-        if (search.length() < 11) {
-            request.getRequestDispatcher("home.jsp").forward(request, response);
-        }
-        String title = search.substring(0, search.length() - 11).trim();
         Cookie[] cookie = request.getCookies();
         Cookie C_iDAccount = loginServlet.getCookie(cookie, "IDAccount");
-        String dateStart = search.substring(search.length() - 10, search.length()).trim();
-        Date date = Date.valueOf(dateStart);
         ItemsInforDAL itemsDAL = new ItemsInforDAL();
-        ArrayList<ItemsInfor> items = itemsDAL.getAlByTitleDate(C_iDAccount.getValue(), title, date);
-        if (items != null) {
+        ArrayList<ItemsInfor> iemsUpdate = new ArrayList<>();
+        for (ItemsInfor item : itemsDAL.getAll(C_iDAccount.getValue())) {
+            if ((item.getTitle() + " " + item.getDateStart()).contains(search)) {
+                iemsUpdate.add(item);
+            }
+        } 
+        if (!iemsUpdate.isEmpty()) {
             request.setAttribute("checkFindDelete", true);
         }
-        request.setAttribute("listItemsDelete", items);
+        request.setAttribute("listItemsDelete", iemsUpdate);
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }
 

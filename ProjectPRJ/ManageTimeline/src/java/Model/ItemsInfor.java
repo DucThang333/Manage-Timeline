@@ -36,7 +36,7 @@ public class ItemsInfor {
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.detail = detail;
-        this.background = background; 
+        this.background = background;
     }
 
     public ItemsInfor(String iD, String title, Date dateStart) {
@@ -79,6 +79,12 @@ public class ItemsInfor {
 
     public String getDetail() {
         return detail;
+    }
+
+    public String getDetailBrief() {
+        if (detail.length() > 34) {
+            return detail.substring(0, 33);
+        }return detail;
     }
 
     public void setDetail(String detail) {

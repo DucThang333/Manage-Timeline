@@ -134,7 +134,7 @@
                                     <td>
                                         <input name="bgColor" class="background--color" type="color"
                                                value="#d6ecd6"><br>
-                                        <input name="bgfile"type="file" value="null"style="padding: 0px;">
+                                        <input name="bgfile"type="file" value=""style="padding: 0px;">
                                     </td>
                                 </tr>
                             </table>
@@ -175,7 +175,7 @@
                                         <p>title : ${item.getTitle()}</p>
                                         <p>date start : ${item.getDateStart()} </p>
                                         <p>date end : ${item.getDateEnd()}</p>
-                                        <p>description ${item.getDetail()}</p>
+                                        <p>description : ${item.getDetailBrief()}</p>
                                         <div class="btn" onclick="getHideDelete(this)">delete</div>
                                     </div> 
                                 </c:forEach>
@@ -210,7 +210,7 @@
                                         <p>title : ${item.getTitle()}</p>
                                         <p>date start : ${item.getDateStart()} </p>
                                         <p>date end : ${item.getDateEnd()}</p>
-                                        <p>description ${item.getDetail()}</p>
+                                        <p>description : ${item.getDetailBrief()}</p>
                                         <div class="btn" onclick="getAllHideUpdate(this)">update</div>
                                     </div> 
                                 </c:forEach> 
@@ -231,14 +231,14 @@
                                         </tr>
                                         <tr>
                                             <td><label for="">description</label></td>
-                                             <td><textarea name="detailUpdate" ></textarea><br></td>
+                                            <td><textarea name="detailUpdate" ></textarea><br></td>
                                         </tr>
                                         <tr>
                                             <td>background</td>
                                             <td>
                                                 <input name="bgColorUpdate" class="background--color" type="color"
                                                        value="#d6ecd6"><br>
-                                                <input name="bgfileUpdate"type="file" value="null"style="padding: 0px;">
+                                                 <input name="bgfileUpdate"type="file" value=""style="padding: 0px;">
                                             </td>
                                         </tr>
                                     </table>
@@ -248,10 +248,17 @@
                             <button class="btn" id="cancel-delete" onclick="cancelHideDelete()">cancel</button>
                         </div> 
                     </c:if>   
-                    <c:if test="${checkDelete}">
-                        <script>
-                            showSuccessToastDelete(${titleDe});
-                        </script>
+                    <c:if test="${doUpdate}">
+                        <c:if test="${checkUpdate}">
+                            <script>
+                                showSuccessToastUpdate();
+                            </script>
+                        </c:if>  
+                        <c:if test="${!checkUpdate}">
+                            <script>
+                                showErrorToastUpdate();
+                            </script>
+                        </c:if>   
                     </c:if>     
                 </li>
 
