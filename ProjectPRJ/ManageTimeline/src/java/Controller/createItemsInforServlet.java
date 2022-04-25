@@ -35,23 +35,8 @@ public class createItemsInforServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        Cookie[] cookie = request.getCookies();
-        String iDAccount = loginServlet.getCookie(cookie, "IDAccount").getValue();
-        String title = request.getParameter("createTitle");
-        Date dateStart = new Date(getDate(request.getParameter("createDateStart")).getTime());
-        Date dateEnd =new Date(getDate(request.getParameter("createDateEnd")).getTime());
-        String description = request.getParameter("createDescription");
-        String backround = request.getParameter("bgfile");
-        if("".equals(backround)){
-            backround = request.getParameter("bgColor");
-        }
-        InsertItemsInfor insert = new InsertItemsInfor(); 
-        request.setAttribute("doCreate", true);
-        request.setAttribute("checkCreate",
-                insert.checkInvalid(new ItemsInfor(title, dateStart, dateEnd, description ,backround), iDAccount));
-        request.getRequestDispatcher("home").forward(request, response);
     }
-    
+
     private java.util.Date getDate(String dt2) {
         java.util.Date newdate = new java.util.Date();
         try {
@@ -88,7 +73,21 @@ public class createItemsInforServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        Cookie[] cookie = request.getCookies();
+        String iDAccount = loginServlet.getCookie(cookie, "IDAccount").getValue();
+        String title = request.getParameter("createTitle");
+        Date dateStart = new Date(getDate(request.getParameter("createDateStart")).getTime());
+        Date dateEnd = new Date(getDate(request.getParameter("createDateEnd")).getTime());
+        String description = request.getParameter("createDescription");
+        String backround = request.getParameter("bgfile");
+        if ("".equals(backround)) {
+            backround = request.getParameter("bgColor");
+        }
+        InsertItemsInfor insert = new InsertItemsInfor();
+        request.setAttribute("doCreate", true);
+        request.setAttribute("checkCreate",
+                insert.checkInvalid(new ItemsInfor(title, dateStart, dateEnd, description, backround), iDAccount));
+        response.sendRedirect("home");
     }
 
     /**

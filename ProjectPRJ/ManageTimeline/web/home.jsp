@@ -111,7 +111,7 @@
                     Create New Item
                     <div class="container__feature--form" id="form-create">
                         <p onclick='event.stopPropagation();'>information</p>
-                        <form onclick='event.stopPropagation();' action="createItemsInfor">
+                        <form onclick='event.stopPropagation();' action="createItemsInfor" method="post">
                             <table>
                                 <tr>
                                     <td><label for="">title</title></label></td>
@@ -159,7 +159,7 @@
                     Delete Item
                     <div onclick='event.stopPropagation();'  class="container__feature--form" id="form-delete" style="width: 400px;">
                         <p>search</p>
-                        <form class="feature-search" action="deleteItemInfor" method="post">
+                        <form class="feature-search" action="deleteItemInfor" method="get">
                             <input name="search-delete" type="text" placeholder="search : title + date start">
                             <button class="btn">search</button>
                             <div class="autocom-box">
@@ -169,7 +169,8 @@
                     </div>
                     <c:if test="${checkFindDelete}">
                         <div class="container__feature--delete" id="display-delete"> 
-                            <div class="form-delete">
+                            <form class="form-delete" action="deleteItemInfor" method="post">
+                                <input name="IDItemdelete" style="display: none">
                                 <c:forEach items="${listItemsDelete}" var="item">
                                     <div class="form" id="${item.getID()}">
                                         <p>title : ${item.getTitle()}</p>
@@ -179,8 +180,8 @@
                                         <div class="btn" onclick="getHideDelete(this)">delete</div>
                                     </div> 
                                 </c:forEach>
-                                <a class="btn" id="submit-delete" >done</a>
-                            </div>
+                                <button class="btn" id="submit-delete">done</button>
+                            </form>
                             <button class="btn" id="cancel-delete" onclick="cancelHideDelete()">cancel</button>
                         </div>
                     </c:if>   
@@ -194,7 +195,7 @@
                     Update
                     <div onclick='event.stopPropagation();'  class="container__feature--form" id="form-update" style="width: 400px;">
                         <p >search</p>
-                        <form class="feature-search-update"action="updateItemsInfor" method="post">
+                        <form class="feature-search-update"action="updateItemsInfor" method="get">
                             <input name="search-update"  type="text" placeholder="search : title + date start">
                             <button class="btn">search</button>
                             <div id="1"class="autocom-box" >
@@ -214,7 +215,7 @@
                                         <div class="btn" onclick="getAllHideUpdate(this)">update</div>
                                     </div> 
                                 </c:forEach> 
-                                <form id="form-update-input" onclick='event.stopPropagation();' action="updateItemsInfor">
+                                <form id="form-update-input" onclick='event.stopPropagation();' action="updateItemsInfor" method="post">
                                     <input name="IDItemUpdate" style="display: none;">
                                     <table>
                                         <tr>
@@ -223,11 +224,11 @@
                                         </tr>
                                         <tr>
                                             <td><label for="">date start</label></td>
-                                            <td><input name="dateStartUpdate" type="date"><br></td>
+                                            <td><input name="dateStartUpdate"type="date" value="2022-04-22" min="2022-04-22"><br></td>
                                         </tr>
                                         <tr>
                                             <td><label for="">date end</label></td>
-                                            <td><input name="dateEndUpdate" type="date"><br></td>
+                                            <td><input name="dateEndUpdate"type="date" value="2022-04-22" min="2022-04-22"><br></td>
                                         </tr>
                                         <tr>
                                             <td><label for="">description</label></td>
@@ -266,7 +267,7 @@
         </div>
         <script src="https://kit.fontawesome.com/98a6f068d5.js" crossorigin="anonymous"></script>
         <!--        <script src="toolBase.js"></script>-->
-        <script src="JS/scriptHome2.js"></script>
+        <script src="JS/scriptHome3.js"></script>
         <script src="JS/clickCreateClass.js"></script> 
         <script src="JS/scriptSearch.js"></script>
 

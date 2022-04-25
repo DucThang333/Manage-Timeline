@@ -49,32 +49,22 @@ public class updateItemsInforServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        String IDItem = request.getParameter("IDItemUpdate");
-        String title = request.getParameter("titleUpdate");
-        String dateStart = request.getParameter("dateStartUpdate");
-        String dateEnd = request.getParameter("dateEndUpdate");
-        String detail = request.getParameter("detailUpdate");
-        String background = request.getParameter("bgfileUpdate");
+        String search = request.getParameter("search-update").trim();
         Cookie[] cookie = request.getCookies();
-        Cookie C_iDAccount = loginServlet.getCookie(cookie, "IDAccount"); 
-        if (background.equals("")) {
-            background = request.getParameter("bgColorUpdate");
+        Cookie C_iDAccount = loginServlet.getCookie(cookie, "IDAccount");
+        ItemsInforDAL itemsDAL = new ItemsInforDAL();
+        ArrayList<ItemsInfor> iemsUpdate = new ArrayList<>();
+        for (ItemsInfor item : itemsDAL.getAll(C_iDAccount.getValue())) {
+            if ((item.getTitle() + "   " + item.getDateStart()).contains(search)) {
+                iemsUpdate.add(item);
+            }
         }
-        Date dateSt = Date.valueOf(dateStart);
-        Date dateEn = Date.valueOf(dateEnd);
-        InsertItemsInfor insertData = new InsertItemsInfor();
-        Date dateNow = new Date(System.currentTimeMillis());
-        if (!insertData.checkDate(dateNow, dateSt, dateEn)) {
-            out.print("update false");
-            return;
+        if (!iemsUpdate.isEmpty()) {
+            request.setAttribute("checkFindUpdate", true);
         }
-        ItemsInforDAL itemDAL = new ItemsInforDAL();
-        request.setAttribute("checkUpdate", itemDAL.updateItemsInfor(new ItemsInfor
-        (IDItem, title, dateSt, dateEn, detail, background),C_iDAccount.getValue()));
-        request.setAttribute("doUpdate", true);
-        request.setAttribute("checkFindUpdate", false);
-        request.getRequestDispatcher("home").forward(request, response);
+        request.setAttribute("listItemsUpdate", iemsUpdate);
+        request.getRequestDispatcher("home").forward(request, response); 
+
     }
 
     /**
@@ -88,20 +78,29 @@ public class updateItemsInforServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String search = request.getParameter("search-update").trim();
+        String IDItem = request.getParameter("IDItemUpdate");
+        String title = request.getParameter("titleUpdate");
+        String dateStart = request.getParameter("dateStartUpdate");
+        String dateEnd = request.getParameter("dateEndUpdate");
+        String detail = request.getParameter("detailUpdate");
+        String background = request.getParameter("bgfileUpdate");
         Cookie[] cookie = request.getCookies();
         Cookie C_iDAccount = loginServlet.getCookie(cookie, "IDAccount");
-        ItemsInforDAL itemsDAL = new ItemsInforDAL();
-        ArrayList<ItemsInfor> iemsUpdate = new ArrayList<>();
-        for (ItemsInfor item : itemsDAL.getAll(C_iDAccount.getValue())) {
-            if ((item.getTitle() + " " + item.getDateStart()).contains(search)) {
-                iemsUpdate.add(item);
-            }
+        if (background.equals("")) {
+            background = request.getParameter("bgColorUpdate");
         }
-        if (!iemsUpdate.isEmpty()) {
-            request.setAttribute("checkFindUpdate", true);
+        Date dateSt = Date.valueOf(dateStart);
+        Date dateEn = Date.valueOf(dateEnd);
+        InsertItemsInfor insertData = new InsertItemsInfor();
+        Date dateNow = new Date(System.currentTimeMillis());
+        if (!insertData.checkDate(dateNow, dateSt, dateEn)) {
+            request.getRequestDispatcher("home").forward(request, response);
+            return;
         }
-        request.setAttribute("listItemsUpdate", iemsUpdate);
+        ItemsInforDAL itemDAL = new ItemsInforDAL();
+        request.setAttribute("checkUpdate", itemDAL.updateItemsInfor(new ItemsInfor(IDItem, title, dateSt, dateEn, detail, background), C_iDAccount.getValue()));
+        request.setAttribute("doUpdate", true);
+        request.setAttribute("checkFindUpdate", false);
         request.getRequestDispatcher("home").forward(request, response);
     }
 

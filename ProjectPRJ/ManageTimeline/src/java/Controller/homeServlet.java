@@ -46,7 +46,6 @@ public class homeServlet extends HttpServlet {
         FormatTimeline fTimeline = new FormatTimeline();
         Timeline timeline = fTimeline.getTimesline(acc.getID(),acc.getDateJoin());
         timeline.setMonth();
-        
         // set data items ----
         FormatItemsLocate fItemsLocate = new FormatItemsLocate();
         ArrayList<ItemsLocate> listItemsLocate = 
@@ -57,6 +56,7 @@ public class homeServlet extends HttpServlet {
         request.setAttribute("doCreate",request.getAttribute("doCreate"));
         request.setAttribute("doDelete",request.getAttribute("doDelete"));
         request.setAttribute("doUpdate",request.getAttribute("doUpdate"));
+        request.setAttribute("dateNoew", acc);
         request.getSession().setAttribute("listItemsLocate",listItemsLocate);
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }

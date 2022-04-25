@@ -26,7 +26,7 @@ go
 	select * from Account where nameAccount = 'ABC'
 
 	-- command table ItemsInfor
-	select * from ItemsInfor where IDAccount = '022';
+	select * from ItemsInfor where IDAccount = 'A456';
 	select * from ItemsInfor where IDAccount = '022' and IDItems = '2222'
 	select max(DateEnd)from ItemsInfor where IDAccount = '022'
 	select * from ItemsInfor where IDAccount = '022' order by DateStart,dateEnd;
@@ -37,7 +37,7 @@ go
 	UPDATE ItemsInfor
 	SET		Title = 'abc' ,DateStart = '2000-12-03',DateEnd = '2001-01-01', Detail  = 'ab' ,Background = '111' 
 	WHERE IDItems = '022.1650860715418' and IDAccount = '022';
- 
+	select * from ItemsInfor where IDAccount = '022'
 go 
 
 --create table account
@@ -72,6 +72,8 @@ go
 	values('022','ABC','ABCtest','123456',01256789,'jdbc1.jbg','2010-09-13')
 	insert into Account
 	values('0234','hai','hai123','0123',012345,'jdbc2.jbg','2022-12-17')
+	insert into Account
+	values('A456','thang','thang2001','123456',0123455,'jdbc2.jbg','2022-04-25') 
 
 	-- insert table ItemsInfor
 	insert into ItemsInfor

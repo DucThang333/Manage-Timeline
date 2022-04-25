@@ -61,17 +61,20 @@ public class deleteItemInforServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
-        String itemsDelete = request.getParameter("itemsDelete");
-        String[] IDitemsDeletes = itemsDelete.split(",");
-        Cookie[] cookies = request.getCookies();
-        Cookie C_Account = loginServlet.getCookie(cookies, "IDAccount");
+        String search = request.getParameter("search-delete").trim();
+        Cookie[] cookie = request.getCookies();
+        Cookie C_iDAccount = loginServlet.getCookie(cookie, "IDAccount");
         ItemsInforDAL itemsDAL = new ItemsInforDAL();
-        for (String i : IDitemsDeletes) {
-            itemsDAL.deleteItemsInfor(i.trim(), C_Account.getValue());
-            request.setAttribute("doDelete", true);
-            request.setAttribute("checkDelete", true);
+        ArrayList<ItemsInfor> iemsUpdate = new ArrayList<>();
+        for (ItemsInfor item : itemsDAL.getAll(C_iDAccount.getValue())) {
+            if ((item.getTitle() + "   " + item.getDateStart()).contains(search)) {
+                iemsUpdate.add(item);
+            }
         }
-        request.setAttribute("checkFindDelete", false);
+        if (!iemsUpdate.isEmpty()) {
+            request.setAttribute("checkFindDelete", true);
+        }
+        request.setAttribute("listItemsDelete", iemsUpdate);
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }
 
@@ -86,22 +89,20 @@ public class deleteItemInforServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String search = request.getParameter("search-delete").trim();
-        Cookie[] cookie = request.getCookies();
-        Cookie C_iDAccount = loginServlet.getCookie(cookie, "IDAccount");
+        String itemsDelete = request.getParameter("IDItemdelete");
+        String[] IDitemsDeletes = itemsDelete.split(",");
+        Cookie[] cookies = request.getCookies();
+        Cookie C_Account = loginServlet.getCookie(cookies, "IDAccount");
         ItemsInforDAL itemsDAL = new ItemsInforDAL();
-        ArrayList<ItemsInfor> iemsUpdate = new ArrayList<>();
-        for (ItemsInfor item : itemsDAL.getAll(C_iDAccount.getValue())) {
-            if ((item.getTitle() + " " + item.getDateStart()).contains(search)) {
-                iemsUpdate.add(item);
-            }
-        } 
-        if (!iemsUpdate.isEmpty()) {
-            request.setAttribute("checkFindDelete", true);
+        for (String i : IDitemsDeletes) {
+            itemsDAL.deleteItemsInfor(i.trim(), C_Account.getValue());
+            request.setAttribute("doDelete", true);
+            request.setAttribute("checkDelete", true);
         }
-        request.setAttribute("listItemsDelete", iemsUpdate);
-        request.getRequestDispatcher("home.jsp").forward(request, response);
-    }
+        request.setAttribute("checkFindDelete", false);
+        request.getRequestDispatcher("home").forward(request, response);
+
+     }
 
     /**
      * Returns a short description of the servlet.

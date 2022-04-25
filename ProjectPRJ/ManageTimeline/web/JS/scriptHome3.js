@@ -27,7 +27,7 @@ let submitDelete = document.getElementById("submit-delete");
 let stringHref = [];
 
 submitDelete.onclick = function (e) {
-    submitDelete.href = "deleteItemInfor?itemsDelete=" + stringHref;
+    document.getElementsByName("IDItemdelete")[0].value = stringHref;
 };
 
 
@@ -39,6 +39,7 @@ function getHideDelete(element) {
     faElement.style.display = "none";
     stringHref.push(faElement.id);
 }
+
 function getAllHideUpdate(element){
     let faElement = element.parentNode;
     faFaElement = faElement.parentNode;

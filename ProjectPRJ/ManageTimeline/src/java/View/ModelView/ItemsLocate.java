@@ -22,11 +22,11 @@ public class ItemsLocate {
     public ItemsLocate() {
     }
 
-    public ItemsLocate(String iD, int dayBetween, int dayDistance, int type, int degree , String background) {
+    public ItemsLocate(String iD, int dayBetween, int dayDistance, int type, int degree, String background) {
         this.iD = iD;
-        setHeigth(dayBetween);
-        setDistance(dayDistance);
         this.type = type;
+        setHeigth(dayBetween);
+        setDistance(dayDistance); 
         this.degree = degree;
         this.background = background;
     }
