@@ -4,6 +4,8 @@
  */
 package View.ModelView;
 
+import java.util.Date;
+
 /**
  *
  * @author Thang
@@ -18,17 +20,31 @@ public class ItemsLocate {
     private int type;
     private int degree;
     private String background;
-
+    private int dateNow;
     public ItemsLocate() {
     }
 
-    public ItemsLocate(String iD, int dayBetween, int dayDistance, int type, int degree, String background) {
+    public ItemsLocate(String iD, int dayBetween, int dayDistance, int dateNow, int type, int degree, String background) {
         this.iD = iD;
         this.type = type;
         setHeigth(dayBetween);
-        setDistance(dayDistance); 
+        setDistance(dayDistance);
+        setDateNow(dateNow);
         this.degree = degree;
         this.background = background;
+    }
+
+    public int getDateNow() {
+        return dateNow;
+    }
+
+    public void setDateNow(int dateNow) {
+        this.dateNow = changeDatetoPx(dateNow);
+    }
+
+    public static void main(String[] args) {
+        ItemsLocate i = new ItemsLocate();
+        i.getDateNow();
     }
 
     public String getiD() {

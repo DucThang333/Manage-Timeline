@@ -17,8 +17,8 @@
     <head>  
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="CSS/styleBase2.css">
-        <link rel="stylesheet"  href="CSS/styleHome6.css">
+        <link rel="stylesheet" href="CSS/styleBase3.css">
+        <link rel="stylesheet"  href="CSS/styleHome7.css">
         <link rel="stylesheet" href="CSS/styletoast.css"/>
         <link rel="stylesheet" href="CSS/styleSearch1.css"/>
         <script src="JS/scriptToast1.js"></script>
@@ -31,6 +31,7 @@
         %> 
         <script>
             let suggestions = ${sessionScope.itemsIdentity};
+            let scrollT = ${sessionScope.scrollLoca};
         </script>
     </head>
     <body>
@@ -84,12 +85,12 @@
             </div>
         </nav>
         <div class="container">
-            <div class="container__content">
+            <div class="container__content" id="scroll">
                 <div class="container__timeline">
                     <%for(int i = 0;i < timeline.getSegmentNumber(); i++){%>
                     <%String date = (String)timeline.getNextDate(i);%>
                     <div class="container__timeline--distance">
-                        <hr width="30%" <%if(i==0){%> style="height:0px"<%}%> 
+                        <hr width="30%" <%if(i==0){%>style="height:0px"<%}%> 
                             class="<%=timeline.getLine()?"timeline--big":""%>">
                         <p class="container__timeline--time ">
                             <%=date%>
@@ -99,10 +100,16 @@
                 </div>
                 <div style="display: flex;width: fit-content">
                     <%for(ItemsLocate item : listItemsInfor){%>
-                    <div class="container__content--box"
-                         style="margin-top: <%=item.getDistance()%>px;height:
-                         <%=item.getHeigth()%>px">
-                    </div>
+                    <div>
+                        <div class="container__content--box"
+                             style="margin-top: <%=item.getDistance()%>px;height:
+                             <%=item.getDateNow()%>px;background-color: #9d9d9de3;">
+                        </div>
+                        <div class="container__content--box"
+                             style="height:
+                             <%=item.getHeigth() - item.getDateNow()%>px;background-image: url('IMG/download/<%=item.getBackground()%>');background-color: <%=item.getBackground()%>;">
+                        </div>
+                    </div> 
                     <%}%>
                 </div> 
             </div>
@@ -119,11 +126,11 @@
                                 </tr>
                                 <tr>
                                     <td><label for="">date start</label></td>
-                                    <td><input name="createDateStart"type="date" value="2022-04-22" min="2022-04-22"><br></td>
+                                    <td><input name="createDateStart"type="date" value="${dateNow}" min="${dateNow}"><br></td>
                                 </tr>
                                 <tr>
                                     <td><label for="">date end</label></td>
-                                    <td><input name="createDateEnd"type="date"  value="2022-04-22" min="2022-04-22"><br></td>
+                                    <td><input name="createDateEnd"type="date"  value="${dateNow}" min="${dateNow}"><br></td>
                                 </tr>
                                 <tr>
                                     <td><label for="">description</label></td>
@@ -224,11 +231,11 @@
                                         </tr>
                                         <tr>
                                             <td><label for="">date start</label></td>
-                                            <td><input name="dateStartUpdate"type="date" value="2022-04-22" min="2022-04-22"><br></td>
+                                            <td><input name="dateStartUpdate"type="date" value="${dateNow}" min="${dateNow}"><br></td>
                                         </tr>
                                         <tr>
                                             <td><label for="">date end</label></td>
-                                            <td><input name="dateEndUpdate"type="date" value="2022-04-22" min="2022-04-22"><br></td>
+                                            <td><input name="dateEndUpdate"type="date" value="${dateNow}" min="${dateNow}"><br></td>
                                         </tr>
                                         <tr>
                                             <td><label for="">description</label></td>
@@ -239,7 +246,7 @@
                                             <td>
                                                 <input name="bgColorUpdate" class="background--color" type="color"
                                                        value="#d6ecd6"><br>
-                                                 <input name="bgfileUpdate"type="file" value=""style="padding: 0px;">
+                                                <input name="bgfileUpdate"type="file" value=""style="padding: 0px;">
                                             </td>
                                         </tr>
                                     </table>
@@ -267,7 +274,7 @@
         </div>
         <script src="https://kit.fontawesome.com/98a6f068d5.js" crossorigin="anonymous"></script>
         <!--        <script src="toolBase.js"></script>-->
-        <script src="JS/scriptHome3.js"></script>
+        <script src="JS/scriptHome4.js"></script>
         <script src="JS/clickCreateClass.js"></script> 
         <script src="JS/scriptSearch.js"></script>
 

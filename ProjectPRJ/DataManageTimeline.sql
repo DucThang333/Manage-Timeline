@@ -34,6 +34,11 @@ go
 	select title , dateStart,idItems from ItemsInfor where IDAccount = '022' order by title ,dateStart;
 	select * from ItemsInfor where IDAccount = '022' and title = 'learning' and dateStart = '2005-06-18'
 	select * from ItemsInfor where IDAccount = '022' and title = 'game' and dateStart = '2000-10-02'
+
+	Update Account
+	Set DateJoin = '2022-03-27'
+	where IDAccount = 'A456'
+
 	UPDATE ItemsInfor
 	SET		Title = 'abc' ,DateStart = '2000-12-03',DateEnd = '2001-01-01', Detail  = 'ab' ,Background = '111' 
 	WHERE IDItems = '022.1650860715418' and IDAccount = '022';
@@ -90,6 +95,9 @@ go
 	values('2227','022','SQL','2000-10-2','2001-12-3','SQL', '#d6ecd6')
 		insert into ItemsInfor
 	values('2229','022','123','2000-10-2','2001-12-3','SQL', '#d6ecd6')
+
+	insert into ItemsInfor
+	values('A456.1650894020169','A456','game','2022-03-28','2022-04-30','','#b1ecb1')
 
 
 

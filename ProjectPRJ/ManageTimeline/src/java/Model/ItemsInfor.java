@@ -94,7 +94,6 @@ public class ItemsInfor {
     public String getBackground() {
         return background;
     }
-
     public void setBackground(String background) {
         this.background = background;
     }

@@ -25,6 +25,7 @@ public class Timeline {
     private boolean line;
     private int monthIndex;
     private int monthAfter;
+    private int datePass;
 
     public Timeline() {
     }
@@ -36,6 +37,7 @@ public class Timeline {
         this.line = false;
     }
 
+    
     public void setDateJoin(Date dateJoin) {
         this.dateJoin = dateJoin;
     }

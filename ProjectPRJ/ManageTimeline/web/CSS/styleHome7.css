@@ -169,7 +169,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 .container__content--box{
     margin-left: 20px;
-    width: 100px;
+    width: 140px;
     background-image: url("/img/testbox.jpg");
     background-size: cover;
     background-color: rgb(214, 236, 214);

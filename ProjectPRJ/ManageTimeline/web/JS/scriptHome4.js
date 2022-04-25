@@ -5,6 +5,8 @@
 
 
 
+let croll = document.getElementById('scroll');
+croll.scrollTop = scrollT;
 
 function display(ojectClick, ojectDisplay) {
     document.getElementsByTagName("BODY")[0].onclick = function (e) {

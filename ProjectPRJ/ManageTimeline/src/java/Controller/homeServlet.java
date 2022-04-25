@@ -17,7 +17,9 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -42,6 +44,7 @@ public class homeServlet extends HttpServlet {
         AccountDAL accDAL = new AccountDAL();
         ItemsInforDAL itemsDAL = new ItemsInforDAL();
         Account acc = accDAL.getAccountByID(C_iDAccount.getValue());
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         // set timeline ---
         FormatTimeline fTimeline = new FormatTimeline();
         Timeline timeline = fTimeline.getTimesline(acc.getID(),acc.getDateJoin());
@@ -56,8 +59,9 @@ public class homeServlet extends HttpServlet {
         request.setAttribute("doCreate",request.getAttribute("doCreate"));
         request.setAttribute("doDelete",request.getAttribute("doDelete"));
         request.setAttribute("doUpdate",request.getAttribute("doUpdate"));
-        request.setAttribute("dateNoew", acc);
+        request.setAttribute("dateNow", formatter.format(new Date()));
         request.getSession().setAttribute("listItemsLocate",listItemsLocate);
+        request.getSession().setAttribute("scrollLoca",fItemsLocate.getScrolltop(acc.getDateJoin(),timeline.getType()));
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }
     

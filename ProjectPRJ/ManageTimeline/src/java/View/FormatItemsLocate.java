@@ -7,8 +7,6 @@ package View;
 import DAL.ItemsInforDAL;
 import Model.ItemsInfor;
 import View.ModelView.ItemsLocate;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -18,7 +16,7 @@ import java.util.Date;
  */
 public class FormatItemsLocate {
 
-    public ArrayList<ItemsLocate> getArrayItemsLocate(String iDAccount, Date dateJoin, int type){
+    public ArrayList<ItemsLocate> getArrayItemsLocate(String iDAccount, Date dateJoin, int type) {
         ItemsInforDAL intemsDAL = new ItemsInforDAL();
         ArrayList<ItemsInfor> listInfors = intemsDAL.getAllOrderByDate(iDAccount);
         ArrayList<ItemsLocate> listItemsLocates = new ArrayList<>();
@@ -26,12 +24,30 @@ public class FormatItemsLocate {
             listItemsLocates.add(getItemsLocate(infor, dateJoin, type));
         }
         return listItemsLocates;
-    } 
-    
-    private ItemsLocate getItemsLocate(ItemsInfor itemsInfor,Date dateJoin, int type) {
+    }
+
+    private ItemsLocate getItemsLocate(ItemsInfor itemsInfor, Date dateJoin, int type) {
         int dayDistance = getDayBetween(itemsInfor.getDateStart(), dateJoin);
-        int dayBetween = getDayBetween(itemsInfor.getDateEnd(),itemsInfor.getDateStart());
-        return new ItemsLocate(itemsInfor.getID(),dayBetween,dayDistance, type, 1,itemsInfor.getBackground());
+        int dayBetween = getDayBetween(itemsInfor.getDateEnd(), itemsInfor.getDateStart());
+        int dateNow = getDayBetween(new Date(), itemsInfor.getDateStart());
+        return new ItemsLocate(itemsInfor.getID(), dayBetween, dayDistance, dateNow, type, 1, itemsInfor.getBackground());
+    }
+
+    public int getScrolltop(Date dateJoin, int type) {
+        int multi = 0;
+        switch (type) {
+            case 1:
+                multi = 48;
+                break;
+            case 2:
+                multi = 24;
+                break;
+            default:
+                multi = 8;
+                break;
+        }
+
+        return getDayBetween(new Date(), dateJoin)*multi + 3;
     }
 
     private int getDayBetween(Date dateMax, Date dateJoin) {
@@ -47,6 +63,4 @@ public class FormatItemsLocate {
 //    }
 //    
 
-    
-    
 }
