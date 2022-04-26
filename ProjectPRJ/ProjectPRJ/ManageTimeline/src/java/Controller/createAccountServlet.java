@@ -4,21 +4,20 @@
  */
 package Controller;
 
-import DAL.AccountDAL;
 import Model.Account;
+import View.InsertData.InsertAccount;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
 
 /**
  *
  * @author Thang
  */
-public class loginServlet extends HttpServlet {
+public class createAccountServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,20 +30,19 @@ public class loginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    }
-
-    public static Cookie getCookie(Cookie[] cookie, String nameCookie) {
-        if (cookie == null) {
-            return null;
-        } else {
-            for (Cookie coo : cookie) {
-                if (coo.getName().equals(nameCookie)) {
-                    return coo;
-
-                }
-            }
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet createAccountServlet</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet createAccountServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -59,17 +57,7 @@ public class loginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Cookie[] cookies = request.getCookies();
-        if (getCookie(cookies, "username") != null) {
-            request.setAttribute("name", getCookie(cookies, "username").getValue()); 
-        }
-        if (cookies != null) {
-            for (Cookie coo : cookies) {
-                coo.setMaxAge(0);
-                response.addCookie(coo);
-            }
-        }
-        request.getRequestDispatcher("login.jsp").include(request, response);
+        response.sendRedirect("createAccount.jsp");
     }
 
     /**
@@ -83,25 +71,28 @@ public class loginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username").trim();
-        String password = request.getParameter("password").trim();
-        AccountDAL accDAL = new AccountDAL();
-        Account acc = accDAL.existAccount(username, password);
-        if (acc != null) {
-            String remember = request.getParameter("remember");
-            if (remember != null) {
-                Cookie C_Username = new Cookie("username", username);
-                Cookie C_IDAccount = new Cookie("IDAccount", acc.getID());
-                C_Username.setMaxAge(3600);
-                C_IDAccount.setMaxAge(3600);
-                response.addCookie(C_Username);
-                response.addCookie(C_IDAccount);
-            }
-            // get session iDAccount
-            response.sendRedirect("home");
-        } else {
-            request.setAttribute("messLogin", "Wrong username or password please re-login");
+        String name = request.getParameter("name");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        int phoneNumber = 0;
+        try {
+            phoneNumber = Integer.parseInt(request.getParameter("phoneNumber"));
+        } catch (NumberFormatException e) {
+            request.setAttribute("messSignUp", "Sign up fail your phone invalid");
+            request.getRequestDispatcher("createAccount.jsp").forward(request, response); 
+            return;
+        }
+        String avatar = request.getParameter("avatar");
+        if (avatar == null || avatar.isEmpty()) {
+            avatar = "Logo.png";
+        }
+        InsertAccount insert = new InsertAccount();
+        if (insert.insertData(new Account(name, username, password, phoneNumber, avatar))) {
+            request.setAttribute("messLogin", "Sign up success enter account to login");
             request.getRequestDispatcher("login.jsp").forward(request, response);
+        } else {
+            request.setAttribute("messSignUp", "Sign up fail please enter another account");
+            request.getRequestDispatcher("createAccount.jsp").forward(request, response);
         }
     }
 

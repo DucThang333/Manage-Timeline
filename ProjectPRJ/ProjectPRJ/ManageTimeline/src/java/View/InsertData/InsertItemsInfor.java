@@ -27,7 +27,7 @@ public class InsertItemsInfor {
     }
 
     private void setIDItemsInfor(ItemsInfor itemsInfor, String iDAccount, long time) {
-        itemsInfor.setID(iDAccount + "." + String.valueOf(time));
+        itemsInfor.setID(String.valueOf(time));
     }
 
     public boolean checkDate(Date dateNow, Date dateStart, Date dateEnd) {

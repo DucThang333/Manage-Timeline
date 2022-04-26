@@ -154,7 +154,7 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
         try {
             // PreparedStatement prepare execute
             PreparedStatement PreStmt = connection.prepareStatement(
-                    "insert into ItemsInfor values(?,?,?,?,?,?,?)");
+                    "insert into ItemsInfor values(?,?,?,?,?,?,?,?)");
             // PreparedStatement set place(?)
             PreStmt.setString(1, itemsInfor.getID());
             PreStmt.setString(2, iDAccount);
@@ -163,6 +163,7 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
             PreStmt.setDate(5, itemsInfor.getDateEnd());
             PreStmt.setString(6, itemsInfor.getDetail());
             PreStmt.setString(7, itemsInfor.getBackground());
+            PreStmt.setBoolean(8,false);
             // Resuilt to contain result execute
             PreStmt.execute();
             return true;

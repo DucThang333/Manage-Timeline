@@ -1,5 +1,6 @@
 s--create data base
 create database ManageTimeline
+drop database ManageTimeline
 	
 --use database
 go
@@ -7,9 +8,9 @@ go
 go
 
 go
- --drop table Account
+ drop table Account
  drop table ItemsInfor
- --drop table settting
+ drop table settting
 go
 
 -- delete data
@@ -35,8 +36,8 @@ go
 	select * from ItemsInfor where IDAccount = '022' and title = 'learning' and dateStart = '2005-06-18'
 	select * from ItemsInfor where IDAccount = '022' and title = 'game' and dateStart = '2000-10-02'
 
-	Update Account
-	Set DateJoin = '2022-03-27'
+	Update ItemsInfor
+	Set submit = 'false'
 	where IDAccount = 'A456'
 
 	UPDATE ItemsInfor
@@ -57,14 +58,36 @@ go
 	create table ItemsInfor(IDItems varchar(50) primary key , 
 	IDAccount varchar(50) foreign key references Account(IDAccount),
 	Title varchar(50) not null ,DateStart date not null,DateEnd date not null,Detail varchar(50),
-	Background varchar(200) not null)
+	Background varchar(200) not null , submit bit not null)
 go 
+
+go 
+	create table SubItemsInfor(IDSub varchar(50) primary key , 
+	IDItems varchar(50) foreign key references  ItemsInfor(IDItems),
+	Title varchar(50) not null ,DateStart date not null,DateEnd date not null,Detail varchar(50), submit bit not null)
+
+go 
+
+go
+	create table scoreboard(idScore varchar(50) unique not null,
+	submit bit, point int)
+	alter table scoreboard
+		ADD constraint FK_IDItems_idScore foreign key(idScore) references  ItemsInfor(IDItems)
+go
+
+select * from setting
 
 go 
 	create table setting(IDSetting varchar(50) unique not null)
 	-----
 	alter table setting
 		add constraint FK_IDAccount_IDSetting foreign key(IDSetting) references Account(IDAccount)
+go 
+
+
+
+go 
+	create table 
 go 
 
 
@@ -79,6 +102,8 @@ go
 	values('0234','hai','hai123','0123',012345,'jdbc2.jbg','2022-12-17')
 	insert into Account
 	values('A456','thang','thang2001','123456',0123455,'jdbc2.jbg','2022-04-25') 
+	insert into Account
+	values('A456','thang','thang20011','1234561',01234551,'a','2022-04-25') 
 
 	-- insert table ItemsInfor
 	insert into ItemsInfor
@@ -93,9 +118,8 @@ go
 	values('2226','022','video','2000-10-2','2001-12-3','video', '#d6ecd6')
 	insert into ItemsInfor
 	values('2227','022','SQL','2000-10-2','2001-12-3','SQL', '#d6ecd6')
-		insert into ItemsInfor
+	insert into ItemsInfor
 	values('2229','022','123','2000-10-2','2001-12-3','SQL', '#d6ecd6')
-
 	insert into ItemsInfor
 	values('A456.1650894020169','A456','game','2022-03-28','2022-04-30','','#b1ecb1')
 

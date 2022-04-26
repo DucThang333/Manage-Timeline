@@ -22,6 +22,15 @@ public class Account {
     public Account() {
     }
 
+    public Account(String name, String userName, String password, int phone, String imageURL) {
+        this.name = name;
+        this.userName = userName;
+        this.password = password;
+        this.phone = phone;
+        this.imageURL = imageURL;
+    }
+    
+
     public Account(String iD, String name, String userName, String password, int phone, String imageURL ,Date dateJoin) {
         this.iD = iD;
         this.name = name;
