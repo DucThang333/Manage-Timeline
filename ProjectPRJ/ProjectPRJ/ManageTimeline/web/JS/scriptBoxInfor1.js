@@ -35,9 +35,14 @@ function displayInformation(element){
     let content = boxContent.querySelector(".content") ;
     let data = getInformation(element.id);
     let arrayP = content.querySelectorAll("p");
-    for (let i = 0; i < arrayP.length; i++) {
+    for (let i = 0; i < arrayP.length -2; i++) {
         arrayP[i].innerHTML = data[i+1].replaceAll("="," : ");
-        console.log(arrayP[i]);
     }
-    boxContent.querySelector(".img").querySelector("img").src = 'IMG/download/'+data[data.length - 1].replace(" background=","");
+    if(data[data.length - 1].replaceAll("="," : ").includes("false")){
+        arrayP[arrayP.length - 1].innerHTML = "submit : process";
+    }else{
+        arrayP[arrayP.length - 1].innerHTML = "submit : done";
+    }
+    arrayP[arrayP.length - 2].innerHTML = data[data.length - 2].replaceAll("="," : ");
+    boxContent.querySelector(".img").querySelector("img").src = 'IMG/download/'+data[data.length - 3].replace(" background=","");
 }

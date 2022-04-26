@@ -30,7 +30,7 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
             // get data
             while (rs.next()) {
                 listItemsInfor.add(new ItemsInfor(rs.getString(1), rs.getString(3),
-                        rs.getDate(4), rs.getDate(5), rs.getString(6), rs.getString(7)));
+                        rs.getDate(4), rs.getDate(5), rs.getString(6), rs.getString(7),rs.getString(9)));
             }
         } catch (SQLException ex) {
         }
@@ -50,33 +50,9 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
             // get data
             while (rs.next()) {
                 listItemsInfor.add(new ItemsInfor(rs.getString(1), rs.getString(3),
-                        rs.getDate(4), rs.getDate(5), rs.getString(6), rs.getString(7)));
+                        rs.getDate(4), rs.getDate(5), rs.getString(6), rs.getString(7),rs.getString(9),rs.getBoolean(8)));
             }
         } catch (SQLException ex) {
-        }
-        return listItemsInfor;
-    }
-
-    public ArrayList<ItemsInfor> getAlByTitleDate(String iDAccount, String title, Date date) {
-        ArrayList<ItemsInfor> listItemsInfor = new ArrayList<>();
-        // connect
-        try {
-            // PreparedStatement prepare execute
-            PreparedStatement PreStmt = connection.prepareStatement(""
-                    + "select * from ItemsInfor where IDAccount = ? and title = ? and dateStart = ?");
-            // PreparedStatement set place(?)
-            PreStmt.setString(1, iDAccount);
-            PreStmt.setString(2, title);
-            PreStmt.setDate(3, date);
-            // Resuilt to contain result execute
-            ResultSet rs = PreStmt.executeQuery();
-            // get data
-            while (rs.next()) {
-                listItemsInfor.add(new ItemsInfor(rs.getString(1), rs.getString(3),
-                        rs.getDate(4), rs.getDate(5), rs.getString(6), rs.getString(7)));
-            }
-        } catch (SQLException ex) {
-            return null;
         }
         return listItemsInfor;
     }
@@ -102,12 +78,7 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
         return listIdentify;
     }
 
-    public static void main(String[] args) {
-        ItemsInforDAL i = new ItemsInforDAL();
-        for (String stri : i.getAllIdentify("022")) {
-            System.out.println(stri);
-        }
-    }
+
 
     public Date getMaxdate(String iDAccount) {
         // connect
@@ -154,7 +125,7 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
         try {
             // PreparedStatement prepare execute
             PreparedStatement PreStmt = connection.prepareStatement(
-                    "insert into ItemsInfor values(?,?,?,?,?,?,?,?)");
+                    "insert into ItemsInfor values(?,?,?,?,?,?,?,?,?)");
             // PreparedStatement set place(?)
             PreStmt.setString(1, itemsInfor.getID());
             PreStmt.setString(2, iDAccount);
@@ -164,6 +135,7 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
             PreStmt.setString(6, itemsInfor.getDetail());
             PreStmt.setString(7, itemsInfor.getBackground());
             PreStmt.setBoolean(8,false);
+            PreStmt.setString(9, itemsInfor.getTypeInfor());
             // Resuilt to contain result execute
             PreStmt.execute();
             return true;
@@ -178,7 +150,7 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
             // PreparedStatement prepare execute
             PreparedStatement PreStmt = connection.prepareStatement(
                     "	UPDATE ItemsInfor\n"
-                    + "	SET Title = ? ,DateStart = ?,DateEnd = ?, Detail  = ? ,Background = ? \n"
+                    + "	SET Title = ? ,DateStart = ?,DateEnd = ?, Detail  = ? ,Background = ?,typeItems = ? \n"
                     + "	WHERE IDItems = ? and IDAccount = ?;");
             // PreparedStatement set place(?)
             PreStmt.setString(1, itemsInfor.getTitle());
@@ -186,8 +158,9 @@ public class ItemsInforDAL extends BaseDAL<ItemsInfor> {
             PreStmt.setDate(3, itemsInfor.getDateEnd());
             PreStmt.setString(4, itemsInfor.getDetail());
             PreStmt.setString(5, itemsInfor.getBackground());
-            PreStmt.setString(6, itemsInfor.getID());
-            PreStmt.setString(7, iDAccount);
+            PreStmt.setString(6, itemsInfor.getTypeInfor());
+            PreStmt.setString(7, itemsInfor.getID());
+            PreStmt.setString(8, iDAccount);
             // Resuilt to contain result execute
             PreStmt.execute();
             return true;

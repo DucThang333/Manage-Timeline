@@ -1,0 +1,58 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Apr 27, 2022, 12:17:28 AM
+    Author     : Thang
+*/
+
+.box__edit{
+    width: 570px;
+    min-height: 182px;
+    background: #868f82;
+    color: white;
+    display: none;
+    position: sticky;
+    top: 100px;
+    margin-left: 140px;
+}
+.box__edit--feature{
+    width: 30%;
+    height: 100%;
+    border-right: 1px solid;
+}
+.edit--feature{
+    display: flex;
+    line-height: 27px;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid;
+    cursor: pointer;
+    position: relative;
+}
+.edit--feature:hover{
+    background-color: #4d4747;
+}
+.box__edit--content p{
+    line-height: 27px;
+    border-bottom: 1px solid;
+    margin: 0;
+    margin-left: 15px;
+}
+.input__edit--content{
+    position: absolute;
+    left:100%;
+    top: 0;
+    background-color: rgb(44, 42, 42);
+    padding: 5px 30px;
+    display: none;
+}
+.input__edit--number{
+    position: absolute;
+    left:100%;
+    top: 0;
+    background-color: rgb(44, 42, 42);
+    padding: 5px 30px;
+    display: none;
+}

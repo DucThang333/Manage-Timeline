@@ -4,24 +4,18 @@
  */
 package Controller;
 
-import Model.ItemsInfor;
-import View.InsertData.InsertItemsInfor;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 /**
  *
  * @author Thang
  */
-public class createItemsInforServlet extends HttpServlet {
+public class diagramServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,16 +29,18 @@ public class createItemsInforServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-    }
-
-    private java.util.Date getDate(String dt2) {
-        java.util.Date newdate = new java.util.Date();
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            newdate = sdf.parse(dt2);
-        } catch (ParseException e) {
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet diagramServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet diagramServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        return newdate;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -59,7 +55,7 @@ public class createItemsInforServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.sendRedirect("diagram.jsp");
     }
 
     /**
@@ -73,22 +69,7 @@ public class createItemsInforServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Cookie[] cookie = request.getCookies();
-        String iDAccount = loginServlet.getCookie(cookie, "IDAccount").getValue();
-        String title = request.getParameter("createTitle");
-        Date dateStart = new Date(getDate(request.getParameter("createDateStart")).getTime());
-        Date dateEnd = new Date(getDate(request.getParameter("createDateEnd")).getTime());
-        String description = request.getParameter("createDescription");
-        String backround = request.getParameter("bgfile");
-        String typeInfor = request.getParameter("typeInfor");
-        if ("".equals(backround)) {
-            backround = request.getParameter("bgColor");
-        }
-        InsertItemsInfor insert = new InsertItemsInfor();
-        request.setAttribute("doCreate", true);
-        request.setAttribute("checkCreate",
-                insert.checkInvalid(new ItemsInfor(title, dateStart, dateEnd, description, backround , typeInfor), iDAccount));
-        request.getRequestDispatcher("home").forward(request, response);
+        
     }
 
     /**
@@ -99,6 +80,6 @@ public class createItemsInforServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold> 
+    }// </editor-fold>
 
 }

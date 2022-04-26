@@ -29,3 +29,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 .box--content .content{
     width: 54%;
 }
+.edit-process{
+    margin-top: 10px;
+    background-color: #645c5c;
+    width: 117px;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.edit-process:hover{
+    width: 118px;
+    height: 34px;
+}

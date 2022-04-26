@@ -18,10 +18,35 @@ public class ItemsInfor {
     private Date dateEnd;
     private String detail;
     private String background;
+    private String typeInfor;
+    private boolean submit;
 
     public ItemsInfor() {
     }
 
+    public ItemsInfor(String iD, String title, Date dateStart, Date dateEnd, String detail, String background, String typeInfor, boolean submit) {
+        this.iD = iD;
+        this.title = title;
+        this.dateStart = dateStart;
+        this.dateEnd = dateEnd;
+        this.detail = detail;
+        this.background = background;
+        this.typeInfor = typeInfor;
+        this.submit = submit;
+    }
+    
+
+    public ItemsInfor(String iD, String title, Date dateStart, Date dateEnd, String detail, String background, String typeInfor) {
+        this.iD = iD;
+        this.title = title;
+        this.dateStart = dateStart;
+        this.dateEnd = dateEnd;
+        this.detail = detail;
+        this.background = background;
+        this.typeInfor = typeInfor;
+    }
+
+    
     public ItemsInfor(String iD, String title, Date dateStart, Date dateEnd, String detail, String bacground) {
         this.iD = iD;
         this.title = title;
@@ -30,6 +55,16 @@ public class ItemsInfor {
         this.detail = detail;
         this.background = bacground;
     }
+
+    public ItemsInfor(String title, Date dateStart, Date dateEnd, String detail, String background, String typeInfor) {
+        this.title = title;
+        this.dateStart = dateStart;
+        this.dateEnd = dateEnd;
+        this.detail = detail;
+        this.background = background;
+        this.typeInfor = typeInfor;
+    }
+    
 
     public ItemsInfor(String title, Date dateStart, Date dateEnd, String detail, String background) {
         this.title = title;
@@ -43,6 +78,24 @@ public class ItemsInfor {
         this.iD = iD;
         this.title = title;
         this.dateStart = dateStart;
+    }
+    
+
+
+    public String getTypeInfor() {
+        return typeInfor;
+    }
+
+    public void setTypeInfor(String typeInfor) {
+        this.typeInfor = typeInfor;
+    }
+
+    public boolean isSubmit() {
+        return submit;
+    }
+
+    public void setSubmit(boolean submit) {
+        this.submit = submit;
     }
 
     public String getID() {
@@ -100,7 +153,8 @@ public class ItemsInfor {
 
     @Override
     public String toString() {
-        return "ItemsInfor{" + "iD=" + iD + ", title=" + title + ", dateStart=" + dateStart + ", dateEnd=" + dateEnd + ", detail=" + detail + ", background=" + background + '}';
+        return "ItemsInfor{" + "iD=" + iD + ", title=" + title + ", dateStart=" + dateStart + ", dateEnd=" + dateEnd + ", detail=" + detail + ", background=" + background + ", typeInfor=" + typeInfor + ", submit=" + submit + '}';
     }
+    
 
 }

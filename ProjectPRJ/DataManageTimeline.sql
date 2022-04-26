@@ -59,7 +59,10 @@ go
 	IDAccount varchar(50) foreign key references Account(IDAccount),
 	Title varchar(50) not null ,DateStart date not null,DateEnd date not null,Detail varchar(50),
 	Background varchar(200) not null , submit bit not null)
+	alter table ItemsInfor
+	add typeItems varchar(50)
 go 
+select * from ItemsInfor where IDAccount = 'A456' order by DateStart,dateEnd
 
 go 
 	create table SubItemsInfor(IDSub varchar(50) primary key , 

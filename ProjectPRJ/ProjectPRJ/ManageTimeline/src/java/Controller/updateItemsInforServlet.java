@@ -84,6 +84,7 @@ public class updateItemsInforServlet extends HttpServlet {
         String dateEnd = request.getParameter("dateEndUpdate");
         String detail = request.getParameter("detailUpdate");
         String background = request.getParameter("bgfileUpdate");
+        String typeInforUpdate = request.getParameter("typeInforUpdate");
         Cookie[] cookie = request.getCookies();
         Cookie C_iDAccount = loginServlet.getCookie(cookie, "IDAccount");
         if (background.equals("")) {
@@ -98,7 +99,9 @@ public class updateItemsInforServlet extends HttpServlet {
             return;
         }
         ItemsInforDAL itemDAL = new ItemsInforDAL();
-        request.setAttribute("checkUpdate", itemDAL.updateItemsInfor(new ItemsInfor(IDItem, title, dateSt, dateEn, detail, background), C_iDAccount.getValue()));
+        request.setAttribute("checkUpdate", itemDAL.updateItemsInfor(new 
+        ItemsInfor(IDItem, title, dateSt, dateEn, detail, background,typeInforUpdate),
+                C_iDAccount.getValue()));
         request.setAttribute("doUpdate", true);
         request.setAttribute("checkFindUpdate", false);
         request.getRequestDispatcher("home").forward(request, response);

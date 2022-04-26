@@ -17,11 +17,13 @@
     <head>  
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="CSS/styleHeader.css"/>
         <link rel="stylesheet" href="CSS/styleBase3.css">
         <link rel="stylesheet"  href="CSS/styleHome7.css">
         <link rel="stylesheet" href="CSS/styletoast.css"/>
         <link rel="stylesheet" href="CSS/styleSearch1.css"/>
-        <link rel="stylesheet" href="CSS/styleBoxInfor.css"/>
+        <link rel="stylesheet" href="CSS/styleBoxInfor1.css"/>
+        <link rel="stylesheet" href="CSS/styleEditSkub.css">
         <script src="JS/scriptToast1.js"></script>
         <%
             // get list Items
@@ -35,54 +37,7 @@
     </head>
     <body>
         <div id="toast"></div>
-        <nav class="header">
-            <div class="header__brand">
-                <img class="header__brand--img" src="IMG/Logo.png" alt="Logo">
-                <H1 class="header__brand--text">TimeLine</H1>
-            </div>
-            <div class="header__feature">
-                <div class="header__transfer">
-                    <div class="header__transfer--link">
-                        <a href="" class="header__feature--link">Home</a>
-                    </div>
-                    <div class="header__transfer--link">
-                        <a href="" class="header__feature--link">Graph</a>
-                    </div>
-                </div>
-                <form action="" class="header__search">
-                    <input type="search" class="header__search--input" placeholder="Search">
-                    <button class="header__search--btn btn" type="submit">Search</button>
-                </form>
-                <div class="header__log">
-                    <div class="header__notifi">
-                        <i class="fa-regular fa-bell" style="color: white;font-size: 1.6rem;"></i>
-                    </div>
-                    <div class="header__account">
-                        <img class="header__account--img" onclick="getDisplay(this, 'account-setting')" src="IMG/Logo.png" alt="">
-                        <ul class="header__account--setting" id="account-setting">
-                            <li class="header__setting--header line">
-                                <img onclick='event.stopPropagation();' class="header__setting--img" src="IMG/Logo.png" alt="">
-                                <div onclick='event.stopPropagation();' class="header__setting--info">
-                                    <h4>${accountInfor.getName()}</h4>
-                                    <h5>Thoi gian hoat dong : 90 ngay</h5>
-                                </div>
-                            </li>
-                            <li onclick='event.stopPropagation();' class="header__account--propoties ">
-                                <a href="login">Sign out</a>
-                            </li>
-                            <li onclick='event.stopPropagation();' class="header__account--propoties line">Switch account</li>
-                            <li onclick='event.stopPropagation();'  class="header__account--propoties ">Language</li>
-                            <li onclick='event.stopPropagation();' class="header__account--propoties ">Appearance</li>
-                            <li onclick='event.stopPropagation();' class="header__account--propoties ">Setting</li>
-                            <li onclick='event.stopPropagation();' class="header__account--propoties line">Reset Data</li>
-                            <li onclick='event.stopPropagation();' class="header__account--propoties ">Contact</li>
-                            <li onclick='event.stopPropagation();' class="header__account--propoties ">Help</li>
-                            <li onclick='event.stopPropagation();' class="header__account--propoties ">Send feedback</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </nav>
+        <%@include file="header.jsp" %>
         <div class="container">
             <div class="container__content" id="scroll">
                 <div class="container__timeline">
@@ -97,9 +52,9 @@
                     </div>
                     <%}%>
                 </div>
-                <div style="display: flex">
+                <div id="contain-content" style="display: flex">
                     <%for(ItemsLocate item : listItemsInfor){%>
-                    <div \ >
+                    <div>
                         <div class="container__content--box"
                              style="margin-top: <%=item.getDistance()%>px;height:
                              <%=item.getDateNow()%>px;background-color: #9d9d9de3;">
@@ -111,12 +66,39 @@
                             <div class="box--content">
                                 <div class="img"><img src="" alt="dont have background img"></div>
                                 <div class="content">
-                                    <p></p>
-                                    <p></p>
-                                    <p></p>
-                                    <p></p>
+                                    <p></p><p></p><p></p><p></p><p></p> <p></p>
+                                    <div class="edit-process">
+                                        edit process
+                                    </div>
                                 </div>
-                            </div>  
+                            </div>
+                            <div onclick="event.stopPropagation()" class="box__edit">
+                                <  class="box__edit--feature">
+                                    <div class="edit--feature" id="edit-add">add
+                                        <div class="input__edit--content" id="input-edit">
+                                            <form action="subItemsInfor">
+                                                <input type="text" placeholder="enter title">
+                                                <input type="date" placeholder="enter date start">
+                                                <input type="date" placeholder="enter date end">
+                                                <input type="text" placeholder="enter detail">
+                                                <button class="btn">submit</button>
+                                                <button id="input-edit-cancel" class="btn">cancel</button> 
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="edit--feature" id="edit-delete">remove
+                                        <div class="input__edit--number" id="input-edit-delete">
+                                            <input type="number" placeholder="enter number delete">
+                                            <button class="btn">submit</button>
+                                            <button id="input-edit-cancel-delete" class="btn">cancel</button>
+                                        </div>
+                                    </div>
+                                    <div class="edit--feature">compite</div> 
+                                    <div id="edit-feature-cancel" class="edit--feature">cancel</div> 
+                                </div>
+                                <div class="box__edit--content">
+                                </div>
+                            </div> 
                         </div>  
                     </div> 
                     <%}%>
@@ -146,11 +128,22 @@
                                     <td><textarea name="createDescription" ></textarea><br></td>
                                 </tr>
                                 <tr>
-                                    <td>background</td>
+                                    <td><label for="">background</label></td>
                                     <td>
                                         <input name="bgColor" class="background--color" type="color"
                                                value="#d6ecd6"><br>
                                         <input name="bgfile"type="file" value=""style="padding: 0px;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label for="">type</label></td>
+                                    <td>
+                                        <select name="typeInfor">
+                                            <option>unknow</option>
+                                            <option>game</option>
+                                            <option>working</option>
+                                            <option>play</option>
+                                        </select>
                                     </td>
                                 </tr>
                             </table>
@@ -193,6 +186,7 @@
                                         <p>date start : ${item.getDateStart()} </p>
                                         <p>date end : ${item.getDateEnd()}</p>
                                         <p>description : ${item.getDetailBrief()}</p>
+                                        <p>type : ${item.getTypeInfor()}</p>
                                         <div class="btn" onclick="getHideDelete(this)">delete</div>
                                     </div> 
                                 </c:forEach>
@@ -228,6 +222,7 @@
                                         <p>date start : ${item.getDateStart()} </p>
                                         <p>date end : ${item.getDateEnd()}</p>
                                         <p>description : ${item.getDetailBrief()}</p>
+                                        <p>type : ${item.getTypeInfor()}</p>
                                         <div class="btn" onclick="getAllHideUpdate(this)">update</div>
                                     </div> 
                                 </c:forEach> 
@@ -251,13 +246,24 @@
                                             <td><textarea name="detailUpdate" ></textarea><br></td>
                                         </tr>
                                         <tr>
-                                            <td>background</td>
+                                            <td><label for="">background</label></td>
                                             <td>
                                                 <input name="bgColorUpdate" class="background--color" type="color"
                                                        value="#d6ecd6"><br>
                                                 <input name="bgfileUpdate"type="file" value=""style="padding: 0px;">
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td><label for="">type</label></td>
+                                            <td>
+                                                <select name="typeInforUpdate">
+                                                    <option>unknow</option>
+                                                    <option>game</option>
+                                                    <option>working</option>
+                                                    <option>play</option>
+                                                </select>
+                                            </td>
+                                        </tr> 
                                     </table>
                                     <button class="btn">update</button>
                                 </form>  
@@ -282,7 +288,8 @@
             </ul>
         </div>
         <script src="https://kit.fontawesome.com/98a6f068d5.js" crossorigin="anonymous"></script>
-        <script src="JS/scriptBoxInfor.js"></script>
+        <script src="JS/scriptEditSub.js"></script>
+        <script src="JS/scriptBoxInfor1.js"></script>
         <script src="JS/scriptHome5.js"></script> 
         <script src="JS/scriptSearch.js"></script>
     </body>
