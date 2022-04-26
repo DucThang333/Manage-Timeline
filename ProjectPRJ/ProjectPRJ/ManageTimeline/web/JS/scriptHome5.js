@@ -25,10 +25,9 @@ function getDisplay(ojectClick, IDDisplay) {
     display(ojectClick,
             document.getElementById(IDDisplay));
 }
-let submitDelete = document.getElementById("submit-delete");
 let stringHref = [];
 
-submitDelete.onclick = function (e) {
+function getSubmitDelete() {
     document.getElementsByName("IDItemdelete")[0].value = stringHref;
 };
 

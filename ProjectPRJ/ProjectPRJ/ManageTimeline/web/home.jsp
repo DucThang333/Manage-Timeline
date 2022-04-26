@@ -21,17 +21,17 @@
         <link rel="stylesheet"  href="CSS/styleHome7.css">
         <link rel="stylesheet" href="CSS/styletoast.css"/>
         <link rel="stylesheet" href="CSS/styleSearch1.css"/>
+        <link rel="stylesheet" href="CSS/styleBoxInfor.css"/>
+        <script src="JS/scriptToast1.js"></script>
         <%
             // get list Items
             ArrayList<ItemsLocate> listItemsInfor = (ArrayList) session.getAttribute("listItemsLocate"); 
             // get timeline
             Timeline timeline = (Timeline) session.getAttribute("timeline");
         %> 
-        <script>
-            document.getElementById('scroll').scrollTop = 100;
-
-            let scrollT = ${sessionScope.scrollLoca};
-        </script>
+        <script> let scrollT = ${sessionScope.scrollLoca};</script>
+        <script> let suggestions = ${sessionScope.itemsIdentity};</script> 
+        <script> let arrayItem = '${sessionScope.listItems}'</script>
     </head>
     <body>
         <div id="toast"></div>
@@ -63,7 +63,7 @@
                             <li class="header__setting--header line">
                                 <img onclick='event.stopPropagation();' class="header__setting--img" src="IMG/Logo.png" alt="">
                                 <div onclick='event.stopPropagation();' class="header__setting--info">
-                                    <h4></h4>
+                                    <h4>${accountInfor.getName()}</h4>
                                     <h5>Thoi gian hoat dong : 90 ngay</h5>
                                 </div>
                             </li>
@@ -84,7 +84,7 @@
             </div>
         </nav>
         <div class="container">
-            <div id="scroll" class="container__content" >
+            <div class="container__content" id="scroll">
                 <div class="container__timeline">
                     <%for(int i = 0;i < timeline.getSegmentNumber(); i++){%>
                     <%String date = (String)timeline.getNextDate(i);%>
@@ -97,17 +97,27 @@
                     </div>
                     <%}%>
                 </div>
-                <div style="display: flex;width: fit-content">
+                <div style="display: flex">
                     <%for(ItemsLocate item : listItemsInfor){%>
-                    <div>
+                    <div \ >
                         <div class="container__content--box"
                              style="margin-top: <%=item.getDistance()%>px;height:
                              <%=item.getDateNow()%>px;background-color: #9d9d9de3;">
                         </div>
-                        <div class="container__content--box"
-                             style="height:
-                             <%=item.getHeigth() - item.getDateNow()%>px;background-image: url('IMG/download/<%=item.getBackground()%>');background-color: <%=item.getBackground()%>;">
-                        </div>
+                        <div class="container__content--box" id="<%=item.getiD()%>" onclick="displayInformation(this)"
+                             style="height:<%=item.getHeigth() - item.getDateNow()%>px;
+                             background-image: url('IMG/download/<%=item.getBackground()%>')
+                             ;background-color: <%=item.getBackground()%>;">
+                            <div class="box--content">
+                                <div class="img"><img src="" alt="dont have background img"></div>
+                                <div class="content">
+                                    <p></p>
+                                    <p></p>
+                                    <p></p>
+                                    <p></p>
+                                </div>
+                            </div>  
+                        </div>  
                     </div> 
                     <%}%>
                 </div> 
@@ -186,7 +196,7 @@
                                         <div class="btn" onclick="getHideDelete(this)">delete</div>
                                     </div> 
                                 </c:forEach>
-                                <button class="btn" id="submit-delete">done</button>
+                                <button class="btn" onclick="getSubmitDelete()">done</button>
                             </form>
                             <button class="btn" id="cancel-delete" onclick="cancelHideDelete()">cancel</button>
                         </div>
@@ -272,9 +282,8 @@
             </ul>
         </div>
         <script src="https://kit.fontawesome.com/98a6f068d5.js" crossorigin="anonymous"></script>
-        <!--        <script src="toolBase.js"></script>-->
-        <script src="JS/scriptHome5.js"></script>
+        <script src="JS/scriptBoxInfor.js"></script>
+        <script src="JS/scriptHome5.js"></script> 
         <script src="JS/scriptSearch.js"></script>
-
     </body>
 </html>

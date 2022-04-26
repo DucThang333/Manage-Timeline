@@ -1,0 +1,336 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Apr 15, 2022, 7:14:04 PM
+    Author     : Thang
+*/
+/* header */
+/* header */
+.header {
+    background-color: var(--black-color);
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__brand {
+    display: flex;
+    align-items: center;
+}
+
+.header__brand--img {
+    margin-left: 16px;
+    width: 40px;
+    height: 40px;
+}
+
+.header__brand--text {
+    color: white;
+}
+
+.header__feature {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.header__transfer {
+    width: 190px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__transfer--link {
+    width: 44%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+}
+
+.header__transfer--link:hover {
+    border: 1px solid var(--green-color);
+    background-color: #292e33;
+    line-height: 38px;
+}
+
+.header__feature--link {
+    color: var(--green-color);
+    font-size: 20px;
+}
+
+.header__search--input {
+    width: 220px;
+    height: 35px;
+    border-radius: 2px;
+    padding: 0.5rem;
+}
+
+.header__search--btn {
+    width: 63px;
+    height: 35px;
+    border-radius: 3px;
+    color: var(--green-color);
+    background-color: #ff000000;
+    border: 1px solid;
+}
+
+.header__search--btn:hover {
+    color: var(--while-color);
+    background-color: var(--green-color);
+    border-color: var(--green-color);
+}
+
+.header__log {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100px;
+}
+
+.header__account{
+    position: relative;
+    width: 38px;
+    height: 38px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.header__account--img {
+    border-radius: 50%;
+    width: 30px;
+    cursor: pointer;
+}
+
+.header__account--img:hover {
+    width: 32px;
+    box-shadow: 0px 0px 10px 0px #ccc;
+}
+.header__account--setting{
+    width: 269px;
+    background-color: rgb(0 0 0 / 61%);
+    position: absolute;
+    top: 102%;
+    right: 0;
+    z-index: 10;
+    display: none;
+}
+.header__setting--header{
+    height: 90px;
+    background-color: #ebffed;
+    display: flex;
+}
+.header__setting--img{
+    width: 49px;
+    height: 49px;
+    margin: 10px 0px 0px 10px;
+}
+.header__setting--info{
+    margin: 19px 0px 0px 10px;
+}
+.header__account--propoties{
+    height: 40px;
+    cursor: pointer;
+    line-height: 40px;
+    background-color: #ebffed;
+}
+.header__account--propoties:hover{
+    background-color: rgb(207 218 207);
+}
+.header__account--propoties a{
+    color: var(--black-color);
+}
+
+/* container */
+.container {
+    display: flex;
+    padding-top: 18px;
+}
+
+.container__content {
+    margin-left: 18px;
+    width: 1175px;
+    height: 760px;
+    background-color: var(--dark-green-color);
+    overflow-y: scroll;
+    overflow-x: scroll;
+    border-top: 1px black solid;
+    border-left: 2px black solid;
+    display: flex;
+}
+.container__timeline{
+    height: auto;
+}
+.container__timeline--distance{
+    height: 48px;
+    width: 53px;
+}
+.container__content--box{
+    margin-left: 20px;
+    width: 140px;
+    background-image: url("/img/testbox.jpg");
+    background-size: cover;
+    background-color: rgb(214, 236, 214);
+}
+.box--new{
+    height: 250px;
+    background-image: url("/img/testbox2.jpg");
+}
+
+.container__timeline--line{
+    font-size: 5px;
+    align-items: center;
+    width: auto;
+}
+.timeline--begin{
+    margin-top: 0;
+}
+.timeline--big{
+    width: 100%;
+    background-color: red;
+}
+.container__timeline--time{
+    font-size: 0.7rem;
+    padding-top: 6px;
+}
+
+.container__feature {
+    width: 296px;
+    height: 30px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 20px;
+    left: 100%;
+}
+
+.container__feature--item {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 2px;
+    border: 1px #8fb49691 solid;
+    border-radius: 2px;
+    background-color: var(--dark-green-color);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding-left: 10px;
+    position: relative;
+}
+
+
+.container__feature--form {
+    position: absolute;
+    right: 105%;
+    top: 0;
+    width: 360px;
+    background-color: var(--earth-brown--color);
+    color: white;
+    border-radius: 3px;
+    display: none;
+    cursor: auto;
+}
+
+.container__feature--form p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #e4c3c3;
+}
+
+.container__feature--form form {
+    padding: 20px;
+}
+
+.container__feature--form input {
+    padding: 5px;
+    margin-top: 3px;
+}
+
+.container__feature--form button {
+    margin-top: 16px;
+    font-size: 19px;
+    color: gray;
+    padding: 5px;
+    width: 90px;
+    border-radius: 3px;
+    background-color: #ccc8c8;
+}
+.container__feature--form button:nth-child(3){
+    margin: -8px 0px 10px 21px;
+}
+.background--color{
+    height: 23px;
+    width: 86px;
+    padding: 1px !important;
+}
+
+
+.container__feature--form textarea {
+    margin-top: 6px;
+    font-size: 15px;
+    height: 69px;
+    width: 244px;
+    border-radius: 1px;
+}
+
+.container__feature--item:hover {
+    background-color: #5e7c6a5c;
+    color: white;
+}
+.container__feature--delete{
+    background-color: var(--earth-brown--color);
+    color: #e4c3c3;
+    position: absolute;
+    top: 0;
+    right: 105%;
+}
+
+.container__feature--delete .form-delete {
+    padding: 10px 30px 20px 10px;
+    width: 400px;
+    max-height: 500px;
+    overflow: auto;
+}
+.container__feature--delete button{
+    margin-top: 13px;
+    background-color: gray;
+    font-size: 20px;
+    padding: 5px 10px 5px 10px;
+}
+
+#cancel-delete{
+    margin: 0px 0px 10px 10px;
+}
+
+.container__feature--delete .btn{
+    width: 100px;
+    height: 30px;
+    background-color: rgb(134, 129, 129);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container__feature--delete  a{
+    margin-top: 10px;
+}
+.container__feature--delete .form-update {
+    padding: 10px 30px 20px 10px;
+    width: 500px;
+    max-height: 500px;
+    overflow: auto; 
+}
+.container__feature--delete .form-update form{
+    margin-top: 10px;
+    font-size: 19px;
+    display: none;
+}
+.container__feature--delete .form-update input{
+    font-size: 16px;
+    padding: 4px;
+}
+.container__feature--delete .form-update textarea{
+    width: 230px;
+    height: 67px;
+}
+

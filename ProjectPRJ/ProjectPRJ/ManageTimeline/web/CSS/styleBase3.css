@@ -1,0 +1,55 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Apr 15, 2022, 2:54:31 PM
+    Author     : Thang
+*/
+:root{
+    --text-color:#333;
+    --brown-color:#3e1932;
+    --black-color:#212529;
+    --while-color:#fff;
+    --green-color:#198754;
+    --dark-green-color:#90a49329;
+    --earth-brown--color : #584242f0;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+    border: none;
+}
+html{
+    box-sizing: border-box;
+}
+
+img {
+    width: 100%;
+}
+a{
+    text-decoration: none;
+}
+.btn{
+    cursor: pointer;
+}
+input:focus-visible{
+    outline: none;
+}
+input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    content: url(/img/Delete.jpg);
+    width: 14px;
+    cursor: pointer;
+}
+li{
+    list-style-type: none;
+}
+.line{
+    border-bottom: 1px solid rgb(54, 52, 52);
+}
+hr{
+    height: 1px;
+    background-color: #d6caca;
+}
