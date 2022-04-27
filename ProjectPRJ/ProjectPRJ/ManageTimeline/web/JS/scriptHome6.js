@@ -5,16 +5,15 @@
 
 
 
-let croll = document.getElementById('scroll');
-croll.scrollTop = scrollT;
-
 function display(ojectClick, ojectDisplay) {
     document.getElementsByTagName("BODY")[0].onclick = function (e) {
         if (e.target === ojectClick) {
             if (ojectDisplay.style.display === "none") {
                 ojectDisplay.style.display = "block";
-            } else {
+            } else if (ojectDisplay.style.display === "block") {
                 ojectDisplay.style.display = "none";
+            } else {
+                ojectDisplay.style.display = "block";
             }
         } else if (e.target !== ojectDisplay) {
             ojectDisplay.style.display = "none";
@@ -29,7 +28,8 @@ let stringHref = [];
 
 function getSubmitDelete() {
     document.getElementsByName("IDItemdelete")[0].value = stringHref;
-};
+}
+;
 
 
 function cancelHideDelete() {
@@ -41,14 +41,27 @@ function getHideDelete(element) {
     stringHref.push(faElement.id);
 }
 
-function getAllHideUpdate(element){
+
+let arrayList = document.querySelectorAll(".list-form");
+for (var i = 0; i < arrayList.length; i++) {
+    getAllHideUpdate(arrayList[i].querySelector(".click-list-form"));
+}
+
+
+function getAllHideUpdate(element) {
     let faElement = element.parentNode;
     faFaElement = faElement.parentNode;
-    listALL = faFaElement.querySelectorAll("div");
-    for (let index = 0; index < listALL.length; index++) {
-      if(listALL[index] === faElement)continue;
-      listALL[index].style.display = "none";
-    }
-    document.getElementById("form-update-input").style.display = 'block';
-    document.getElementsByName("IDItemUpdate")[0].value = faElement.id;
+    listALL = faFaElement.querySelectorAll("div"); 
+    element.onclick = function (e) {
+        for (let index = 0; index < listALL.length; index++) {
+            if (listALL[index] === faElement)
+                continue;
+            listALL[index].style.display = "none";
+        }
+        faElement.querySelector("form").style.display = 'block';
+        faElement.querySelector("form").querySelector(".IDItemUpdate")[0].value = faElement.id;
+    };
+}
+function cancelHideAdd(){
+    document.getElementById("form-addType").style.display = "none";
 }

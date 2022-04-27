@@ -92,12 +92,6 @@ public class updateItemsInforServlet extends HttpServlet {
         }
         Date dateSt = Date.valueOf(dateStart);
         Date dateEn = Date.valueOf(dateEnd);
-        InsertItemsInfor insertData = new InsertItemsInfor();
-        Date dateNow = new Date(System.currentTimeMillis());
-        if (!insertData.checkDate(dateNow, dateSt, dateEn)) {
-            request.getRequestDispatcher("home").forward(request, response);
-            return;
-        }
         ItemsInforDAL itemDAL = new ItemsInforDAL();
         request.setAttribute("checkUpdate", itemDAL.updateItemsInfor(new 
         ItemsInfor(IDItem, title, dateSt, dateEn, detail, background,typeInforUpdate),

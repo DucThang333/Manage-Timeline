@@ -220,37 +220,37 @@
                                         <p>description : ${item.getDetailBrief()}</p>
                                         <div class="btn" onclick="getAllHideUpdate(this)">update</div>
                                     </div> 
+                                    <form id="form-update-input" onclick='event.stopPropagation();' action="updateItemsInfor" method="post">
+                                        <input name="IDItemUpdate" style="display: none;">
+                                        <table>
+                                            <tr>
+                                                <td><label for="">title</title></label></td>
+                                                <td><input name="titleUpdate" type="text"></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="">date start</label></td>
+                                                <td><input name="dateStartUpdate"type="date" value="${dateNow}" min="${dateNow}"><br></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="">date end</label></td>
+                                                <td><input name="dateEndUpdate"type="date" value="${dateNow}" min="${dateNow}"><br></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="">description</label></td>
+                                                <td><textarea name="detailUpdate" ></textarea><br></td>
+                                            </tr>
+                                            <tr>
+                                                <td>background</td>
+                                                <td>
+                                                    <input name="bgColorUpdate" class="background--color" type="color"
+                                                           value="#d6ecd6"><br>
+                                                    <input name="bgfileUpdate"type="file" value=""style="padding: 0px;">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <button class="btn">update</button>
+                                    </form>   
                                 </c:forEach> 
-                                <form id="form-update-input" onclick='event.stopPropagation();' action="updateItemsInfor" method="post">
-                                    <input name="IDItemUpdate" style="display: none;">
-                                    <table>
-                                        <tr>
-                                            <td><label for="">title</title></label></td>
-                                            <td><input name="titleUpdate" type="text"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label for="">date start</label></td>
-                                            <td><input name="dateStartUpdate"type="date" value="${dateNow}" min="${dateNow}"><br></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label for="">date end</label></td>
-                                            <td><input name="dateEndUpdate"type="date" value="${dateNow}" min="${dateNow}"><br></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label for="">description</label></td>
-                                            <td><textarea name="detailUpdate" ></textarea><br></td>
-                                        </tr>
-                                        <tr>
-                                            <td>background</td>
-                                            <td>
-                                                <input name="bgColorUpdate" class="background--color" type="color"
-                                                       value="#d6ecd6"><br>
-                                                <input name="bgfileUpdate"type="file" value=""style="padding: 0px;">
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <button class="btn">update</button>
-                                </form>  
                             </div>
                             <button class="btn" id="cancel-delete" onclick="cancelHideDelete()">cancel</button>
                         </div> 
@@ -274,7 +274,7 @@
         <script src="https://kit.fontawesome.com/98a6f068d5.js" crossorigin="anonymous"></script>
         <!--        <script src="toolBase.js"></script>-->
         <script src="JS/scriptHome5.js"></script>
-        <script src="JS/scriptSearch.js"></script>
+        <script src="JS/scriptSearch1.js"></script>
 
     </body>
 </html>

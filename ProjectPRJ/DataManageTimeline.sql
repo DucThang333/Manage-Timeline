@@ -1,6 +1,6 @@
-s--create data base
+--create data base
 create database ManageTimeline
-drop database ManageTimeline
+--drop database ManageTimeline
 	
 --use database
 go
@@ -27,7 +27,7 @@ go
 	select * from Account where nameAccount = 'ABC'
 
 	-- command table ItemsInfor
-	select * from ItemsInfor where IDAccount = 'A456';
+	select * from ItemsInfor where IDAccount = 'Apr271541332022';
 	select * from ItemsInfor where IDAccount = '022' and IDItems = '2222'
 	select max(DateEnd)from ItemsInfor where IDAccount = '022'
 	select * from ItemsInfor where IDAccount = '022' order by DateStart,dateEnd;
@@ -36,9 +36,9 @@ go
 	select * from ItemsInfor where IDAccount = '022' and title = 'learning' and dateStart = '2005-06-18'
 	select * from ItemsInfor where IDAccount = '022' and title = 'game' and dateStart = '2000-10-02'
 
-	Update ItemsInfor
-	Set submit = 'false'
-	where IDAccount = 'A456'
+	Update Account
+	Set DateJoin = '2022-04-13'
+	where IDAccount = 'Apr271541332022'
 
 	UPDATE ItemsInfor
 	SET		Title = 'abc' ,DateStart = '2000-12-03',DateEnd = '2001-01-01', Detail  = 'ab' ,Background = '111' 
@@ -48,40 +48,50 @@ go
 
 --create table account
 go 
-	create table Account (IDAccount varchar(50) primary key ,
-	NameAccount varchar(50) not null,usernameAccount varchar(50) not null unique,PasswordAccount varchar(50) not null,
-	PhoneAccount int not null, IMGAccount varchar(100) not null,DateJoin date not null)
+	create table Account (IDAccount varchar(250) primary key ,
+	NameAccount varchar(250) not null,usernameAccount varchar(250) not null unique,PasswordAccount varchar(250) not null,
+	PhoneAccount int not null, IMGAccount varchar(300) not null,DateJoin date not null)
 go
 
 -- create table items information
 go
-	create table ItemsInfor(IDItems varchar(50) primary key , 
-	IDAccount varchar(50) foreign key references Account(IDAccount),
-	Title varchar(50) not null ,DateStart date not null,DateEnd date not null,Detail varchar(50),
-	Background varchar(200) not null , submit bit not null)
+	create table ItemsInfor(IDItems varchar(250) primary key , 
+	IDAccount varchar(250) foreign key references Account(IDAccount),
+	Title varchar(250) not null ,DateStart date not null,DateEnd date not null,Detail varchar(250),
+	Background varchar(200) not null ,typeItems varchar(250),submit bit not null)
 	alter table ItemsInfor
-	add typeItems varchar(50)
+		ADD FOREIGN KEY (typeItems) REFERENCES typeInfor(typeItems);
 go 
 select * from ItemsInfor where IDAccount = 'A456' order by DateStart,dateEnd
 
-go 
-	create table SubItemsInfor(IDSub varchar(50) primary key , 
-	IDItems varchar(50) foreign key references  ItemsInfor(IDItems),
-	Title varchar(50) not null ,DateStart date not null,DateEnd date not null,Detail varchar(50), submit bit not null)
 
+drop table typeInfor
+
+
+go
+	create table typeInfor( typeItems varchar(250) primary key , detail varchar(250))
+go
+
+
+go 
+	create table SubItemsInfor(IDSub varchar(250) primary key , 
+	IDItems varchar(250) foreign key references  ItemsInfor(IDItems),
+	idScore varchar(250) foreign key references  scoreboard(idScore),
+	Title varchar(350) not null ,DateStart date not null,DateEnd date not null,Detail varchar(350), submit bit not null)
 go 
 
 go
-	create table scoreboard(idScore varchar(50) unique not null,
-	submit bit, point int)
+	create table scoreboard(idScore varchar(250) unique  not null,
+	process int not null, point int) 
 	alter table scoreboard
-		ADD constraint FK_IDItems_idScore foreign key(idScore) references  ItemsInfor(IDItems)
+		add constraint FK_idScore_IDItems foreign key(idScore) references ItemsInfor(IDItems)
 go
 
 select * from setting
+drop table setting
 
 go 
-	create table setting(IDSetting varchar(50) unique not null)
+	create table setting(IDSetting varchar(250) unique not null)
 	-----
 	alter table setting
 		add constraint FK_IDAccount_IDSetting foreign key(IDSetting) references Account(IDAccount)
@@ -95,6 +105,8 @@ go
 
 
 --example data
+select * from ItemsInfor
+
 go 
 	-- insert table account
 	insert into Account
@@ -110,7 +122,7 @@ go
 
 	-- insert table ItemsInfor
 	insert into ItemsInfor
-	values('2222','022','game','2000-10-2','2001-12-3','Stream game 8h','#d6ecd6')
+	values('Apr271541332022.345','Apr271541332022','game','2022-04-12','2022-05-3','Stream game 8h','#d6ecd6','game','false')
 	insert into ItemsInfor
 	values('2223','022','learning','2005-6-18','2007-10-3','learning 4h perday','#d6ecd6')
 	insert into ItemsInfor

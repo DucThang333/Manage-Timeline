@@ -6,6 +6,7 @@ package Controller;
 
 import DAL.AccountDAL;
 import DAL.ItemsInforDAL;
+import DAL.TypeInforDAL;
 import Model.Account;
 import View.FormatItemsLocate;
 import View.FormatTimeline;
@@ -44,6 +45,7 @@ public class homeServlet extends HttpServlet {
         AccountDAL accDAL = new AccountDAL();
         ItemsInforDAL itemsDAL = new ItemsInforDAL();
         Account acc = accDAL.getAccountByID(C_iDAccount.getValue());
+        TypeInforDAL typeDAL= new TypeInforDAL();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         // set timeline ---
         FormatTimeline fTimeline = new FormatTimeline();
@@ -60,6 +62,7 @@ public class homeServlet extends HttpServlet {
         request.setAttribute("doDelete",request.getAttribute("doDelete"));
         request.setAttribute("doUpdate",request.getAttribute("doUpdate"));
         request.setAttribute("dateNow", formatter.format(new Date()));
+        request.getSession().setAttribute("listTypeInfor", typeDAL.getAllType());
         request.getSession().setAttribute("listItems",String.valueOf(itemsDAL.getAllOrderByDate(C_iDAccount.getValue())));
         request.getSession().setAttribute("accountInfor",acc);
         request.getSession().setAttribute("listItemsLocate",listItemsLocate);

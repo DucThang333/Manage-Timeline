@@ -31,9 +31,6 @@
             // get timeline
             Timeline timeline = (Timeline) session.getAttribute("timeline");
         %> 
-        <script> let scrollT = ${sessionScope.scrollLoca};</script>
-        <script> let suggestions = ${sessionScope.itemsIdentity};</script> 
-        <script> let arrayItem = '${sessionScope.listItems}'</script>
     </head>
     <body>
         <div id="toast"></div>
@@ -55,11 +52,10 @@
                 <div id="contain-content" style="display: flex">
                     <%for(ItemsLocate item : listItemsInfor){%>
                     <div>
-                        <div class="container__content--box"
-                             style="margin-top: <%=item.getDistance()%>px;height:
-                             <%=item.getDateNow()%>px;background-color: #9d9d9de3;">
+                        <div style="margin-top: <%=item.getDistance()%>px;height:
+                             <%=item.getDateNow()%>px;background-color: #9d9d9de3;margin-left: 20px;width: 140px;">
                         </div>
-                        <div class="container__content--box" id="<%=item.getiD()%>" onclick="displayInformation(this)"
+                        <div class="container__content--box" id="<%=item.getiD()%>"
                              style="height:<%=item.getHeigth() - item.getDateNow()%>px;
                              background-image: url('IMG/download/<%=item.getBackground()%>')
                              ;background-color: <%=item.getBackground()%>;">
@@ -73,28 +69,30 @@
                                 </div>
                             </div>
                             <div onclick="event.stopPropagation()" class="box__edit">
-                                <  class="box__edit--feature">
-                                    <div class="edit--feature" id="edit-add">add
-                                        <div class="input__edit--content" id="input-edit">
-                                            <form action="subItemsInfor">
-                                                <input type="text" placeholder="enter title">
-                                                <input type="date" placeholder="enter date start">
-                                                <input type="date" placeholder="enter date end">
-                                                <input type="text" placeholder="enter detail">
+                                <div  class="box__edit--feature">
+                                    <div class="edit--feature edit-add" >add
+                                        <div class="input__edit--content input-edit" >
+                                            <form action="createSubItems" method="post">
+                                                <input name="subTitle" type="text" placeholder="enter title">
+                                                <input name="subDateStart"type="date" value="${dateNow}" min="${dateNow}" placeholder="enter date start">
+                                                <input name="subDateEnd"type="date" value="${dateNow}" min="${dateNow}" placeholder="enter date end">
+                                                <input name="datail"type="text" placeholder="enter detail">
                                                 <button class="btn">submit</button>
-                                                <button id="input-edit-cancel" class="btn">cancel</button> 
+                                                <button class="input-edit-cancel btn" >cancel</button> 
                                             </form>
                                         </div>
                                     </div>
-                                    <div class="edit--feature" id="edit-delete">remove
-                                        <div class="input__edit--number" id="input-edit-delete">
-                                            <input type="number" placeholder="enter number delete">
-                                            <button class="btn">submit</button>
-                                            <button id="input-edit-cancel-delete" class="btn">cancel</button>
+                                    <div class="edit--feature edit-delete" >remove
+                                        <div class="input__edit--number input-edit-delete">
+                                            <form>
+                                                <input type="number" placeholder="enter number delete">
+                                                <button class="btn">submit</button>
+                                                <button class="btn input-edit-cancel-delete">cancel</button> 
+                                            </form>
                                         </div>
                                     </div>
-                                    <div class="edit--feature">compite</div> 
-                                    <div id="edit-feature-cancel" class="edit--feature">cancel</div> 
+                                    <div class="edit--feature">complite</div> 
+                                    <div class="edit--feature edit-feature-cancel">cancel</div> 
                                 </div>
                                 <div class="box__edit--content">
                                 </div>
@@ -102,8 +100,8 @@
                         </div>  
                     </div> 
                     <%}%>
-                </div> 
-            </div>
+                </div>  
+            </div> 
             <ul class="container__feature">
                 <li class="container__feature--item" onclick="getDisplay(this, 'form-create')">
                     Create New Item
@@ -139,10 +137,9 @@
                                     <td><label for="">type</label></td>
                                     <td>
                                         <select name="typeInfor">
-                                            <option>unknow</option>
-                                            <option>game</option>
-                                            <option>working</option>
-                                            <option>play</option>
+                                            <c:forEach items="${listTypeInfor}" var="item">
+                                                <option>${item.getName()}</option>
+                                            </c:forEach>
                                         </select>
                                     </td>
                                 </tr>
@@ -217,56 +214,55 @@
                         <div class="container__feature--delete" id="display-delete">
                             <div class="form-update">
                                 <c:forEach items="${listItemsUpdate}" var="item">
-                                    <div class="form line" id="${item.getID()}">
+                                    <div class="list-form form line" id="${item.getID()}">
                                         <p>title : ${item.getTitle()}</p>
                                         <p>date start : ${item.getDateStart()} </p>
                                         <p>date end : ${item.getDateEnd()}</p>
                                         <p>description : ${item.getDetailBrief()}</p>
                                         <p>type : ${item.getTypeInfor()}</p>
-                                        <div class="btn" onclick="getAllHideUpdate(this)">update</div>
+                                        <div class="btn click-list-form" onclick="getAllHideUpdate(this)">update</div>
+                                        <form id="form-update-input" onclick='event.stopPropagation();' action="updateItemsInfor" method="post">
+                                            <input name="IDItemUpdate" value="${item.getID()}" style="display: none;">
+                                            <table>
+                                                <tr>
+                                                    <td><label for="">title</title></label></td>
+                                                    <td><input value="${item.getTitle()}" name="titleUpdate" type="text"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><label for="">date start</label></td>
+                                                    <td><input value="${item.getDateStart()}" name="dateStartUpdate"type="date" ><br></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><label for="">date end</label></td>
+                                                    <td><input value="${item.getDateEnd()}" name="dateEndUpdate"type="date"><br></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><label for="">description</label></td>
+                                                    <td><textarea  name="detailUpdate" >${item.getDetailBrief()}</textarea><br></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><label for="">background</label></td>
+                                                    <td>
+                                                        <input name="bgColorUpdate" class="background--color" type="color"
+                                                               value="#d6ecd6"><br>
+                                                        <input name="bgfileUpdate"type="file" value=""style="padding: 0px;">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><label for="">type</label></td>
+                                                    <td>
+                                                        <select name="typeInforUpdate">
+                                                            <c:forEach items="${listTypeInfor}" var="item">
+                                                                <option>${item.getName()}</option>
+                                                            </c:forEach> 
+                                                        </select>
+                                                    </td>
+                                                </tr> 
+                                            </table>
+                                            <button class="btn">update</button>
+                                        </form>   
                                     </div> 
-                                </c:forEach> 
-                                <form id="form-update-input" onclick='event.stopPropagation();' action="updateItemsInfor" method="post">
-                                    <input name="IDItemUpdate" style="display: none;">
-                                    <table>
-                                        <tr>
-                                            <td><label for="">title</title></label></td>
-                                            <td><input name="titleUpdate" type="text"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label for="">date start</label></td>
-                                            <td><input name="dateStartUpdate"type="date" value="${dateNow}" min="${dateNow}"><br></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label for="">date end</label></td>
-                                            <td><input name="dateEndUpdate"type="date" value="${dateNow}" min="${dateNow}"><br></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label for="">description</label></td>
-                                            <td><textarea name="detailUpdate" ></textarea><br></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label for="">background</label></td>
-                                            <td>
-                                                <input name="bgColorUpdate" class="background--color" type="color"
-                                                       value="#d6ecd6"><br>
-                                                <input name="bgfileUpdate"type="file" value=""style="padding: 0px;">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><label for="">type</label></td>
-                                            <td>
-                                                <select name="typeInforUpdate">
-                                                    <option>unknow</option>
-                                                    <option>game</option>
-                                                    <option>working</option>
-                                                    <option>play</option>
-                                                </select>
-                                            </td>
-                                        </tr> 
-                                    </table>
-                                    <button class="btn">update</button>
-                                </form>  
+                                </c:forEach>  
                             </div>
                             <button class="btn" id="cancel-delete" onclick="cancelHideDelete()">cancel</button>
                         </div> 
@@ -284,13 +280,29 @@
                         </c:if>   
                     </c:if>     
                 </li>
-
+                <li class="container__feature--item" onclick="getDisplay(this, 'form-addType')">
+                    Add type
+                    <div onclick='event.stopPropagation();'  class="container__feature--form" id="form-addType" style="width: 400px;">
+                        <p>add type</p> 
+                        <form action="createType" method="post">
+                            <label for="">name : </label>
+                            <input name="nameType"type="text"><br>
+                            <label for="">detail :</label>
+                            <textarea name="detailType"> </textarea><br>
+                            <button>add</button> 
+                        </form>
+                        <button style="margin-left: 21px;" class="btn" id="cancel-delete" onclick="cancelHideAdd()">cancel</button>
+                    </div> 
+                </li> 
             </ul>
         </div>
         <script src="https://kit.fontawesome.com/98a6f068d5.js" crossorigin="anonymous"></script>
-        <script src="JS/scriptEditSub.js"></script>
-        <script src="JS/scriptBoxInfor1.js"></script>
-        <script src="JS/scriptHome5.js"></script> 
+        <script> document.getElementById('scroll').scrollTop = ${sessionScope.scrollLoca};</script>   
+        <script> let suggestions = ${sessionScope.itemsIdentity};</script> 
+        <script> let arrayItem = '${sessionScope.listItems}'</script> 
+        <script src="JS/scriptEditSub2.js"></script>
+        <script src="JS/scriptBoxInfor2.js"></script>
+        <script src="JS/scriptHome6.js"></script> 
         <script src="JS/scriptSearch.js"></script>
     </body>
 </html>

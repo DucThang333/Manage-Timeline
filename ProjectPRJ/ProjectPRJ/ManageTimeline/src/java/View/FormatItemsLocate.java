@@ -46,7 +46,6 @@ public class FormatItemsLocate {
                 multi = 8;
                 break;
         }
-
         return getDayBetween(new Date(), dateJoin)*multi + 3;
     }
 

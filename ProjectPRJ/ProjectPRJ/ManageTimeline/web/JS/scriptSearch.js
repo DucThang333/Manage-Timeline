@@ -8,8 +8,6 @@ function getCC(classname) {
     const searchWrapper = document.querySelector(classname);
     const inputBox = searchWrapper.querySelector("input");
     const suggBox = searchWrapper.querySelector(".autocom-box");
-
-
     inputBox.onkeyup = (e) => {
         e.stopPropagation();
         let userData = e.target.value;

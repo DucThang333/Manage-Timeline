@@ -109,24 +109,9 @@ public class AccountDAL extends BaseDAL<Account> {
                          rs.getString(3), rs.getString(4), rs.getInt(5),
                         rs.getString(6), rs.getDate(7));
             }
-//            // close
-//            conn.close();
         } catch (SQLException ex) {
         }
         return null;
     }
 
-// -----------test process------------  
-//    public static void main(String[] args) {
-//        AccountDAL d = new AccountDAL();
-////         test getAll
-//        for (Account acc : d.getAll()) {
-//            System.out.println(acc);
-//        }
-//        System.out.println("---------------");
-////      test getAccountByID
-//        System.out.println(d.getAccountByID("0234"));
-//    // test getAccountByUsername
-//        System.out.println(d.getAccountByUsername("hai123"));
-//    }
 }

@@ -9,8 +9,8 @@ function getCC(classname) {
     const inputBox = searchWrapper.querySelector("input");
     const suggBox = searchWrapper.querySelector(".autocom-box");
 
-
     inputBox.onkeyup = (e) => {
+        console.log("acns");
         e.stopPropagation();
         let userData = e.target.value;
         let Data = [];

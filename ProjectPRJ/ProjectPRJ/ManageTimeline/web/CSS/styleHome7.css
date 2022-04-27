@@ -10,6 +10,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 /* header */
 
 /* container */
+body{
+    background-color: #f1f1f1;
+}
 .container {
     display: flex;
     padding-top: 18px;

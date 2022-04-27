@@ -40,6 +40,14 @@
         <servlet-name>subItemsInforServlet</servlet-name>
         <servlet-class>Controller.subItemsInforServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>createSubItemsServlet</servlet-name>
+        <servlet-class>Controller.createSubItemsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>createTypeServlet</servlet-name>
+        <servlet-class>Controller.createTypeServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -79,6 +87,14 @@
     <servlet-mapping>
         <servlet-name>subItemsInforServlet</servlet-name>
         <url-pattern>/subItemsInfor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createSubItemsServlet</servlet-name>
+        <url-pattern>/createSubItems</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createTypeServlet</servlet-name>
+        <url-pattern>/createType</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Thang
  */
-public class subItemsInforServlet extends HttpServlet {
+public class createSubItemsServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,10 +34,10 @@ public class subItemsInforServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet subItemsInforServlet</title>");            
+            out.println("<title>Servlet createSubItemsServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet subItemsInforServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet createSubItemsServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -69,14 +69,8 @@ public class subItemsInforServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
